@@ -61,6 +61,13 @@
         </li>
 
         <!-- Nav Item - Tables -->
+        <li class="nav-item <?= $title == 'Data Tagihan' ? 'active' : ''; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>data-tagihan">
+                <i class="fas fa-fw fa-credit-card"></i>
+                <span>Tagihan</span></a>
+        </li>
+
+        <!-- Nav Item - Tables -->
         <li class="nav-item <?= $title == 'Data Pembayaran' ? 'active' : ''; ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>data-pembayaran">
                 <i class="fas fa-fw fa-credit-card"></i>

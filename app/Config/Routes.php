@@ -32,6 +32,11 @@ $routes->get('detail-penyewaan/(:segment)', 'Penyewaan::detailPenyewaan/$1');
 $routes->post('edit-penyewaan', 'penyewaan::editPenyewaan');
 $routes->get('hapus-penyewaan/(:segment)', 'Penyewaan::hapusPenyewaan/$1');
 
+$routes->get('data-tagihan', 'Tagihan::index');
+$routes->get('buat-tagihan', 'Tagihan::buatTagihan');
+$routes->post('buat-tagihan', 'Tagihan::create');
+$routes->get('hapus-tagihan/(:segment)', 'Tagihan::hapusTagihan/$1');
+
 $routes->get('/data-pembayaran', 'Home::dataPembayaran');
 $routes->get('/data-ajuan', 'Home::dataAjuan');
 $routes->get('/laporan-penyewaan', 'Home::laporanPenyewaan');

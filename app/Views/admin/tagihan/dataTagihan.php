@@ -1,8 +1,8 @@
 <div class="container-fluid bg-white text-dark p-3 ms-2">
-    <h3 class="text-center">Data Penyewaan</h3>
+    <h3 class="text-center">Data Tagihan</h3>
     <div class="row">
         <div class="col-12 d-flex justify-content-end">
-            <a href="<?php echo base_url(); ?>tambah-penghuni"><button type="button" class="btn btn-primary ms-auto mb-2">Tambah Penyewaan</button></a>
+            <a href="<?php echo base_url(); ?>buat-tagihan"><button type="button" class="btn btn-primary ms-auto mb-2">Buat Tagihan</button></a>
         </div>
         <?php if (session()->getFlashdata('success')) : ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -20,23 +20,23 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>Nomor Kamar</th>
-                    <th>Harga</th>
-                    <th>Tanggal Penyewaan</th>
+                    <th>Bulan</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $nomor = 1; ?>
-                <?php foreach ($penyewaan_list as $penyewaan_item) : ?>
+                <?php foreach ($tagihan_list as $tagihan_item) : ?>
                     <tr>
                         <td><?= $nomor ?></td>
-                        <td><?= esc($penyewaan_item['nama']) ?></td>
-                        <td><?= esc($penyewaan_item['nomor_kamar']) ?></td>
-                        <td><?= "Rp. " . number_format($penyewaan_item['harga'], 0, ',', '.') ?></td>
-                        <td><?= date('d-m-Y', strtotime($penyewaan_item['tanggal_penyewaan'])) ?></td>
+                        <td><?= esc($tagihan_item['id']) ?></td>
+                        <td><?= esc($tagihan_item['id_penyewaan']) ?></td>
+                        <td><?= esc($tagihan_item['bulan']) ?></td>
+                        <td><?= esc($tagihan_item['status']) ?></td>
                         <td>
-                            <a href="<?php echo base_url('detail-penyewaan/' . $penyewaan_item['id']); ?>"><span class="badge text-bg-warning">Edit</span></a>
-                            <a href="#" onclick="confirmDelete('<?php echo base_url('hapus-penyewaan/' . $penyewaan_item['id']); ?>')">
+                            <a href="<?php echo base_url('detail-tagihan/' . $tagihan_item['id']); ?>"><span class="badge text-bg-warning">Edit</span></a>
+                            <a href="#" onclick="confirmDelete('<?php echo base_url('hapus-tagihan/' . $tagihan_item['id']); ?>')">
                                 <span class="badge badge-danger">Hapus</span>
                             </a>
                         </td>

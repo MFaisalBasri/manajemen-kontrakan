@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <h3>Data Penghuni</h3>
+<div class="container-fluid bg-white text-dark p-3 ms-2">
+    <h3 class="text-center">Data Penghuni</h3>
     <?php if (session()->getFlashdata('success')) : ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?= session()->getFlashdata('success') ?>
