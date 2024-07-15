@@ -31,8 +31,9 @@ class Tagihan extends BaseController
     public function buatTagihan(): string
     {
         $model = new TagihanModel();
+        $model = new PenyewaanModel();
         $data = [
-            'tagihan_list' => $model->getTagihan(),
+            'tagihan_list' => $model->getPenyewaan(),
             'title'     => 'Buat Tagihan',
         ];
         return view('templates/header', $data)
@@ -66,7 +67,8 @@ class Tagihan extends BaseController
             'bulan' => $post['bulan'],
             'status' => $post['status'],
         ]);
-
+        $penyewaanModel = model(PenyewaanModel::class);
+        $penyewaanModel->update($post['id_penyewaan'], ['status_pembayaran' => 'Belum Lunas']);
 
         session()->setFlashdata('success', 'Data berhasil disimpan.');
         return redirect()->to('data-tagihan');

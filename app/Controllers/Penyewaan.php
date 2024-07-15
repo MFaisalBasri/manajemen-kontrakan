@@ -29,15 +29,29 @@ class Penyewaan extends BaseController
 
     public function tambahPenyewaan(): string
     {
-        $model = new PenyewaanModel();
-        $modelKamar = new KamarModel();
+        // $model = new PenyewaanModel();
+        // $modelKamar = new KamarModel();
+        // $modelPenghuni = new PenghuniModel();
+        // $data = [
+        //     'penyewaan_list' => $model->getPenyewaan(),
+        //     'kamar_list' => $modelKamar->getKamar(),
+        //     'penghuni_list' => $modelPenghuni->getPenghuni(),
+        //     'title'     => 'Tambah Penyewaan',
+        // ];
+        // return view('templates/header', $data)
+        //     . view('templates/sidebar')
+        //     . view('admin/penyewaan/tambahPenyewaan')
+        //     . view('templates/footer');
+
+        $modelPenyewaan = new PenyewaanModel();
         $modelPenghuni = new PenghuniModel();
+
         $data = [
-            'penyewaan_list' => $model->getPenyewaan(),
-            'kamar_list' => $modelKamar->getKamar(),
-            'penghuni_list' => $modelPenghuni->getPenghuni(),
-            'title'     => 'Tambah Penyewaan',
+            'penghuni_list' => $modelPenghuni->findAll(),
+            'kamar_list' => $modelPenyewaan->getAvailableRooms(),
+            'title' => 'Tambah Penyewaan',
         ];
+
         return view('templates/header', $data)
             . view('templates/sidebar')
             . view('admin/penyewaan/tambahPenyewaan')
@@ -72,6 +86,8 @@ class Penyewaan extends BaseController
             'status_pembayaran'  => $post['status'],
         ]);
 
+        $modelKamar = new KamarModel();
+        $modelKamar->updateStatus($post['nomor_kamar'], 'Digunakan');
 
         session()->setFlashdata('success', 'Data berhasil disimpan.');
         return redirect()->to('data-penyewaan');

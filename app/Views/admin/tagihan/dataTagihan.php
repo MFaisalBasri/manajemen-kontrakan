@@ -30,8 +30,8 @@
                 <?php foreach ($tagihan_list as $tagihan_item) : ?>
                     <tr>
                         <td><?= $nomor ?></td>
-                        <td><?= esc($tagihan_item['id']) ?></td>
-                        <td><?= esc($tagihan_item['id_penyewaan']) ?></td>
+                        <td><?= esc($tagihan_item['nama_penghuni']) ?></td>
+                        <td><?= esc($tagihan_item['nomor_kamar']) ?></td>
                         <td><?= esc($tagihan_item['bulan']) ?></td>
                         <td><?= esc($tagihan_item['status']) ?></td>
                         <td>

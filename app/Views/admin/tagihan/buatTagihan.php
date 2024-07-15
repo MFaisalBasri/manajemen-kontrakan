@@ -15,8 +15,8 @@
                     <label for="id" class="form-label">ID Penyewaan</label>
                     <select name="id_penyewaan" class="form-select" aria-label="Default select example">
                         <?php foreach ($tagihan_list as $tagihan_item) : ?>
-                            <option value="<?php echo htmlspecialchars($tagihan_item['id_penyewaan']); ?>">
-                                <?php echo htmlspecialchars($tagihan_item['id_penyewaan']); ?>
+                            <option value="<?php echo htmlspecialchars($tagihan_item['id']); ?>">
+                                <?php echo htmlspecialchars($tagihan_item['id']); ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -24,8 +24,8 @@
                     <label for="exampleFormControlInput1" class="form-label">Bulan</label>
                     <input type="input" class="form-control" id="exampleFormControlInput1" name="bulan">
 
-                    <label for="exampleFormControlInput2" class="form-label">Status</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput2" name="status">
+                    <label for="exampleFormControlSelect2" class="form-label">Status</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput2" name="status" readonly value="Belum Lunas">
 
                     <button type="submit" class="btn btn-primary ms-auto mb-2 mt-1">Tambah</button>
                 </div>

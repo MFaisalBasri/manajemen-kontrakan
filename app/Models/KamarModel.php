@@ -14,4 +14,11 @@ class KamarModel extends Model
     {
         return $this->findAll();
     }
+
+    public function updateStatus($idKamar, $status)
+    {
+        $builder = $this->db->table($this->table);
+        $builder->where('id', $idKamar)
+            ->update(['status' => $status]);
+    }
 }

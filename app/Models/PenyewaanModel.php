@@ -25,4 +25,18 @@ class PenyewaanModel extends Model
             ->where('tb_penyewaan.id', $id)
             ->first();
     }
+    public function getAvailableRooms()
+    {
+        $db = \Config\Database::connect();
+
+        // Query to get rooms that are not in tb_penyewaan or have status other than "Digunakan"
+        $query = $db->table('tb_kamar')
+            ->select('tb_kamar.id, tb_kamar.nomor_kamar')
+            ->join('tb_penyewaan', 'tb_kamar.id = tb_penyewaan.id_kamar', 'left')
+            ->where('tb_penyewaan.id_kamar IS NULL')
+            ->orWhere('tb_kamar.status !=', 'Digunakan')
+            ->groupBy('tb_kamar.id'); // Group by to ensure distinct rooms
+
+        return $query->get()->getResultArray();
+    }
 }

@@ -14,14 +14,15 @@
         <h3 class="text-center mb-5">INFORMASI KOST</h3>
         <?php foreach ($kamar_list as $kamar_item) : ?>
             <div class="col-12 col-md-3">
-                <div class="card mb-3" style="max-width: 18rem;">
+                <div class="card mb-3" style="max-width: 18rem; min-height: 20rem;">
                     <?php $nama_file_gambar = $kamar_item['gambar'];
                     $url_gambar = base_url('uploads/' . $nama_file_gambar); ?>
                     <img src="<?= $url_gambar ?>" class="card-img-top" alt="..." style="max-width: 100%; max-height: 200px;">
                     <div class="card-body">
-                        <h5 class="card-title"><?= esc($kamar_item['nomor_kamar']) ?></h5>
+                        <h5 class="card-title"><?= esc($kamar_item['nama_kamar']) ?></h5>
                         <p><small><?= esc($kamar_item['status']) ?></small></p>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text"><b>Fasilitas : </b><?= esc($kamar_item['fasilitas']) ?></p>
+                        <p class="card-text"><b>Alamat : </b><?= esc($kamar_item['alamat']) ?></p>
                         <a href="#" class="btn btn-primary">Pesan Kamar</a>
                     </div>
                 </div>
