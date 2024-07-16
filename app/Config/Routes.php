@@ -42,6 +42,8 @@ $routes->get('/data-ajuan', 'Home::dataAjuan');
 $routes->get('/laporan-penyewaan', 'Home::laporanPenyewaan');
 
 $routes->get('data-user', 'User::index');
+$routes->get('tambah-user', 'User::tambahUser');
+$routes->get('hapus-user/(:segment)', 'User::hapusUser/$1');
 
 use App\Controllers\News;
 use App\Controllers\Pages;

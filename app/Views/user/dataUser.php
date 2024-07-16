@@ -1,9 +1,9 @@
 <div class="container-fluid bg-white text-dark p-3 ms-2">
     <h3>Data Pengguna</h3>
     <div class="row">
-        <div class="col-12 d-flex justify-content-end">
-            <a href="<?php echo base_url(); ?>tambah-kamar"><button type="button" class="btn btn-primary ms-auto mb-2">Tambah Pengguna</button></a>
-        </div>
+        <!-- <div class="col-12 d-flex justify-content-end">
+            <a href="<?php echo base_url(); ?>tambah-user"><button type="button" class="btn btn-primary ms-auto mb-2">Tambah Pengguna</button></a>
+        </div> -->
     </div>
     <?php if (session()->getFlashdata('success')) : ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -34,7 +34,7 @@
                         <td><?= esc($user_item['role']) ?></td>
                         <td>
                             <a href="<?php echo base_url('detail-kamar/'); ?>"><span class="badge text-bg-warning">Edit</span></a>
-                            <a href="#" onclick="confirmDelete('<?php echo base_url('hapus-kamar/'); ?>')">
+                            <a href="#" onclick="confirmDelete('<?php echo base_url('hapus-user/' . $user_item['id']); ?>')">
                                 <span class="badge badge-danger">Hapus</span>
                             </a>
                         </td>

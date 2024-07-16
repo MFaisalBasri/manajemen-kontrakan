@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\PenghuniModel;
 
 // Add this line to import the class.
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -25,50 +26,20 @@ class User extends BaseController
             . view('templates/footer');
     }
 
-    public function buatTagihan(): string
+    public function tambahUser(): string
     {
-        $model = new TagihanModel();
-        $model = new PenyewaanModel();
+        helper('form');
+        $model = new UserModel();
+        $penghuni = new PenghuniModel();
         $data = [
-            'tagihan_list' => $model->getPenyewaan(),
-            'title'     => 'Buat Tagihan',
+            'user_list' => $model->getUser(),
+            'penghuni_list' => $penghuni->getPenghuni(),
+            'title'     => 'Tambah User',
         ];
         return view('templates/header', $data)
             . view('templates/sidebar')
-            . view('admin/tagihan/buatTagihan')
+            . view('user/tambahUser')
             . view('templates/footer');
-    }
-
-    public function create()
-    {
-        helper('form');
-
-        $data = $this->request->getPost(['id_penyewaan', 'bulan', 'status']);
-
-        // Checks whether the submitted data passed the validation rules.
-        if (!$this->validateData($data, [
-            'id_penyewaan' => 'required|max_length[255]|min_length[1]',
-            'bulan' => 'required|max_length[255]|min_length[1]',
-            'status' => 'max_length[255]',
-        ])) {
-            // The validation fails, so returns the form.
-            return $this->buatTagihan();
-        }
-
-        // Gets the validated data.
-        $post = $this->validator->getValidated();
-
-        $model = model(TagihanModel::class);
-        $model->insert([
-            'id_penyewaan' => $post['id_penyewaan'],
-            'bulan' => $post['bulan'],
-            'status' => $post['status'],
-        ]);
-        $penyewaanModel = model(PenyewaanModel::class);
-        $penyewaanModel->update($post['id_penyewaan'], ['status_pembayaran' => 'Belum Lunas']);
-
-        session()->setFlashdata('success', 'Data berhasil disimpan.');
-        return redirect()->to('data-tagihan');
     }
 
 
@@ -119,14 +90,14 @@ class User extends BaseController
         return redirect()->to('data-penyewaan')->with('success', 'Data kamar berhasil diupdate');
     }
 
-    public function hapusTagihan($id)
+    public function hapusUser($id)
     {
-        $model = model(TagihanModel::class);
+        $model = model(UserModel::class);
 
         // Ambil data kamar berdasarkan nomor kamar
-        $tagihan = $model->where('id', $id)->first();
+        $user = $model->where('id', $id)->first();
 
-        if (!$tagihan) {
+        if (!$user) {
             session()->setFlashdata('error', 'Data Tagihan tidak ditemukan.');
             return redirect()->to('data-tagihan');
         }
@@ -136,6 +107,6 @@ class User extends BaseController
 
 
         session()->setFlashdata('success', 'Data berhasil dihapus.');
-        return redirect()->to('data-tagihan');
+        return redirect()->to('data-user');
     }
 }

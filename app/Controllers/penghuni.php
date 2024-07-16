@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\PenghuniModel;
+use App\Models\UserModel;
 
 // Add this line to import the class.
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -58,13 +59,22 @@ class Penghuni extends BaseController
         $post = $this->validator->getValidated();
 
         $model = model(PenghuniModel::class);
-
         $model->insert([
             'nama' => $post['nama'],
             'tgl_lahir'  => $post['tanggal_lahir'],
             'pekerjaan'  => $post['pekerjaan'],
         ]);
 
+        // Get the last inserted ID from tb_penghuni
+        $lastInsertId = $model->insertID();
+
+        $modelUser = model(UserModel::class);
+
+        $modelUser->insert([
+            'id_penghuni' => $lastInsertId,
+            'password' => 'admin',
+            'role'  => 'user',
+        ]);
 
         session()->setFlashdata('success', 'Data berhasil disimpan.');
         return redirect()->to('tambah-penyewaan');
