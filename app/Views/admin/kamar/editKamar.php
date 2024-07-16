@@ -3,7 +3,7 @@
     <div class="row d-flex justify-content-around">
         <div class="col-12 col-md-6 bg-white">
 
-            <form action="/edit-kamar" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>edit-kamar" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <?php foreach ($kamar_list as $kamar_item) : ?>
                         <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id" value="<?= esc($kamar_item['id']) ?>">

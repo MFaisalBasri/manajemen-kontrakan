@@ -41,6 +41,8 @@ $routes->get('/data-pembayaran', 'Home::dataPembayaran');
 $routes->get('/data-ajuan', 'Home::dataAjuan');
 $routes->get('/laporan-penyewaan', 'Home::laporanPenyewaan');
 
+$routes->get('data-user', 'User::index');
+
 use App\Controllers\News;
 use App\Controllers\Pages;
 

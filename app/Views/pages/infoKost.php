@@ -23,46 +23,12 @@
                         <p><small><?= esc($kamar_item['status']) ?></small></p>
                         <p class="card-text"><b>Fasilitas : </b><?= esc($kamar_item['fasilitas']) ?></p>
                         <p class="card-text"><b>Alamat : </b><?= esc($kamar_item['alamat']) ?></p>
-                        <a href="#" class="btn btn-primary">Pesan Kamar</a>
+                        <a href="#" class="btn btn-primary" onclick="sendWhatsAppMessage()">Pesan Kamar</a>
                     </div>
                 </div>
             </div>
         <?php endforeach ?>
 
-
-        <!-- <div class="col-12 col-md-3">
-            <div class="card mb-3" style="max-width: 18rem;">
-                <img src="<?php echo base_url(); ?>assets/img/kost/kost-2.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Kamar Putih</h5>
-                    <p><small>Tersedia</small></p>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Pesan Kamar</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-3">
-            <div class="card mb-3" style="max-width: 18rem;">
-                <img src="<?php echo base_url(); ?>assets/img/kost/kost-3.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Kamar Abu-abu</h5>
-                    <p><small>Tersedia</small></p>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Pesan Kamar</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-3">
-            <div class="card mb-3" style="max-width: 18rem;">
-                <img src="<?php echo base_url(); ?>assets/img/kost/kost-3.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Kamar LT-1</h5>
-                    <p><small>Tersedia</small></p>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Pesan Kamar</a>
-                </div>
-            </div>
-        </div> -->
     </div>
     <div class="row mt-5 mb-5 d-flex justify-content-center bg-light p-5">
         <div class="col-12 col-md-10 text-center">
@@ -71,3 +37,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function sendWhatsAppMessage() {
+        const phoneNumber = "62895380902470"; // Ganti '0' dengan kode negara Indonesia '62'
+        const message = "hallo, saya ingin memesan kontrakan";
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+        window.open(whatsappUrl, '_blank');
+    }
+</script>

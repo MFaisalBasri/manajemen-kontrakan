@@ -41,7 +41,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Data Master:</h6>
                     <a class="collapse-item <?= $title == 'Data Kamar' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-kamar">Data Kamar</a>
-                    <!-- <a class="collapse-item <?= $title == 'Data Fasilitas' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-fasilitas">Data Fasilitas</a> -->
+                    <a class="collapse-item <?= $title == 'Data User' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-user">Data User</a>
                 </div>
             </div>
         </li>

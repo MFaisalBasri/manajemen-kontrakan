@@ -9,7 +9,7 @@
                 </div>
             <?php endif; ?>
             <?= validation_list_errors() ?>
-            <form action="/tambah-penghuni" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>tambah-penghuni" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama</label>
                     <input type="input" class="form-control" id="exampleFormControlInput1" name="nama" value="<?= set_value('nomor_kamar') ?>">
