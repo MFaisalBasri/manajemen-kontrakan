@@ -8,7 +8,7 @@ use App\Models\PenghuniModel;
 // Add this line to import the class.
 use CodeIgniter\Exceptions\PageNotFoundException;
 
-class User extends BaseController
+class Users extends BaseController
 {
     public function index()
     {
@@ -16,13 +16,13 @@ class User extends BaseController
 
         $data = [
             'user_list' => $model->getUser(),
-            'title'     => 'Data Pengguna',
+            'title'     => 'Data User',
         ];
 
         // Tampilkan view dengan data yang telah didapatkan
         return view('templates/header', $data)
             . view('templates/sidebar')
-            . view('user/dataUser')
+            . view('admin/user/dataUser')
             . view('templates/footer');
     }
 

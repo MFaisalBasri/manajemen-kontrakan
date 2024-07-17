@@ -9,6 +9,8 @@ use App\Controllers\Kamar;
 $routes->get('/', 'Home::index');
 $routes->get('/info-kost', 'Home::infoKost');
 $routes->get('/login', 'Home::login');
+$routes->get('/logout', 'Home::logout');
+$routes->post('/auth', 'Home::auth');
 $routes->get('/dashboard', 'Home::dashboard');
 
 $routes->get('data-kamar', 'Kamar::index');
@@ -41,9 +43,11 @@ $routes->get('/data-pembayaran', 'Home::dataPembayaran');
 $routes->get('/data-ajuan', 'Home::dataAjuan');
 $routes->get('/laporan-penyewaan', 'Home::laporanPenyewaan');
 
-$routes->get('data-user', 'User::index');
-$routes->get('tambah-user', 'User::tambahUser');
-$routes->get('hapus-user/(:segment)', 'User::hapusUser/$1');
+$routes->get('data-user', 'Users::index');
+$routes->get('tambah-user', 'Users::tambahUser');
+$routes->get('hapus-user/(:segment)', 'Users::hapusUser/$1');
+
+$routes->get('dashboard-user', 'DashboardUser::index');
 
 use App\Controllers\News;
 use App\Controllers\Pages;

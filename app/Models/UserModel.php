@@ -15,4 +15,11 @@ class UserModel extends Model
             ->select('tb_user.*, tb_penghuni.nama')
             ->findAll();
     }
+
+    public function getUserWithNama()
+    {
+        return $this->join('tb_penghuni', 'tb_user.id_penghuni = tb_penghuni.id')
+            ->select('tb_user.*, tb_penghuni.nama')
+            ->findAll();
+    }
 }
