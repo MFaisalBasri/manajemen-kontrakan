@@ -14,15 +14,79 @@ class DashboardUser extends BaseController
     {
         $model = new UserModel();
 
+        $session = session();
         $data = [
-            'user_list' => $model->getUser(),
-            'title'     => 'Data User',
+            'id' => $session->get('id'),
+            'id_penghuni' => $session->get('id_penghuni'),
+            'nama' => $session->get('nama'),
+            'role' => $session->get('role'),
+            'title' => 'Dahsboard User'
         ];
+
 
         // Tampilkan view dengan data yang telah didapatkan
         return view('templates/header', $data)
             . view('user/templates/sidebar')
-            . view('admin/user/dataUser')
+            . view('user/dataUser')
+            . view('templates/footer');
+    }
+
+    public function profile()
+    {
+        $model = new UserModel();
+
+        $session = session();
+        $data = [
+            'id' => $session->get('id'),
+            'id_penghuni' => $session->get('id_penghuni'),
+            'nama' => $session->get('nama'),
+            'role' => $session->get('role'),
+            'title' => 'My Profile'
+        ];
+
+
+        // Tampilkan view dengan data yang telah didapatkan
+        return view('templates/header', $data)
+            . view('user/templates/sidebar')
+            . view('user/profile')
+            . view('templates/footer');
+    }
+
+    public function tagihan()
+    {
+        $session = session();
+        $data = [
+            'id' => $session->get('id'),
+            'id_penghuni' => $session->get('id_penghuni'),
+            'nama' => $session->get('nama'),
+            'role' => $session->get('role'),
+            'title' => 'Data Tagihan'
+        ];
+
+
+        // Tampilkan view dengan data yang telah didapatkan
+        return view('templates/header', $data)
+            . view('user/templates/sidebar')
+            . view('user/tagihan')
+            . view('templates/footer');
+    }
+
+    public function pembayaran()
+    {
+        $session = session();
+        $data = [
+            'id' => $session->get('id'),
+            'id_penghuni' => $session->get('id_penghuni'),
+            'nama' => $session->get('nama'),
+            'role' => $session->get('role'),
+            'title' => 'Data Pembayaran'
+        ];
+
+
+        // Tampilkan view dengan data yang telah didapatkan
+        return view('templates/header', $data)
+            . view('user/templates/sidebar')
+            . view('user/pembayaran')
             . view('templates/footer');
     }
 

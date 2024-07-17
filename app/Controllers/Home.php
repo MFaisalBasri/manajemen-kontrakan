@@ -60,11 +60,11 @@ class Home extends BaseController
             $user = $userModel->where('id_penghuni', $penghuni['id'])->first();
             if ($user) {
                 $pass = $user['password'];
-                // $authenticatePassword = password_verify($password, $pass);
                 if ($pass === $password) {
                     $ses_data = [
                         'id' => $user['id'],
                         'id_penghuni' => $user['id_penghuni'],
+                        'nama' => $penghuni['nama'],
                         'role' => $user['role'],
                         'isLoggedIn' => TRUE
                     ];
@@ -87,6 +87,7 @@ class Home extends BaseController
             return redirect()->to('/data-user');
         }
     }
+
 
     public function logout()
     {

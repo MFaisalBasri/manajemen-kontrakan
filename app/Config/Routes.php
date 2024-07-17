@@ -48,6 +48,9 @@ $routes->get('tambah-user', 'Users::tambahUser');
 $routes->get('hapus-user/(:segment)', 'Users::hapusUser/$1');
 
 $routes->get('dashboard-user', 'DashboardUser::index');
+$routes->get('dashboard-profile', 'DashboardUser::profile');
+$routes->get('tagihan-user', 'DashboardUser::tagihan');
+$routes->get('pembayaran-user', 'DashboardUser::pembayaran');
 
 use App\Controllers\News;
 use App\Controllers\Pages;

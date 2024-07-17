@@ -36,25 +36,25 @@
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Data Master</span>
             </a>
-            <div id="collapseTwo" class="collapse <?= $title == 'Data Kamar' ? 'show' : ($title == 'Data Fasilitas' ? 'show' : ''); ?>
+            <div id="collapseTwo" class="collapse <?= $title == 'My Profile' ? 'show' : ($title == 'Data Fasilitas' ? 'show' : ''); ?>
                     " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Data Master:</h6>
-                    <a class="collapse-item <?= $title == 'Data User' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-user">My Profile</a>
+                    <a class="collapse-item <?= $title == 'My Profile' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>dashboard-profile">My Profile</a>
                 </div>
             </div>
         </li>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item <?= $title == 'Data Tagihan' ? 'active' : ''; ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>data-tagihan">
+            <a class="nav-link" href="<?php echo base_url(); ?>tagihan-user">
                 <i class="fas fa-fw fa-credit-card"></i>
                 <span>Tagihan</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item <?= $title == 'Data Pembayaran' ? 'active' : ''; ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>data-pembayaran">
+            <a class="nav-link" href="<?php echo base_url(); ?>pembayaran-user">
                 <i class="fas fa-fw fa-credit-card"></i>
                 <span>Pembayaran</span></a>
         </li>
