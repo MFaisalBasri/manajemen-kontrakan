@@ -49,6 +49,7 @@ $routes->get('hapus-user/(:segment)', 'Users::hapusUser/$1');
 
 $routes->get('dashboard-user', 'DashboardUser::index');
 $routes->get('dashboard-profile', 'DashboardUser::profile');
+$routes->get('dashboard-akun', 'DashboardUser::akun');
 $routes->get('tagihan-user', 'DashboardUser::tagihan');
 $routes->get('pembayaran-user', 'DashboardUser::pembayaran');
 

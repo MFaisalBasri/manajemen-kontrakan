@@ -66,6 +66,7 @@ class Home extends BaseController
                         'id_penghuni' => $user['id_penghuni'],
                         'nama' => $penghuni['nama'],
                         'role' => $user['role'],
+                        'password' => $user['password'],
                         'isLoggedIn' => TRUE
                     ];
                     $session->set($ses_data);

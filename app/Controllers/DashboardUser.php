@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Models\PenghuniModel;
+use App\Models\TagihanModel;
 
 // Add this line to import the class.
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -33,14 +34,21 @@ class DashboardUser extends BaseController
 
     public function profile()
     {
-        $model = new UserModel();
+        helper('form');
+        $model = new PenghuniModel();
 
         $session = session();
+        $id_penghuni = $session->get('id_penghuni'); // Ambil id_penghuni dari session
+
+        // Ambil data penghuni berdasarkan id_penghuni
+        $penghuni = $model->where('id', $id_penghuni)->first();
+        if (!$penghuni) {
+            // Handle kasus jika penghuni tidak ditemukan
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Penghuni tidak ditemukan.');
+        }
+
         $data = [
-            'id' => $session->get('id'),
-            'id_penghuni' => $session->get('id_penghuni'),
-            'nama' => $session->get('nama'),
-            'role' => $session->get('role'),
+            'penghuni' => $penghuni,
             'title' => 'My Profile'
         ];
 
@@ -52,17 +60,40 @@ class DashboardUser extends BaseController
             . view('templates/footer');
     }
 
-    public function tagihan()
+    public function akun()
     {
+        helper('form');
         $session = session();
         $data = [
             'id' => $session->get('id'),
             'id_penghuni' => $session->get('id_penghuni'),
             'nama' => $session->get('nama'),
+            'password' => $session->get('password'),
             'role' => $session->get('role'),
-            'title' => 'Data Tagihan'
+            'title' => 'Akun'
         ];
 
+
+        // Tampilkan view dengan data yang telah didapatkan
+        return view('templates/header', $data)
+            . view('user/templates/sidebar')
+            . view('user/akun')
+            . view('templates/footer');
+    }
+
+    public function tagihan()
+    {
+        $session = session();
+        $model = new TagihanModel();
+
+        // Ambil id_penghuni dari session
+        $id_penghuni = $session->get('id_penghuni');
+
+        // Ambil data tagihan berdasarkan id_penghuni
+        $data = [
+            'tagihan_list' => $model->getTagihanByPenghuni($id_penghuni),
+            'title' => 'Data Tagihan'
+        ];
 
         // Tampilkan view dengan data yang telah didapatkan
         return view('templates/header', $data)

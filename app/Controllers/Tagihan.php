@@ -68,7 +68,7 @@ class Tagihan extends BaseController
             'status' => $post['status'],
         ]);
         $penyewaanModel = model(PenyewaanModel::class);
-        $penyewaanModel->update($post['id_penyewaan'], ['status_pembayaran' => 'Belum Lunas']);
+        // $penyewaanModel->update($post['id_penyewaan'], ['status_pembayaran' => 'Belum Lunas']);
 
         session()->setFlashdata('success', 'Data berhasil disimpan.');
         return redirect()->to('data-tagihan');

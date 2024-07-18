@@ -36,11 +36,12 @@
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Data Master</span>
             </a>
-            <div id="collapseTwo" class="collapse <?= $title == 'My Profile' ? 'show' : ($title == 'Data Fasilitas' ? 'show' : ''); ?>
+            <div id="collapseTwo" class="collapse <?= $title == 'My Profile' ? 'show' : ($title == 'Akun' ? 'show' : ''); ?>
                     " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Data Master:</h6>
                     <a class="collapse-item <?= $title == 'My Profile' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>dashboard-profile">My Profile</a>
+                    <a class="collapse-item <?= $title == 'Akun' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>dashboard-akun">Akun</a>
                 </div>
             </div>
         </li>

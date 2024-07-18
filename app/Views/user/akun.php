@@ -1,5 +1,7 @@
 <div class="container-fluid">
-    <h3 class="text-center">Profil Saya</h3>
+    <h1>Welcome, <?= $nama; ?>!</h1>
+    <p>Your role: <?= $role; ?></p>
+    <h3 class="text-center">Akun Saya</h3>
     <div class="row d-flex justify-content-around">
         <div class="col-12 col-md-6 bg-white">
 
@@ -12,20 +14,17 @@
             <form action="<?php echo base_url(); ?>tambah-penghuni" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput1" name="nama" value="<?= esc($penghuni['nama']); ?>" readonly>
+                    <input type="input" class="form-control" id="exampleFormControlInput1" name="nama" value="<?= $nama ?>" readonly>
 
-                    <label for="exampleFormControlInput2" class="form-label">Tanggal Lahir</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput2" name="password" value="<?= esc($penghuni['tgl_lahir']); ?>">
-
-                    <label for="exampleFormControlInput2" class="form-label">Pekerjaan</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput2" name="password" value="<?= esc($penghuni['pekerjaan']); ?>">
+                    <label for="exampleFormControlInput2" class="form-label">Password</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput2" name="password" value="<?= $password ?>">
 
                     <!-- <label for="exampleFormControlInput4" class="form-label">Gambar</label>
                     <input type="file" class="form-control-file" id="gambar" name="gambar" value="<?= set_value('gambar') ?>">
                     <div id="preview-container" style="display: none;">
                         <img id="preview" src="#" alt="Preview Gambar" style="max-width: 100%; max-height: 200px; margin-top: 10px;">
                     </div> -->
-                    <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-1">Ubah Profil</button>
+                    <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-1">Ubah Password</button>
 
                 </div>
             </form>
