@@ -21,14 +21,14 @@ class DashboardUser extends BaseController
             'id_penghuni' => $session->get('id_penghuni'),
             'nama' => $session->get('nama'),
             'role' => $session->get('role'),
-            'title' => 'Dahsboard User'
+            'title' => 'Dashboard'
         ];
 
 
         // Tampilkan view dengan data yang telah didapatkan
         return view('templates/header', $data)
             . view('user/templates/sidebar')
-            . view('user/dataUser')
+            . view('user/dashboard')
             . view('templates/footer');
     }
 

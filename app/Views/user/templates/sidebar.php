@@ -17,7 +17,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item <?= $title == 'Dashboard' ? 'active' : ''; ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>dashboard">
+            <a class="nav-link" href="<?php echo base_url(); ?>dashboard-user">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>

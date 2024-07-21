@@ -7,6 +7,11 @@
             </button>
         </div>
     <?php endif; ?>
+    <?php if (session()->getFlashdata('logout_message')) : ?>
+        <div class="alert alert-info">
+            <?= session()->getFlashdata('logout_message'); ?>
+        </div>
+    <?php endif; ?>
     <div class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100">
         <div class="card p-2 shadow p-3 mb-5 bg-body rounded" style="width: 18rem; z-index: 1;">
             <div class="card-body">

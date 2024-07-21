@@ -94,13 +94,23 @@ class Home extends BaseController
     {
         $session = session();
         $session->destroy();
+
+        // Debug: periksa apakah sesi masih ada
+        $session->setFlashdata('logout_message', 'Sesi berhasil dihapus');
+
         return redirect()->to('/login');
     }
 
+
     public function dashboard(): string
     {
+
+        $session = session();
+        if (!$session->get('id')) {
+            return redirect()->to('/login');
+        }
         $data = [
-            'title'     => 'Dashboard Admin',
+            'title'     => 'Dashboard Admin' . $session->get('id'),
         ];
 
 
