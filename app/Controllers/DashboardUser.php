@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\PenghuniModel;
 use App\Models\TagihanModel;
+use App\Models\PenyewaanModel;
 
 // Add this line to import the class.
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -102,54 +103,44 @@ class DashboardUser extends BaseController
             . view('templates/footer');
     }
 
+    // public function pembayaran()
+    // {
+    //     helper('form');
+    //     $session = session();
+    //     $data = [
+    //         'id' => $session->get('id'),
+    //         'id_penghuni' => $session->get('id_penghuni'),
+    //         'nama' => $session->get('nama'),
+    //         'role' => $session->get('role'),
+    //         'title' => 'Data Pembayaran'
+    //     ];
+
+
+    //     // Tampilkan view dengan data yang telah didapatkan
+    //     return view('templates/header', $data)
+    //         . view('user/templates/sidebar')
+    //         . view('user/pembayaran')
+    //         . view('templates/footer');
+    // }
+
     public function pembayaran()
     {
+        helper('form');
+        $model = new TagihanModel();
+
         $session = session();
+        // Ambil id_penghuni dari session
+        $id_penghuni = $session->get('id_penghuni');
+
+        // Ambil data tagihan berdasarkan id_penghuni
         $data = [
-            'id' => $session->get('id'),
-            'id_penghuni' => $session->get('id_penghuni'),
-            'nama' => $session->get('nama'),
-            'role' => $session->get('role'),
-            'title' => 'Data Pembayaran'
+            'tagihan_list' => $model->getTagihanByPenghuni($id_penghuni),
+            'title'     => 'Bayar Tagihan',
         ];
 
-
-        // Tampilkan view dengan data yang telah didapatkan
         return view('templates/header', $data)
             . view('user/templates/sidebar')
             . view('user/pembayaran')
-            . view('templates/footer');
-    }
-
-    public function tambahUser(): string
-    {
-        helper('form');
-        $model = new UserModel();
-        $penghuni = new PenghuniModel();
-        $data = [
-            'user_list' => $model->getUser(),
-            'penghuni_list' => $penghuni->getPenghuni(),
-            'title'     => 'Tambah User',
-        ];
-        return view('templates/header', $data)
-            . view('templates/sidebar')
-            . view('user/tambahUser')
-            . view('templates/footer');
-    }
-
-
-    public function detailPenyewaan($id)
-    {
-        $model = model(PenyewaanModel::class);
-
-        $data = [
-            'penyewaan_item' => $model->getDetailPenyewaan($id),
-            'title'     => 'Data Penyewaan',
-        ];
-
-        return view('templates/header', $data)
-            . view('templates/sidebar')
-            . view('admin/penyewaan/editPenyewaan')
             . view('templates/footer');
     }
 

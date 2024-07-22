@@ -75,16 +75,37 @@ class Filters extends BaseConfig
      */
     public array $filters = [
         'isLoggedIn' => [
-            'before' =>
-            [
-                // 'dashboard',
-                // 'data-kamar',
-                'admin/*'
-                // 'data-user',
-                // 'data-penghuni',
-                // 'data-penyewaan',
-                // 'data-tagihan',
-                // 'data-pembayaran'
+            'before' => [
+                'dashboard',
+                'data-kamar',
+                'tambah-kamar',
+                'hapus-kamar/(:segment)',
+                'detail-kamar/(:segment)',
+                'edit-kamar',
+                'data-penghuni',
+                'tambah-penghuni',
+                'detail-penghuni/(:segment)',
+                'edit-penghuni',
+                'hapus-penghuni/(:segment)',
+                'data-penyewaan',
+                'tambah-penyewaan',
+                'detail-penyewaan/(:segment)',
+                'edit-penyewaan',
+                'hapus-penyewaan/(:segment)',
+                'data-tagihan',
+                'buat-tagihan',
+                'hapus-tagihan/(:segment)',
+                'data-pembayaran',
+                'data-ajuan',
+                'laporan-penyewaan',
+                'data-user',
+                'tambah-user',
+                'hapus-user/(:segment)',
+                'dashboard-user',
+                'dashboard-profile',
+                'dashboard-akun',
+                'tagihan-user',
+                'pembayaran-user'
             ]
         ]
     ];

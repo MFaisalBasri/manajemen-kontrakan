@@ -15,44 +15,30 @@
         </thead>
         <tbody>
             <tr>
-                <td>1</td>
-                <td>P001</td>
-                <td>Edinburgh</td>
-                <td>001</td>
-                <td>Rp.500.000</td>
-                <td>Sedang dicek</td>
-                <td> <span class="badge text-bg-info">Lihat Bukti</span></td>
-                <td>
-                    <span class="badge text-bg-warning">Edit</span>
-                    <span class="badge text-bg-danger">Hapus</span>
-                </td>
+                <?php $nomor = 1; ?>
+                <?php foreach ($pembayaran_list as $pembayaran_item) : ?>
+                    <td><?= $nomor ?></td>
+                    <td><?= esc($pembayaran_item['id_tagihan']) ?></td>
+                    <td><?= esc($pembayaran_item['bukti_pembayaran']) ?></td>
+                    <td>001</td>
+                    <td>Rp.500.000</td>
+                    <?php $nama_file_gambar = $pembayaran_item['bukti_pembayaran'];
+                    $url_gambar = base_url('uploads/' . $nama_file_gambar); ?>
+                    <td>
+                        <?php if (!empty($pembayaran_item['bukti_pembayaran'])) : ?>
+                            <img src="<?= $url_gambar ?>" alt="Gambar Bukti" style="max-width: 100px;">
+                        <?php else : ?>
+                            <span>Tidak ada gambar</span>
+                        <?php endif; ?>
+                    </td>
+                    <td> <span class="badge text-bg-info">Lihat Bukti</span></td>
+                    <td>
+                        <span class="badge text-bg-warning">Edit</span>
+                        <span class="badge text-bg-danger">Hapus</span>
+                    </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>P002</td>
-                <td>Tokyo</td>
-                <td>002</td>
-                <td>Rp.500.000</td>
-                <td>Sedang dicek</td>
-                <td><span class="badge text-bg-info">Lihat Bukti</span></td>
-                <td>
-                    <span class="badge text-bg-warning">Edit</span>
-                    <span class="badge text-bg-danger">Hapus</span>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>P003</td>
-                <td>San Francisco</td>
-                <td>003</td>
-                <td>Rp.400.000</td>
-                <td>Sedang dicek</td>
-                <td><span class="badge text-bg-info">Lihat Bukti</span></td>
-                <td>
-                    <span class="badge text-bg-warning">Edit</span>
-                    <span class="badge text-bg-danger">Hapus</span>
-                </td>
-            </tr>
+            <?php $nomor++; ?>
+        <?php endforeach ?>
         </tbody>
     </table>
 </div>
