@@ -21,4 +21,9 @@ class KamarModel extends Model
         $builder->where('id', $idKamar)
             ->update(['status' => $status]);
     }
+
+    public function getTotalKamar()
+    {
+        return count($this->findAll());
+    }
 }

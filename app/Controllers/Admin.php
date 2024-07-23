@@ -4,42 +4,69 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Models\PenghuniModel;
+use App\Models\AdminModel;
 
 // Add this line to import the class.
 use CodeIgniter\Exceptions\PageNotFoundException;
 
-class Users extends BaseController
+class Admin extends BaseController
 {
     public function index()
     {
-        $model = new UserModel();
+        $model = new AdminModel();
 
         $data = [
-            'user_list' => $model->getUser(),
-            'title'     => 'Data User',
+            'admin_list' => $model->getAllAdmin(),
+            'title'     => 'Data Admin',
         ];
 
         // Tampilkan view dengan data yang telah didapatkan
         return view('templates/header', $data)
             . view('templates/sidebar')
-            . view('admin/user/dataUser')
+            . view('admin/admin/dataAdmin')
             . view('templates/footer');
     }
 
-    public function tambahUser(): string
+    public function tambahAdmin(): string
     {
         helper('form');
-        $model = new UserModel();
-        $penghuni = new PenghuniModel();
         $data = [
-            'user_list' => $model->getUser(),
-            'penghuni_list' => $penghuni->getPenghuni(),
-            'title'     => 'Tambah User',
+            'title' => 'Tambah Admin',
         ];
         return view('templates/header', $data)
             . view('templates/sidebar')
-            . view('user/tambahUser')
+            . view('admin/admin/tambahAdmin')
             . view('templates/footer');
+    }
+
+    public function create()
+    {
+        helper('form');
+
+        $data = $this->request->getPost(['nama', 'password', 'role']);
+
+        // Checks whether the submitted data passed the validation rules.
+        if (!$this->validateData($data, [
+            'nama' => 'required|max_length[255]|min_length[3]',
+            'password'  =>  'max_length[255]|min_length[3]',
+            'role' => 'max_length[255]|min_length[3]',
+        ])) {
+            // The validation fails, so returns the form.
+            return $this->tambahAdmin();
+        }
+
+        // Gets the validated data.
+        $post = $this->validator->getValidated();
+
+        $model = model(AdminModel::class);
+        $model->insert([
+            'nama' => $post['nama'],
+            'password'  => $post['password'],
+            'role'  => $post['role'],
+        ]);
+
+        session()->setFlashdata('success', 'Data berhasil disimpan.');
+        return redirect()->to('data-admin');
     }
 
 

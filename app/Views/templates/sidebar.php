@@ -36,12 +36,13 @@
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Data Master</span>
             </a>
-            <div id="collapseTwo" class="collapse <?= $title == 'Data Kamar' ? 'show' : ($title == 'Data User' ? 'show' : ''); ?>
+            <div id="collapseTwo" class="collapse <?= $title == 'Data Kamar' ? 'show' : ($title == 'Data User' ? 'show' : ($title == 'Data Admin' ? 'show' : '')); ?>
                     " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Data Master:</h6>
                     <a class="collapse-item <?= $title == 'Data Kamar' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-kamar">Data Kamar</a>
                     <a class="collapse-item <?= $title == 'Data User' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-user">Data User</a>
+                    <a class="collapse-item <?= $title == 'Data Admin' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-admin">Data Admin</a>
                 </div>
             </div>
         </li>

@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Models\FasilitasModel;
 use App\Models\PenghuniModel;
 use App\Models\KamarModel;
 use App\Models\UserModel;
+use App\Models\PenyewaanModel;
 
 class Home extends BaseController
 {
@@ -109,8 +109,16 @@ class Home extends BaseController
         if (!$session->get('id')) {
             return redirect()->to('/login');
         }
+
+        $penghuni = model(PenghuniModel::class);
+        $kamar = model(KamarModel::class);
+        $penyewaan = model(PenyewaanModel::class);
+
         $data = [
-            'title'     => 'Dashboard Admin' . $session->get('id'),
+            'dataPenghuni' => $penghuni->getTotalPenghuni(),
+            'dataKamar' => $kamar->getTotalKamar(),
+            'dataPenyewaan' => $penyewaan->getTotalPenyewaan(),
+            'title'     => 'Dashboard Admin',
         ];
 
 

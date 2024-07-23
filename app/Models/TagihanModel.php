@@ -15,7 +15,6 @@ class TagihanModel extends Model
         tb_penyewaan.id as id_penyewaan, 
         tb_penyewaan.tanggal_penyewaan, 
         tb_penyewaan.id_kamar, 
-        tb_penyewaan.status_pembayaran, 
         tb_penghuni.nama as nama_penghuni, 
         tb_kamar.nomor_kamar, 
         tb_kamar.harga')
@@ -31,7 +30,6 @@ class TagihanModel extends Model
             tb_penyewaan.id as id_penyewaan, 
             tb_penyewaan.tanggal_penyewaan, 
             tb_penyewaan.id_kamar, 
-            tb_penyewaan.status_pembayaran, 
             tb_penghuni.nama as nama_penghuni, 
             tb_kamar.nomor_kamar, 
             tb_kamar.harga')

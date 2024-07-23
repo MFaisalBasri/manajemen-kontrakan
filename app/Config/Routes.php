@@ -20,6 +20,16 @@ $routes->get('hapus-kamar/(:segment)', 'Kamar::hapusKamar/$1');
 $routes->get('detail-kamar/(:segment)', 'Kamar::detailKamar/$1');
 $routes->post('edit-kamar', 'Kamar::editKamar');
 
+$routes->get('data-user', 'Users::index');
+$routes->get('tambah-user', 'Users::tambahUser');
+$routes->get('detail-user/(:segment)', 'Users::detailUser/$1');
+$routes->post('edit-user', 'Users::editUser');
+$routes->get('hapus-user/(:segment)', 'Users::hapusUser/$1');
+
+$routes->get('data-admin', 'Admin::index');
+$routes->get('tambah-admin', 'Admin::tambahAdmin');
+$routes->post('tambah-admin', 'Admin::create');
+
 $routes->get('data-penghuni', 'Penghuni::index');
 $routes->get('tambah-penghuni', 'Penghuni::tambahPenghuni');
 $routes->post('tambah-penghuni', 'Penghuni::create');
@@ -40,12 +50,10 @@ $routes->post('buat-tagihan', 'Tagihan::create');
 $routes->get('hapus-tagihan/(:segment)', 'Tagihan::hapusTagihan/$1');
 
 $routes->get('data-pembayaran', 'Pembayaran::index');
+
+
 $routes->get('/data-ajuan', 'Home::dataAjuan');
 $routes->get('/laporan-penyewaan', 'Home::laporanPenyewaan');
-$routes->get('data-user', 'Users::index');
-
-$routes->get('tambah-user', 'Users::tambahUser');
-$routes->get('hapus-user/(:segment)', 'Users::hapusUser/$1');
 
 $routes->get('dashboard-user', 'DashboardUser::index');
 $routes->get('dashboard-profile', 'DashboardUser::profile');
@@ -55,6 +63,7 @@ $routes->get('bayar-tagihan', 'DashboardUser::pembayaran');
 $routes->post('bayar-tagihan', 'Pembayaran::create');
 $routes->get('pembayaran-user', 'DashboardUser::pembayaran');
 
+$routes->get('lihat-bukti/(:segment)', 'Pembayaran::lihatBukti/$1');
 
 
 use App\Controllers\News;

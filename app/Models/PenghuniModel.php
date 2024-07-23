@@ -21,4 +21,17 @@ class PenghuniModel extends Model
             ->select('tb_penghuni.*, tb_kamar.nomor_kamar')
             ->findAll();
     }
+
+    public function getTotalPenghuni()
+    {
+        return count($this->findAll());
+    }
+
+    public function getAvailableTenants()
+    {
+        return $this->select('tb_penghuni.id, nama')
+            ->join('tb_penyewaan', 'tb_penghuni.id = tb_penyewaan.id_penghuni', 'left')
+            ->where('tb_penyewaan.id_penghuni IS NULL', null, false)
+            ->findAll();
+    }
 }

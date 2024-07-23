@@ -22,4 +22,13 @@ class UserModel extends Model
             ->select('tb_user.*, tb_penghuni.nama')
             ->findAll();
     }
+
+    public function getDetailUser($userId)
+    {
+        // Ambil detail user berdasarkan $userId
+        return $this->join('tb_penghuni', 'tb_user.id_penghuni = tb_penghuni.id')
+            ->where('tb_user.id', $userId)
+            ->select('tb_user.*, tb_penghuni.nama')
+            ->first();
+    }
 }

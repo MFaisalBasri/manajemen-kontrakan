@@ -12,7 +12,7 @@ class Pembayaran extends BaseController
         $model = model(PembayaranModel::class);
 
         $data = [
-            'pembayaran_list' => $model->getPembayaran(),
+            'pembayaran_list' => $model->getDataPembayaran(),
             'title'     => 'Data Pembayaran',
         ];
 
@@ -63,11 +63,27 @@ class Pembayaran extends BaseController
         $model = model(PembayaranModel::class);
         $model->insert([
             'id_tagihan' => $post['id_tagihan'],
+            'status_pembayaran' => 'Belum disetujui',
             'bukti_pembayaran' => $nama_file_baru,
         ]);
 
 
         session()->setFlashdata('success', 'Data berhasil disimpan.');
         return redirect()->to('tagihan-user');
+    }
+
+    public function lihatBukti($id)
+    {
+        $model = model(PembayaranModel::class);
+
+        $data = [
+            'pembayaran_list' => $model->where('id', $id)->findAll(),
+            'title'     => 'Bukti Pembayaran',
+        ];
+
+        return view('templates/header', $data)
+            . view('templates/sidebar')
+            . view('admin/pembayaran/bukti')
+            . view('templates/footer');
     }
 }

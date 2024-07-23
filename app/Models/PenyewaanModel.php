@@ -11,7 +11,7 @@ class PenyewaanModel extends Model
 
     public function getPenyewaan()
     {
-        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar,tb_penyewaan.status_pembayaran, tb_penghuni.nama, tb_kamar.nomor_kamar, tb_kamar.harga')
+        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar, tb_penghuni.nama, tb_kamar.nomor_kamar, tb_kamar.harga')
             ->join('tb_penghuni', 'tb_penghuni.id = tb_penyewaan.id_penghuni')
             ->join('tb_kamar', 'tb_kamar.id = tb_penyewaan.id_kamar')
             ->findAll();
@@ -19,7 +19,7 @@ class PenyewaanModel extends Model
 
     public function getDetailPenyewaan($id)
     {
-        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar, tb_penyewaan.status_pembayaran, tb_penghuni.nama, tb_kamar.nomor_kamar, tb_kamar.harga')
+        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar, tb_penghuni.nama, tb_kamar.nomor_kamar, tb_kamar.harga')
             ->join('tb_penghuni', 'tb_penghuni.id = tb_penyewaan.id_penghuni')
             ->join('tb_kamar', 'tb_kamar.id = tb_penyewaan.id_kamar')
             ->where('tb_penyewaan.id', $id)
@@ -38,5 +38,10 @@ class PenyewaanModel extends Model
             ->groupBy('tb_kamar.id'); // Group by to ensure distinct rooms
 
         return $query->get()->getResultArray();
+    }
+
+    public function getTotalPenyewaan()
+    {
+        return count($this->findAll());
     }
 }

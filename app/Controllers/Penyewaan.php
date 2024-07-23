@@ -29,25 +29,15 @@ class Penyewaan extends BaseController
 
     public function tambahPenyewaan(): string
     {
-        // $model = new PenyewaanModel();
-        // $modelKamar = new KamarModel();
-        // $modelPenghuni = new PenghuniModel();
-        // $data = [
-        //     'penyewaan_list' => $model->getPenyewaan(),
-        //     'kamar_list' => $modelKamar->getKamar(),
-        //     'penghuni_list' => $modelPenghuni->getPenghuni(),
-        //     'title'     => 'Tambah Penyewaan',
-        // ];
-        // return view('templates/header', $data)
-        //     . view('templates/sidebar')
-        //     . view('admin/penyewaan/tambahPenyewaan')
-        //     . view('templates/footer');
-
-        $modelPenyewaan = new PenyewaanModel();
         $modelPenghuni = new PenghuniModel();
 
+        // Memanggil metode baru dari PenghuniModel untuk mendapatkan penghuni yang tersedia
+        $penghuni_list = $modelPenghuni->getAvailableTenants();
+
+        $modelPenyewaan = new PenyewaanModel();
+
         $data = [
-            'penghuni_list' => $modelPenghuni->findAll(),
+            'penghuni_list' => $penghuni_list,
             'kamar_list' => $modelPenyewaan->getAvailableRooms(),
             'title' => 'Tambah Penyewaan',
         ];

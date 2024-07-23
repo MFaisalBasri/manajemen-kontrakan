@@ -1,13 +1,13 @@
-<div class="container-fluid">
+<div class="container-fluid bg-white text-dark p-3 ms-2">
     <h3>Data Pembayaran</h3>
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Kode Penyewaan</th>
                 <th>Nama Penghuni</th>
                 <th>Nomor Kamar</th>
-                <th>Tarif</th>
+                <th>Bulan</th>
+                <th>Harga</th>
                 <th>Status</th>
                 <th>Bukti Pembayaran</th>
                 <th>Action</th>
@@ -18,20 +18,16 @@
                 <?php $nomor = 1; ?>
                 <?php foreach ($pembayaran_list as $pembayaran_item) : ?>
                     <td><?= $nomor ?></td>
-                    <td><?= esc($pembayaran_item['id_tagihan']) ?></td>
-                    <td><?= esc($pembayaran_item['bukti_pembayaran']) ?></td>
-                    <td>001</td>
-                    <td>Rp.500.000</td>
-                    <?php $nama_file_gambar = $pembayaran_item['bukti_pembayaran'];
-                    $url_gambar = base_url('uploads/' . $nama_file_gambar); ?>
+                    <td><?= esc($pembayaran_item['nama_penghuni']) ?></td>
+                    <td><?= esc($pembayaran_item['nomor_kamar']) ?></td>
+                    <td><?= esc($pembayaran_item['bulan']) ?></td>
+                    <td><?= esc($pembayaran_item['harga']) ?></td>
                     <td>
-                        <?php if (!empty($pembayaran_item['bukti_pembayaran'])) : ?>
-                            <img src="<?= $url_gambar ?>" alt="Gambar Bukti" style="max-width: 100px;">
-                        <?php else : ?>
-                            <span>Tidak ada gambar</span>
-                        <?php endif; ?>
+                        <span class="badge <?= ($pembayaran_item['status_pembayaran'] == 'disetujui') ? 'text-bg-success' : 'text-bg-warning' ?>">
+                            <?= esc($pembayaran_item['status_pembayaran']) ?>
+                        </span>
                     </td>
-                    <td> <span class="badge text-bg-info">Lihat Bukti</span></td>
+                    <td><a href="<?php echo base_url('lihat-bukti/' . $pembayaran_item['id']); ?>"><span class="badge text-bg-info">Lihat Bukti</span></a></td>
                     <td>
                         <span class="badge text-bg-warning">Edit</span>
                         <span class="badge text-bg-danger">Hapus</span>

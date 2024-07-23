@@ -33,7 +33,7 @@
                         <td><?= esc($user_item['password']) ?></td>
                         <td><?= esc($user_item['role']) ?></td>
                         <td>
-                            <a href="<?php echo base_url('detail-kamar/'); ?>"><span class="badge text-bg-warning">Edit</span></a>
+                            <a href="<?php echo base_url('detail-user/' . $user_item['id']); ?>"><span class="badge text-bg-warning">Edit</span></a>
                             <a href="#" onclick="confirmDelete('<?php echo base_url('hapus-user/' . $user_item['id']); ?>')">
                                 <span class="badge badge-danger">Hapus</span>
                             </a>

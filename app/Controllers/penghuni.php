@@ -15,7 +15,7 @@ class Penghuni extends BaseController
         $model = new PenghuniModel();
 
         $data = [
-            'penghuni_list' => $model->getPenghuniWithPenyewaan(),
+            'penghuni_list' => $model->getPenghuni(),
             'title'     => 'Data Penghuni',
         ];
 
