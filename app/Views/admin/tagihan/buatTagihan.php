@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row d-flex justify-content-around">
         <div class="col-12 col-md-6 bg-white">
-            <h3 class="text-center">Buat Tagihan</h3>
+            <h3 class="text-center mt-3">Buat Tagihan</h3>
             <?php if (session()->getFlashdata('success')) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <?= session()->getFlashdata('success') ?>
@@ -27,7 +27,7 @@
                     <label for="exampleFormControlSelect2" class="form-label">Status</label>
                     <input type="input" class="form-control" id="exampleFormControlInput2" name="status" readonly value="Belum Lunas">
 
-                    <button type="submit" class="btn btn-primary ms-auto mb-2 mt-1">Tambah</button>
+                    <button type="submit" class="btn btn-primary ms-auto mb-2 mt-3">Tambah</button>
                 </div>
             </form>
         </div>

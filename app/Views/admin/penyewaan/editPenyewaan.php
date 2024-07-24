@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <h3 class="text-center">Edit Data Penyewaan</h3>
-    <div class="row d-flex justify-content-around">
-        <div class="col-12 col-md-6 bg-white">
+    <div class="row d-flex justify-content-around mb-3">
+        <div class="col-12 col-md-6 bg-white rounded-4">
+            <h3 class="text-center mt-2">Edit Data Penyewaan</h3>
 
             <form action="<?= base_url(); ?>edit-penyewaan" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
@@ -15,7 +15,7 @@
                     <label for="exampleFormControlInput1" class="form-label">Tanggal Penyewaan</label>
                     <input type="date" class="form-control" id="exampleFormControlInput1" name="tanggal_penyewaan" value="<?= esc($penyewaan_item['tanggal_penyewaan']) ?>">
 
-                    <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-1">Edit</button>
+                    <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-3">Edit</button>
                 </div>
             </form>
 

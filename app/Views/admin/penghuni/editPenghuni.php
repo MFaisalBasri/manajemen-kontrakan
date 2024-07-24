@@ -1,8 +1,7 @@
 <div class="container-fluid">
-    <h3 class="text-center">Edit Data Penghuni</h3>
-    <div class="row d-flex justify-content-around">
-        <div class="col-12 col-md-6 bg-white">
-
+    <div class="row d-flex justify-content-around mb-3">
+        <div class="col-12 col-md-6 bg-white rounded-4">
+            <h3 class="text-center mt-3">Edit Data Penghuni</h3>
             <form action="<?php echo base_url(); ?>edit-penghuni" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <?php foreach ($penghuni_list as $penghuni_item) : ?>
@@ -16,7 +15,7 @@
                         <label for="exampleFormControlInput1" class="form-label">Pekerjaan</label>
                         <input type="input" class="form-control" id="exampleFormControlInput1" name="pekerjaan" value="<?= esc($penghuni_item['pekerjaan']) ?>">
 
-                        <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-1">Edit</button>
+                        <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-3">Edit</button>
                     <?php endforeach ?>
                 </div>
             </form>

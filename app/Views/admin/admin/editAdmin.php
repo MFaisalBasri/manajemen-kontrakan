@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <h3 class="text-center">Edit Data Admin</h3>
-    <div class="row d-flex justify-content-around">
-        <div class="col-12 col-md-6 bg-white">
+    <div class="row d-flex justify-content-around mb-3">
+        <div class="col-12 col-md-6 bg-white rounded-4">
+            <h3 class="text-center mt-3">Edit Data Admin</h3>
 
             <?php if (session()->getFlashdata('error')) : ?>
                 <div class="alert alert-danger" role="alert">
@@ -21,7 +21,7 @@
                         <label for="exampleFormControlInput2" class="form-label">Role</label>
                         <input type="input" class="form-control" id="exampleFormControlInput2" name="role" value="<?= esc($admin['role']) ?>" readonly>
 
-                        <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-1">Edit</button>
+                        <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-3">Edit</button>
                     <?php endforeach ?>
                 </div>
             </form>

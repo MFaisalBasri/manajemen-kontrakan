@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <h3 class="text-center">Input Data Penghuni</h3>
     <div class="row d-flex justify-content-around">
-        <div class="col-12 col-md-6 bg-white">
+        <div class="col-12 col-md-6 bg-white rounded-4 mb-3">
+            <h3 class="text-center mt-3">Tambah Data Penghuni</h3>
 
             <?php if (session()->getFlashdata('error')) : ?>
                 <div class="alert alert-danger" role="alert">
@@ -25,7 +25,7 @@
                     <div id="preview-container" style="display: none;">
                         <img id="preview" src="#" alt="Preview Gambar" style="max-width: 100%; max-height: 200px; margin-top: 10px;">
                     </div> -->
-                    <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-1">Tambah</button>
+                    <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-3">Tambah</button>
 
                 </div>
             </form>
