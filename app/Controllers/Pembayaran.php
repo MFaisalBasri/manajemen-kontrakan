@@ -86,4 +86,36 @@ class Pembayaran extends BaseController
             . view('admin/pembayaran/bukti')
             . view('templates/footer');
     }
+
+    public function setujuiPembayaran($id)
+    {
+        helper('form');
+
+        // Cek apakah data dengan nomor_kamar tersebut ada
+        $model = model(PembayaranModel::class);
+
+        // Update data kamar
+        $model->update($id, [
+            'status_pembayaran' => 'disetujui',
+        ]);
+        session()->setFlashdata('success', 'Data berhasil diupdate.');
+        // Redirect atau tampilkan view setelah berhasil update
+        return redirect()->to('/data-pembayaran')->with('success', 'Data pembayaran berhasil diupdate');
+    }
+
+    public function tolakPembayaran($id)
+    {
+        helper('form');
+
+        // Cek apakah data dengan nomor_kamar tersebut ada
+        $model = model(PembayaranModel::class);
+
+        // Update data kamar
+        $model->update($id, [
+            'status_pembayaran' => 'ditolak',
+        ]);
+        session()->setFlashdata('success', 'Data berhasil diupdate.');
+        // Redirect atau tampilkan view setelah berhasil update
+        return redirect()->to('/data-pembayaran')->with('success', 'Data pembayaran berhasil diupdate');
+    }
 }

@@ -3,22 +3,26 @@
     <div class="row d-flex justify-content-around">
         <div class="col-12 col-md-6 bg-white">
 
-            <?php if (session()->getFlashdata('error')) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= session()->getFlashdata('error') ?>
+            <?php if (session()->getFlashdata('success')) : ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('success') ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             <?php endif; ?>
             <?= validation_list_errors() ?>
-            <form action="<?php echo base_url(); ?>tambah-penghuni" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>edit-profile" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
+                    <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id" value="<?= esc($penghuni['id']) ?>">
                     <label for="exampleFormControlInput1" class="form-label">Nama</label>
                     <input type="input" class="form-control" id="exampleFormControlInput1" name="nama" value="<?= esc($penghuni['nama']); ?>" readonly>
 
                     <label for="exampleFormControlInput2" class="form-label">Tanggal Lahir</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput2" name="password" value="<?= esc($penghuni['tgl_lahir']); ?>">
+                    <input type="date" class="form-control" id="exampleFormControlInput2" name="tanggal_lahir" value="<?= esc($penghuni['tgl_lahir']); ?>">
 
                     <label for="exampleFormControlInput2" class="form-label">Pekerjaan</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput2" name="password" value="<?= esc($penghuni['pekerjaan']); ?>">
+                    <input type="input" class="form-control" id="exampleFormControlInput2" name="pekerjaan" value="<?= esc($penghuni['pekerjaan']); ?>">
 
                     <!-- <label for="exampleFormControlInput4" class="form-label">Gambar</label>
                     <input type="file" class="form-control-file" id="gambar" name="gambar" value="<?= set_value('gambar') ?>">

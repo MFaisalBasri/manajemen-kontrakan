@@ -64,6 +64,7 @@ class DashboardUser extends BaseController
     public function akun()
     {
         helper('form');
+        $model = new UserModel();
         $session = session();
         $data = [
             'id' => $session->get('id'),
@@ -71,6 +72,7 @@ class DashboardUser extends BaseController
             'nama' => $session->get('nama'),
             'password' => $session->get('password'),
             'role' => $session->get('role'),
+            'user' => $model->getDetailUser($session->get('id')),
             'title' => 'Akun'
         ];
 
@@ -103,26 +105,6 @@ class DashboardUser extends BaseController
             . view('templates/footer');
     }
 
-    // public function pembayaran()
-    // {
-    //     helper('form');
-    //     $session = session();
-    //     $data = [
-    //         'id' => $session->get('id'),
-    //         'id_penghuni' => $session->get('id_penghuni'),
-    //         'nama' => $session->get('nama'),
-    //         'role' => $session->get('role'),
-    //         'title' => 'Data Pembayaran'
-    //     ];
-
-
-    //     // Tampilkan view dengan data yang telah didapatkan
-    //     return view('templates/header', $data)
-    //         . view('user/templates/sidebar')
-    //         . view('user/pembayaran')
-    //         . view('templates/footer');
-    // }
-
     public function pembayaran()
     {
         helper('form');
@@ -144,36 +126,71 @@ class DashboardUser extends BaseController
             . view('templates/footer');
     }
 
-    public function editPenyewaan()
+    public function editProfile()
     {
         helper('form');
 
         // Ambil data dari POST termasuk nomor_kamar
-        $data = $this->request->getPost(['id', 'nomor_kamar', 'tanggal_penyewaan']);
+        $data = $this->request->getPost(['id', 'nama', 'tanggal_lahir', 'pekerjaan']);
 
         // Validasi data
         if (!$this->validateData($data, [
             'id' => 'required|min_length[1]',
-            'nomor_kamar' => 'required',
-            'tanggal_penyewaan' => 'required|max_length[255]|min_length[3]',
+            'nama' => 'required|max_length[255]|min_length[3]',
+            'tanggal_lahir' => 'required|max_length[255]|min_length[3]',
+            'pekerjaan' => 'required|max_length[255]|min_length[3]',
         ])) {
             // The validation fails, so returns the form.
-            return $this->editPenyewaan();
+            return $this->editProfile();
         }
 
         // Dapatkan data yang divalidasi
         $validatedData = $this->validator->getValidated();
 
         // Cek apakah data dengan nomor_kamar tersebut ada
-        $model = model(PenyewaanModel::class);
+        $model = model(PenghuniModel::class);
 
         // Update data kamar
         $model->update($validatedData['id'], [
-            'tanggal_penyewaan' => $validatedData['tanggal_penyewaan'],
+            'nama' => $validatedData['nama'],
+            'tgl_lahir' => $validatedData['tanggal_lahir'],
+            'pekerjaan' => $validatedData['pekerjaan'],
         ]);
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         // Redirect atau tampilkan view setelah berhasil update
-        return redirect()->to('data-penyewaan')->with('success', 'Data kamar berhasil diupdate');
+        return redirect()->to('/dashboard-profile')->with('success', 'Profile berhasil diupdate');
+    }
+
+    public function ubahPassword()
+    {
+        helper('form');
+
+        // Ambil data dari POST termasuk nomor_kamar
+        $data = $this->request->getPost(['id', 'nama', 'password']);
+
+        // Validasi data
+        if (!$this->validateData($data, [
+            'id' => 'required|min_length[1]',
+            'nama' => 'required|max_length[255]|min_length[3]',
+            'password' => 'required|max_length[255]|min_length[3]',
+        ])) {
+            // The validation fails, so returns the form.
+            return $this->akun();
+        }
+
+        // Dapatkan data yang divalidasi
+        $validatedData = $this->validator->getValidated();
+
+        // Cek apakah data dengan nomor_kamar tersebut ada
+        $model = model(UserModel::class);
+
+        // Update data User
+        $model->update($validatedData['id'], [
+            'password' => $validatedData['password'],
+        ]);
+        session()->setFlashdata('success', 'Password berhasil diupdate.');
+        // Redirect atau tampilkan view setelah berhasil update
+        return redirect()->to('/dashboard-akun')->with('success', 'Password berhasil diupdate');
     }
 
     public function hapusUser($id)

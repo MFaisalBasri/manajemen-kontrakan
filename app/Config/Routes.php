@@ -29,6 +29,9 @@ $routes->get('hapus-user/(:segment)', 'Users::hapusUser/$1');
 $routes->get('data-admin', 'Admin::index');
 $routes->get('tambah-admin', 'Admin::tambahAdmin');
 $routes->post('tambah-admin', 'Admin::create');
+$routes->get('detail-admin/(:segment)', 'Admin::detailAdmin/$1');
+$routes->post('edit-admin', 'Admin::editAdmin');
+$routes->get('hapus-admin/(:segment)', 'Admin::hapusAdmin/$1');
 
 $routes->get('data-penghuni', 'Penghuni::index');
 $routes->get('tambah-penghuni', 'Penghuni::tambahPenghuni');
@@ -50,7 +53,8 @@ $routes->post('buat-tagihan', 'Tagihan::create');
 $routes->get('hapus-tagihan/(:segment)', 'Tagihan::hapusTagihan/$1');
 
 $routes->get('data-pembayaran', 'Pembayaran::index');
-
+$routes->get('setujui-pembayaran/(:segment)', 'Pembayaran::setujuiPembayaran/$1');
+$routes->get('tolak-pembayaran/(:segment)', 'Pembayaran::tolakPembayaran/$1');
 
 $routes->get('/data-ajuan', 'Home::dataAjuan');
 $routes->get('/laporan-penyewaan', 'Home::laporanPenyewaan');
@@ -58,6 +62,9 @@ $routes->get('/laporan-penyewaan', 'Home::laporanPenyewaan');
 $routes->get('dashboard-user', 'DashboardUser::index');
 $routes->get('dashboard-profile', 'DashboardUser::profile');
 $routes->get('dashboard-akun', 'DashboardUser::akun');
+$routes->post('edit-profile', 'DashboardUser::editProfile');
+$routes->post('ubah-password', 'DashboardUser::ubahPassword');
+
 $routes->get('tagihan-user', 'DashboardUser::tagihan');
 $routes->get('bayar-tagihan', 'DashboardUser::pembayaran');
 $routes->post('bayar-tagihan', 'Pembayaran::create');

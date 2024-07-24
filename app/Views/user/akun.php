@@ -4,20 +4,26 @@
     <h3 class="text-center">Akun Saya</h3>
     <div class="row d-flex justify-content-around">
         <div class="col-12 col-md-6 bg-white">
-
-            <?php if (session()->getFlashdata('error')) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= session()->getFlashdata('error') ?>
+            <?php if (session()->getFlashdata('success')) : ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('success') ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             <?php endif; ?>
             <?= validation_list_errors() ?>
-            <form action="<?php echo base_url(); ?>tambah-penghuni" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>ubah-password" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama</label>
+                    <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id" value="<?= $id ?>" readonly>
                     <input type="input" class="form-control" id="exampleFormControlInput1" name="nama" value="<?= $nama ?>" readonly>
 
+                    <label for="exampleFormControlInput2" class="form-label">Password Lama</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput2" name="password-lama" value="<?= $user['password'] ?>" readonly>
+
                     <label for="exampleFormControlInput2" class="form-label">Password</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput2" name="password" value="<?= $password ?>">
+                    <input type="input" class="form-control" id="exampleFormControlInput2" name="password" value="<?= set_value('password') ?>">
 
                     <!-- <label for="exampleFormControlInput4" class="form-label">Gambar</label>
                     <input type="file" class="form-control-file" id="gambar" name="gambar" value="<?= set_value('gambar') ?>">

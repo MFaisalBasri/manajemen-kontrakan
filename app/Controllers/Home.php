@@ -6,6 +6,7 @@ use App\Models\PenghuniModel;
 use App\Models\KamarModel;
 use App\Models\UserModel;
 use App\Models\PenyewaanModel;
+use App\Models\AdminModel;
 
 class Home extends BaseController
 {
@@ -51,43 +52,102 @@ class Home extends BaseController
         $session = session();
         $penghuniModel = new PenghuniModel();
         $userModel = new UserModel();
+        $adminModel = new AdminModel(); // Pastikan model AdminModel sudah disesuaikan dengan struktur tabel Admin
         $nama = $this->request->getVar('nama');
         $password = $this->request->getVar('password');
 
+        // Cari penghuni berdasarkan nama
         $penghuni = $penghuniModel->where('nama', $nama)->first();
+        $admin = $adminModel->where('nama', $nama)->first();
 
-        if ($penghuni) {
-            $user = $userModel->where('id_penghuni', $penghuni['id'])->first();
-            if ($user) {
-                $pass = $user['password'];
-                if ($pass === $password) {
+        if ($penghuni || $admin) {
+            if ($penghuni) {
+                // Cek apakah ada user dengan id_penghuni yang sama
+                $user = $userModel->where('id_penghuni', $penghuni['id'])->first();
+
+                if ($user) {
+                    // Jika ditemukan user, cocokkan password
+                    if ($user['password'] === $password) {
+                        // Data sesi untuk user ditemukan
+                        $ses_data = [
+                            'id' => $user['id'],
+                            'id_penghuni' => $user['id_penghuni'],
+                            'nama' => $penghuni['nama'],
+                            'password' => $user['password'],
+                            'role' => $user['role'],
+                            'isLoggedIn' => TRUE
+                        ];
+                        $session->set($ses_data);
+
+                        // Redirect sesuai role user
+                        if ($user['role'] === 'admin') {
+                            return redirect()->to('/dashboard');
+                        } else {
+                            return redirect()->to('/dashboard-user');
+                        }
+                    } else {
+                        // Jika password tidak cocok
+                        $session->setFlashdata('msg', 'Password salah');
+                        return redirect()->to('/info-kost');
+                    }
+                } else {
+                    // Jika tidak ditemukan di tabel user, cek di tabel admin
+                    $admin = $adminModel->where('nama', $nama)->first();
+
+                    if ($admin) {
+                        // Cocokkan password untuk admin
+                        if ($admin['password'] === $password) {
+                            // Data sesi untuk admin ditemukan
+                            $ses_data = [
+                                'id' => $admin['id'],
+                                'nama' => $admin['nama'],
+                                'role' => $admin['role'],
+                                'isLoggedIn' => TRUE
+                            ];
+                            $session->set($ses_data);
+
+                            // Redirect ke dashboard admin
+                            return redirect()->to('/dashboard');
+                        } else {
+                            // Jika password admin tidak cocok
+                            $session->setFlashdata('msg', 'Password salah');
+                            return redirect()->to('/info-kost');
+                        }
+                    } else {
+                        // Jika tidak ditemukan di tabel admin maupun user
+                        $session->setFlashdata('msg', 'User tidak ditemukan');
+                        return redirect()->to('/login');
+                    }
+                }
+            } elseif ($admin) {
+                // Cocokkan password untuk admin
+                if ($admin['password'] === $password) {
+                    // Data sesi untuk admin ditemukan
                     $ses_data = [
-                        'id' => $user['id'],
-                        'id_penghuni' => $user['id_penghuni'],
-                        'nama' => $penghuni['nama'],
-                        'role' => $user['role'],
-                        'password' => $user['password'],
+                        'id' => $admin['id'],
+                        'nama' => $admin['nama'],
+                        'role' => $admin['role'],
                         'isLoggedIn' => TRUE
                     ];
                     $session->set($ses_data);
-                    if ($user['role'] === 'admin') {
-                        return redirect()->to('/dashboard');
-                    } else {
-                        return redirect()->to('/dashboard-user');
-                    }
+
+                    // Redirect ke dashboard admin
+                    return redirect()->to('/dashboard');
                 } else {
+                    // Jika password admin tidak cocok
                     $session->setFlashdata('msg', 'Password salah');
                     return redirect()->to('/info-kost');
                 }
-            } else {
-                $session->setFlashdata('msg', 'User tidak ditemukan');
-                return redirect()->to('/login');
             }
         } else {
+            // Jika nama penghuni tidak ditemukan
             $session->setFlashdata('msg', 'Nama penghuni tidak ditemukan');
             return redirect()->to('/data-user');
         }
     }
+
+
+
 
 
     public function logout()

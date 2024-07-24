@@ -70,22 +70,23 @@ class Admin extends BaseController
     }
 
 
-    public function detailUser($id)
+    public function detailAdmin($id)
     {
-        $model = model(UserModel::class);
+        helper('form');
+        $model = model(AdminModel::class);
 
         $data = [
-            'user_list' => $model->getDetailUser($id),
-            'title'     => 'Data User',
+            'admin_list' => $model->where('id', $id)->findAll(),
+            'title'     => 'Data Admin',
         ];
 
         return view('templates/header', $data)
             . view('templates/sidebar')
-            . view('admin/user/editUser')
+            . view('admin/admin/editAdmin')
             . view('templates/footer');
     }
 
-    public function editUser()
+    public function editAdmin()
     {
         helper('form');
 
@@ -100,35 +101,36 @@ class Admin extends BaseController
             'role' => 'required|max_length[255]|min_length[3]',
         ])) {
             // The validation fails, so returns the form.
-            return $this->editUser();
+            return $this->editAdmin();
         }
 
         // Dapatkan data yang divalidasi
         $validatedData = $this->validator->getValidated();
 
         // Cek apakah data dengan nomor_kamar tersebut ada
-        $model = model(UserModel::class);
+        $model = model(AdminModel::class);
 
         // Update data kamar
         $model->update($validatedData['id'], [
+            'nama' => $validatedData['nama'],
             'password' => $validatedData['password'],
             'role' => $validatedData['role'],
         ]);
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         // Redirect atau tampilkan view setelah berhasil update
-        return redirect()->to('data-user')->with('success', 'Data kamar berhasil diupdate');
+        return redirect()->to('data-admin')->with('success', 'Data Admin berhasil diupdate');
     }
 
-    public function hapusUser($id)
+    public function hapusAdmin($id)
     {
-        $model = model(UserModel::class);
+        $model = model(AdminModel::class);
 
         // Ambil data kamar berdasarkan nomor kamar
-        $user = $model->where('id', $id)->first();
+        $admin = $model->where('id', $id)->first();
 
-        if (!$user) {
-            session()->setFlashdata('error', 'Data Tagihan tidak ditemukan.');
-            return redirect()->to('data-tagihan');
+        if (!$admin) {
+            session()->setFlashdata('error', 'Data Admin tidak ditemukan.');
+            return redirect()->to('data-admin');
         }
 
         // Hapus entri data kamar dari basis data
@@ -136,6 +138,6 @@ class Admin extends BaseController
 
 
         session()->setFlashdata('success', 'Data berhasil dihapus.');
-        return redirect()->to('data-user');
+        return redirect()->to('data-admin');
     }
 }

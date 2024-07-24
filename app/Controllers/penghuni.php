@@ -127,7 +127,7 @@ class Penghuni extends BaseController
         ]);
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         // Redirect atau tampilkan view setelah berhasil update
-        return redirect()->to('/data-penghuni')->with('success', 'Data kamar berhasil diupdate');
+        return redirect()->to('/data-penghuni')->with('success', 'Data Penghuni berhasil diupdate');
     }
 
     public function hapusPenghuni($id)
