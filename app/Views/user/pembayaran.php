@@ -12,7 +12,9 @@
             <form action="<?php echo base_url(); ?>bayar-tagihan" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <?php foreach ($tagihan_list as $tagihan_item) : ?>
+                        <input type="input" class="form-control" id="exampleFormControlInput1" name="id_penghuni" value="<?= esc($id_penghuni) ?>" readonly>
                         <label for="exampleFormControlInput1" class="form-label">Nama</label>
+
                         <input type="input" class="form-control" id="exampleFormControlInput1" name="id_tagihan" value="<?= esc($tagihan_item['id']) ?>" readonly>
                         <input type="input" class="form-control" id="exampleFormControlInput1" name="nama_kamar" value="<?= esc($tagihan_item['nama_penghuni']) ?>" readonly>
 

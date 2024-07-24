@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\PenghuniModel;
 use App\Models\TagihanModel;
-use App\Models\PenyewaanModel;
+use App\Models\PembayaranModel;
 
 // Add this line to import the class.
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -117,6 +117,7 @@ class DashboardUser extends BaseController
         // Ambil data tagihan berdasarkan id_penghuni
         $data = [
             'tagihan_list' => $model->getTagihanByPenghuni($id_penghuni),
+            'id_penghuni' => $id_penghuni,
             'title'     => 'Bayar Tagihan',
         ];
 
@@ -124,6 +125,44 @@ class DashboardUser extends BaseController
             . view('user/templates/sidebar')
             . view('user/pembayaran')
             . view('templates/footer');
+    }
+
+    public function createPembayaran()
+    {
+        helper('form');
+
+        $data = $this->request->getPost(['id_penghuni', 'id_tagihan', 'bukti']);
+
+        // Checks whether the submitted data passed the validation rules.
+        if (!$this->validateData($data, [
+            'id_penghuni' => 'required|max_length[255]|min_length[1]',
+            'id_tagihan' => 'required|max_length[255]|min_length[1]',
+            'bukti' => 'uploaded[bukti]|max_size[bukti,1024]|is_image[bukti]',
+        ])) {
+            // The validation fails, so returns the form.
+            return $this->pembayaran();
+        }
+
+        // Gets the validated data.
+        $post = $this->validator->getValidated();
+
+        // Handle file upload
+        $gambar = $this->request->getFile('bukti');
+        $nama_file_asli = $gambar->getName();
+        $nama_file_baru = uniqid() . '_' . $nama_file_asli;
+        $gambar->move(ROOTPATH . 'public/uploads', $nama_file_baru);
+
+        $model = model(PembayaranModel::class);
+        $model->insert([
+            'id_penghuni' => $post['id_penghuni'],
+            'id_tagihan' => $post['id_tagihan'],
+            'status_pembayaran' => 'Belum disetujui',
+            'bukti_pembayaran' => $nama_file_baru,
+        ]);
+
+
+        session()->setFlashdata('success', 'Data berhasil disimpan.');
+        return redirect()->to('tagihan-user');
     }
 
     public function editProfile()
@@ -193,16 +232,34 @@ class DashboardUser extends BaseController
         return redirect()->to('/dashboard-akun')->with('success', 'Password berhasil diupdate');
     }
 
-    public function hapusUser($id)
+    public function pembayaranUser()
     {
-        $model = model(UserModel::class);
+
+        $model = model(PembayaranModel::class);
+        $session = session();
+        $id = $session->get('id_penghuni');
+        $data = [
+            'pembayaran_list' =>  $model->getDataPembayaranByIdPenghuni($id),
+            'title'     => 'Data Pembayaran',
+        ];
+
+        return view('templates/header', $data)
+            . view('user/templates/sidebar')
+            . view('user/dataPembayaran')
+            . view('templates/footer');
+    }
+
+    public function hapusPembayaran($id)
+    {
+        helper('form');
+        $model = model(PembayaranModel::class);
 
         // Ambil data kamar berdasarkan nomor kamar
-        $user = $model->where('id', $id)->first();
+        $kamar = $model->where('id', $id)->first();
 
-        if (!$user) {
-            session()->setFlashdata('error', 'Data Tagihan tidak ditemukan.');
-            return redirect()->to('data-tagihan');
+        if (!$kamar) {
+            session()->setFlashdata('error', 'Data Penghuni tidak ditemukan.');
+            return redirect()->to('data-penghuni');
         }
 
         // Hapus entri data kamar dari basis data
@@ -210,6 +267,6 @@ class DashboardUser extends BaseController
 
 
         session()->setFlashdata('success', 'Data berhasil dihapus.');
-        return redirect()->to('data-user');
+        return redirect()->to('data-penghuni');
     }
 }

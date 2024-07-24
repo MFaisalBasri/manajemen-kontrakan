@@ -24,14 +24,13 @@
                         <td><?= esc($pembayaran_item['bulan']) ?></td>
                         <td><?= "Rp. " . number_format($pembayaran_item['harga'], 0, ',', '.') ?></td>
                         <td>
-                            <span class="badge <?= ($pembayaran_item['status_pembayaran'] == 'disetujui') ? 'text-bg-success' : (($pembayaran_item['status_pembayaran'] == 'ditolak') ? 'text-bg-danger' : 'text-bg-warning') ?>">
+                            <span class="badge <?= ($pembayaran_item['status_pembayaran'] == 'disetujui') ? 'text-bg-success' : 'text-bg-warning' ?>">
                                 <?= esc($pembayaran_item['status_pembayaran']) ?>
                             </span>
                         </td>
                         <td><a href="<?php echo base_url('lihat-bukti/' . $pembayaran_item['id']); ?>"><span class="badge text-bg-info">Lihat Bukti</span></a></td>
                         <td>
                             <a href="<?php echo base_url('setujui-pembayaran/' . $pembayaran_item['id']); ?>"><span class="badge text-bg-warning">Setujui</span></a>
-                            <a href="<?php echo base_url('tolak-pembayaran/' . $pembayaran_item['id']); ?>"> <span class="badge text-bg-danger">Tolak</span></a>
                         </td>
                 </tr>
                 <?php $nomor++; ?>

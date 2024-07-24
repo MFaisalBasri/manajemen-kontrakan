@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <h3 class="text-center">Edit Data User</h3>
     <div class="row d-flex justify-content-around">
-        <div class="col-12 col-md-6 bg-white">
+        <div class="col-12 col-md-6 bg-white rounded-4">
+            <h3 class="text-center mt-3">Edit Data User</h3>
 
             <form action="<?php echo base_url(); ?>edit-user" method="post" enctype="multipart/form-data">
                 <div class="mb-3">

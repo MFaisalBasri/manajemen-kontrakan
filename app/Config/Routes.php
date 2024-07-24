@@ -67,8 +67,8 @@ $routes->post('ubah-password', 'DashboardUser::ubahPassword');
 
 $routes->get('tagihan-user', 'DashboardUser::tagihan');
 $routes->get('bayar-tagihan', 'DashboardUser::pembayaran');
-$routes->post('bayar-tagihan', 'Pembayaran::create');
-$routes->get('pembayaran-user', 'DashboardUser::pembayaran');
+$routes->post('bayar-tagihan', 'DashboardUser::createPembayaran');
+$routes->get('pembayaran-user', 'DashboardUser::pembayaranUser');
 
 $routes->get('lihat-bukti/(:segment)', 'Pembayaran::lihatBukti/$1');
 

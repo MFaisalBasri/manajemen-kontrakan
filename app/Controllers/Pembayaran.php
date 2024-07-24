@@ -69,7 +69,7 @@ class Pembayaran extends BaseController
 
 
         session()->setFlashdata('success', 'Data berhasil disimpan.');
-        return redirect()->to('tagihan-user');
+        return redirect()->to('pembayaran-user');
     }
 
     public function lihatBukti($id)
