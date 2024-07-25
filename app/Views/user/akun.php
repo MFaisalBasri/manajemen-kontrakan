@@ -1,9 +1,7 @@
 <div class="container-fluid">
-    <h1>Welcome, <?= $nama; ?>!</h1>
-    <p>Your role: <?= $role; ?></p>
-    <h3 class="text-center">Akun Saya</h3>
     <div class="row d-flex justify-content-around">
-        <div class="col-12 col-md-6 bg-white">
+        <div class="col-12 col-md-6 bg-white rounded-4 mb-3">
+            <h3 class="text-center mt-3">Akun Saya</h3>
             <?php if (session()->getFlashdata('success')) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <?= session()->getFlashdata('success') ?>

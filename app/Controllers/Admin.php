@@ -27,6 +27,29 @@ class Admin extends BaseController
             . view('templates/footer');
     }
 
+    public function setting()
+    {
+        helper('form');
+        $model = new AdminModel();
+        $session = session();
+        $data = [
+            'id' => $session->get('id'),
+            'id_penghuni' => $session->get('id_penghuni'),
+            'nama' => $session->get('nama'),
+            'password' => $session->get('password'),
+            'role' => $session->get('role'),
+            'admin' => $model->where('id', $session->get('id'))->first(),
+            'title' => 'Akun Saya',
+        ];
+
+
+        // Tampilkan view dengan data yang telah didapatkan
+        return view('templates/header', $data)
+            . view('templates/sidebar')
+            . view('admin/admin/setting')
+            . view('templates/footer');
+    }
+
     public function tambahAdmin(): string
     {
         helper('form');
@@ -119,6 +142,38 @@ class Admin extends BaseController
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         // Redirect atau tampilkan view setelah berhasil update
         return redirect()->to('data-admin')->with('success', 'Data Admin berhasil diupdate');
+    }
+
+    public function ubahPasswordAdmin()
+    {
+        helper('form');
+
+        // Ambil data dari POST termasuk nomor_kamar
+        $data = $this->request->getPost(['id', 'nama', 'password']);
+
+        // Validasi data
+        if (!$this->validateData($data, [
+            'id' => 'required|min_length[1]',
+            'nama' => 'required|max_length[255]|min_length[3]',
+            'password' => 'required|max_length[255]|min_length[3]',
+        ])) {
+            // The validation fails, so returns the form.
+            return $this->setting();
+        }
+
+        // Dapatkan data yang divalidasi
+        $validatedData = $this->validator->getValidated();
+
+        // Cek apakah data dengan nomor_kamar tersebut ada
+        $model = model(AdminModel::class);
+
+        // Update data User
+        $model->update($validatedData['id'], [
+            'password' => $validatedData['password'],
+        ]);
+        session()->setFlashdata('success', 'Password berhasil diupdate.');
+        // Redirect atau tampilkan view setelah berhasil update
+        return redirect()->to('/setting-admin')->with('success', 'Password berhasil diupdate');
     }
 
     public function hapusAdmin($id)

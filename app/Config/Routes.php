@@ -27,6 +27,8 @@ $routes->post('edit-user', 'Users::editUser');
 $routes->get('hapus-user/(:segment)', 'Users::hapusUser/$1');
 
 $routes->get('data-admin', 'Admin::index');
+$routes->get('setting-admin', 'Admin::setting');
+$routes->post('ubah-password-admin', 'Admin::ubahPasswordAdmin');
 $routes->get('tambah-admin', 'Admin::tambahAdmin');
 $routes->post('tambah-admin', 'Admin::create');
 $routes->get('detail-admin/(:segment)', 'Admin::detailAdmin/$1');
@@ -66,7 +68,7 @@ $routes->post('edit-profile', 'DashboardUser::editProfile');
 $routes->post('ubah-password', 'DashboardUser::ubahPassword');
 
 $routes->get('tagihan-user', 'DashboardUser::tagihan');
-$routes->get('bayar-tagihan', 'DashboardUser::pembayaran');
+$routes->get('bayar-tagihan/(:segment)', 'DashboardUser::pembayaran/$1');
 $routes->post('bayar-tagihan', 'DashboardUser::createPembayaran');
 $routes->get('pembayaran-user', 'DashboardUser::pembayaranUser');
 

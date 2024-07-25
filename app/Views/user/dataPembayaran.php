@@ -1,5 +1,5 @@
-<div class="container-fluid bg-white text-dark p-3 ms-2">
-    <h3>Data Pembayaran User</h3>
+<div class="container-fluid bg-white text-dark p-3 ms-2 border-top border-primary">
+    <h3 class="text-center">Data Pembayaran Saya</h3>
     <div class="table-responsive">
         <table id="example" class="display table" style="width:100%; white-space: nowrap; overflow-x: auto;">
             <thead>

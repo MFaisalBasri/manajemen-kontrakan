@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <h3 class="text-center">Tambah Data Admin</h3>
-    <div class="row d-flex justify-content-around">
-        <div class="col-12 col-md-6 bg-white">
+<div class="row d-flex justify-content-around">
+        <div class="col-12 col-md-6 bg-white rounded-4 mb-3">
+            <h3 class="text-center mt-3">Tambah Data Admin</h3>
 
             <?php if (session()->getFlashdata('error')) : ?>
                 <div class="alert alert-danger" role="alert">

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\PembayaranModel;
+use App\Models\TagihanModel;
 
 class Pembayaran extends BaseController
 {
@@ -93,27 +94,20 @@ class Pembayaran extends BaseController
 
         // Cek apakah data dengan nomor_kamar tersebut ada
         $model = model(PembayaranModel::class);
+        $modelTagihan = model(TagihanModel::class);
 
         // Update data kamar
         $model->update($id, [
             'status_pembayaran' => 'disetujui',
         ]);
+
+        $tagihan = $model->find($id); // Ambil data pembayaran berdasarkan $id
+        $id_penyewaan = $tagihan['id_tagihan']; // Ambil id_penyewaan dari data pembayaran
+
+        // Update status menjadi "Lunas" di tb_tagihan
+        $modelTagihan->updateStatusLunas($id_penyewaan, 'Lunas'); // Method updateStatusLunas disesuaikan dengan model TagihanModel
+
         session()->setFlashdata('success', 'Data berhasil diupdate.');
-        // Redirect atau tampilkan view setelah berhasil update
-        return redirect()->to('/data-pembayaran')->with('success', 'Data pembayaran berhasil diupdate');
-    }
-
-    public function tolakPembayaran($id)
-    {
-        helper('form');
-
-        // Cek apakah data dengan nomor_kamar tersebut ada
-        $model = model(PembayaranModel::class);
-
-        // Update data kamar
-        $model->update($id, [
-            'status_pembayaran' => 'ditolak',
-        ]);
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         // Redirect atau tampilkan view setelah berhasil update
         return redirect()->to('/data-pembayaran')->with('success', 'Data pembayaran berhasil diupdate');

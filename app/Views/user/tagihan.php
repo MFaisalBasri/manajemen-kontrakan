@@ -32,7 +32,7 @@
                         <td><?= esc($tagihan_item['bulan']) ?></td>
                         <td><?= esc($tagihan_item['status']) ?></td>
                         <td>
-                            <a href="<?php echo base_url('bayar-tagihan/'); ?>"><span class="badge text-bg-warning">Bayar</span></a>
+                            <a href="<?php echo base_url('bayar-tagihan/') . $tagihan_item['id']; ?>"><span class="badge text-bg-warning">Bayar</span></a>
                         </td>
                     </tr>
                     <?php $nomor++; ?>

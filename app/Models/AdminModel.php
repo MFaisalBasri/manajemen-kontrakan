@@ -14,4 +14,9 @@ class AdminModel extends Model
     {
         return $this->findAll(); // Mengambil semua data admin dari tabel
     }
+
+    public function getTotalAdmin()
+    {
+        return count($this->findAll());
+    }
 }

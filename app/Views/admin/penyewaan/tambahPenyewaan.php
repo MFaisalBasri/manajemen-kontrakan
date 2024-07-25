@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <h3 class="text-center">Tambah Data Penyewaan</h3>
     <div class="row d-flex justify-content-around">
-        <div class="col-12 col-md-6 bg-white">
+        <div class="col-12 col-md-6 bg-white rounded-4 mb-3">
+            <h3 class="text-center mt-3">Tambah Data Penyewaan</h3>
             <?php if (session()->getFlashdata('success')) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <?= session()->getFlashdata('success') ?>
@@ -30,12 +30,7 @@
                     </select>
                     <label for="exampleFormControlInput4" class="form-label">Tanggal Penyewaan</label>
                     <input type="date" class="form-control" id="exampleFormControlInput4" name="tanggal_penyewaan">
-                    <label for="exampleFormControlInput3" class="form-label">Status Kamar</label>
-                    <select class="form-select" aria-label="Default select example" name="status">
-                        <option selected value="1">Tersedia</option>
-                        <option value="2">Digunakan</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary ms-auto mb-2 mt-1">Tambah</button>
+                    <button type="submit" class="btn btn-primary ms-auto mb-2 mt-3">Tambah</button>
                 </div>
             </form>
 

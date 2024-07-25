@@ -26,7 +26,11 @@
                         <input type="input" class="form-control" id="exampleFormControlInput3" name="harga" value="<?= esc($kamar_item['harga']) ?>">
 
                         <label for="exampleFormControlInput3" class="form-label">Status</label>
-                        <input type="input" class="form-control" id="exampleFormControlInput3" name="status" value="<?= esc($kamar_item['status']) ?>">
+                        <select class="form-control" id="exampleFormControlInput3" name="status">
+                            <option value="Digunakan" <?= ($kamar_item['status'] == 'digunakan') ? 'selected' : '' ?>>Digunakan</option>
+                            <option value="Tersedia" <?= ($kamar_item['status'] == 'tersedia') ? 'selected' : '' ?>>Tersedia</option>
+                        </select>
+
 
                         <label for="exampleFormControlInput4" class="form-label">Gambar</label>
                         <!-- <input type="file" class="form-control-file" id="gambar" name="gambar" onchange="previewFile()"> -->
@@ -36,7 +40,7 @@
                             <?php endif; ?>
                         </div>
 
-                        <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-1">Edit</button>
+                        <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-3">Edit</button>
                     <?php endforeach ?>
                 </div>
             </form>

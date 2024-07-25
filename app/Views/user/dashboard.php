@@ -10,9 +10,11 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Data Fasilitas</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Nama</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <p><?= $nama; ?></p>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -29,8 +31,10 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Data Kamar</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                Role</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <p><?= $role; ?></p>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -46,11 +50,11 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Data Penyewaan
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Data Tagihan
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">5</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $totalTagihan; ?></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -69,8 +73,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Laporan</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
+                                                Data Pembayaran</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalPembayaran; ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>

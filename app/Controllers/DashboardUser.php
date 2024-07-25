@@ -15,6 +15,8 @@ class DashboardUser extends BaseController
     public function index()
     {
         $model = new UserModel();
+        $modelTagihan = new TagihanModel();
+        $modelPembayaran = new PembayaranModel();
 
         $session = session();
         $data = [
@@ -22,6 +24,8 @@ class DashboardUser extends BaseController
             'id_penghuni' => $session->get('id_penghuni'),
             'nama' => $session->get('nama'),
             'role' => $session->get('role'),
+            'totalTagihan' => $modelTagihan->getCountTagihanByPenghuni($session->get('id_penghuni')),
+            'totalPembayaran' => $modelPembayaran->getCountDataPembayaran($session->get('id_penghuni')),
             'title' => 'Dashboard'
         ];
 
@@ -105,7 +109,7 @@ class DashboardUser extends BaseController
             . view('templates/footer');
     }
 
-    public function pembayaran()
+    public function pembayaran($id)
     {
         helper('form');
         $model = new TagihanModel();
@@ -116,7 +120,7 @@ class DashboardUser extends BaseController
 
         // Ambil data tagihan berdasarkan id_penghuni
         $data = [
-            'tagihan_list' => $model->getTagihanByPenghuni($id_penghuni),
+            'tagihan_list' => $model->detailTagihan($id),
             'id_penghuni' => $id_penghuni,
             'title'     => 'Bayar Tagihan',
         ];
@@ -140,7 +144,7 @@ class DashboardUser extends BaseController
             'bukti' => 'uploaded[bukti]|max_size[bukti,1024]|is_image[bukti]',
         ])) {
             // The validation fails, so returns the form.
-            return $this->pembayaran();
+            return $this->createPembayaran();
         }
 
         // Gets the validated data.

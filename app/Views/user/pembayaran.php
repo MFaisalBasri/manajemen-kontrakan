@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <h3>Bayar Tagihan Kamar</h3>
     <div class="row d-flex justify-content-around">
-        <div class="col-12 col-md-6 bg-white">
+        <div class="col-12 col-md-6 bg-white rounded-4 mb-3">
+            <h3 class="text-center mt-3">Data Pembayaran Saya</h3>
 
             <?php if (session()->getFlashdata('error')) : ?>
                 <div class="alert alert-danger" role="alert">
@@ -12,10 +12,10 @@
             <form action="<?php echo base_url(); ?>bayar-tagihan" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <?php foreach ($tagihan_list as $tagihan_item) : ?>
-                        <input type="input" class="form-control" id="exampleFormControlInput1" name="id_penghuni" value="<?= esc($id_penghuni) ?>" readonly>
+                        <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id_penghuni" value="<?= esc($id_penghuni) ?>" readonly>
                         <label for="exampleFormControlInput1" class="form-label">Nama</label>
 
-                        <input type="input" class="form-control" id="exampleFormControlInput1" name="id_tagihan" value="<?= esc($tagihan_item['id']) ?>" readonly>
+                        <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id_tagihan" value="<?= esc($tagihan_item['id']) ?>" readonly>
                         <input type="input" class="form-control" id="exampleFormControlInput1" name="nama_kamar" value="<?= esc($tagihan_item['nama_penghuni']) ?>" readonly>
 
                         <label for="exampleFormControlInput1" class="form-label">Nomor Kamar</label>
@@ -32,7 +32,7 @@
                         <div id="preview-container" style="display: none;">
                             <img id="preview" src="#" alt="Preview Gambar" style="max-width: 100%; max-height: 200px; margin-top: 10px;">
                         </div>
-                        <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-1">Bayar</button>
+                        <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-3">Bayar</button>
                     <?php endforeach ?>
                 </div>
             </form>

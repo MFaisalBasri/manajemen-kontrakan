@@ -59,7 +59,6 @@ class Penyewaan extends BaseController
             'nama_penghuni' => 'required|max_length[255]|min_length[1]',
             'nomor_kamar' => 'required|max_length[255]|min_length[1]',
             'tanggal_penyewaan' => 'max_length[255]',
-            'status' => 'max_length[255]',
         ])) {
             // The validation fails, so returns the form.
             return $this->tambahPenyewaan();
@@ -73,7 +72,6 @@ class Penyewaan extends BaseController
             'id_penghuni' => $post['nama_penghuni'],
             'id_kamar' => $post['nomor_kamar'],
             'tanggal_penyewaan' => $post['tanggal_penyewaan'],
-            'status_pembayaran'  => $post['status'],
         ]);
 
         $modelKamar = new KamarModel();

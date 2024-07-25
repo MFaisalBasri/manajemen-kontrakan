@@ -27,7 +27,11 @@
                     <input type="input" class="form-control" id="exampleFormControlInput2" name="harga" value="<?= set_value('harga') ?>">
 
                     <label for="exampleFormControlInput3" class="form-label">Status</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput3" name="status" value="<?= set_value('status') ?>">
+                    <select class="form-control" id="exampleFormControlInput3" name="status">
+                        <option value="digunakan" <?= set_select('status', 'digunakan') ?>>Digunakan</option>
+                        <option value="tersedia" <?= set_select('status', 'tersedia') ?>>Tersedia</option>
+                    </select>
+
 
                     <label for="exampleFormControlInput3" class="form-label">Alamat</label>
                     <input type="input" class="form-control" id="exampleFormControlInput3" name="alamat" value="<?= set_value('alamat') ?>">

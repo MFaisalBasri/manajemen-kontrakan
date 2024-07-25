@@ -87,8 +87,8 @@ class Home extends BaseController
                         }
                     } else {
                         // Jika password tidak cocok
-                        $session->setFlashdata('msg', 'Password salah');
-                        return redirect()->to('/info-kost');
+                        $session->setFlashdata('danger', 'Password salah');
+                        return redirect()->to('/login');
                     }
                 } else {
                     // Jika tidak ditemukan di tabel user, cek di tabel admin
@@ -110,12 +110,12 @@ class Home extends BaseController
                             return redirect()->to('/dashboard');
                         } else {
                             // Jika password admin tidak cocok
-                            $session->setFlashdata('msg', 'Password salah');
-                            return redirect()->to('/info-kost');
+                            $session->setFlashdata('danger', 'Password salah');
+                            return redirect()->to('/login');
                         }
                     } else {
                         // Jika tidak ditemukan di tabel admin maupun user
-                        $session->setFlashdata('msg', 'User tidak ditemukan');
+                        $session->setFlashdata('danger', 'User tidak ditemukan');
                         return redirect()->to('/login');
                     }
                 }
@@ -135,14 +135,14 @@ class Home extends BaseController
                     return redirect()->to('/dashboard');
                 } else {
                     // Jika password admin tidak cocok
-                    $session->setFlashdata('msg', 'Password salah');
-                    return redirect()->to('/info-kost');
+                    $session->setFlashdata('danger', 'Password salah');
+                    return redirect()->to('/login');
                 }
             }
         } else {
             // Jika nama penghuni tidak ditemukan
-            $session->setFlashdata('msg', 'Nama penghuni tidak ditemukan');
-            return redirect()->to('/data-user');
+            $session->setFlashdata('danger', 'periksa kembali username!');
+            return redirect()->to('/login');
         }
     }
 
@@ -173,11 +173,13 @@ class Home extends BaseController
         $penghuni = model(PenghuniModel::class);
         $kamar = model(KamarModel::class);
         $penyewaan = model(PenyewaanModel::class);
+        $admin = model(AdminModel::class);
 
         $data = [
             'dataPenghuni' => $penghuni->getTotalPenghuni(),
             'dataKamar' => $kamar->getTotalKamar(),
             'dataPenyewaan' => $penyewaan->getTotalPenyewaan(),
+            'dataAdmin' => $admin->getTotalAdmin(),
             'title'     => 'Dashboard Admin',
         ];
 

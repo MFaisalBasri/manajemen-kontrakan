@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <h3 class="text-center">Konfirmasi Bukti Pembayaran</h3>
-    <div class="row d-flex justify-content-around">
-        <div class="col-12 col-md-6 bg-white">
+    <div class="row d-flex justify-content-around mb-3">
+        <div class="col-12 col-md-6 bg-white rounded-4">
+            <h3 class="text-center mt-2">Bukti Pembayaran</h3>
 
             <div class="mb-3">
                 <?php foreach ($pembayaran_list as $pembayaran_item) : ?>
@@ -13,7 +13,7 @@
                         <?php endif; ?>
                     </div>
 
-                    <a href="../data-pembayaran"><button type="" name="submit" class="btn btn-primary ms-auto mb-2 mt-1">Keluar</button></a>
+                    <a href="../data-pembayaran"><button type="" name="submit" class="btn btn-primary ms-auto mb-2 mt-3">Keluar</button></a>
                 <?php endforeach ?>
             </div>
         </div>

@@ -50,4 +50,16 @@ class PembayaranModel extends Model
             ->where('tb_penghuni.id', $id_penghuni)
             ->findAll();
     }
+
+    public function getCountDataPembayaran($id_penghuni)
+    {
+        return $this
+            ->select('COUNT(*) as total_pembayaran')
+            ->join('tb_tagihan', 'tb_pembayaran.id_tagihan = tb_tagihan.id')
+            ->join('tb_penyewaan', 'tb_tagihan.id_penyewaan = tb_penyewaan.id')
+            ->join('tb_penghuni', 'tb_penyewaan.id_penghuni = tb_penghuni.id')
+            ->join('tb_kamar', 'tb_penyewaan.id_kamar = tb_kamar.id')
+            ->where('tb_penghuni.id', $id_penghuni)
+            ->countAllResults();
+    }
 }
