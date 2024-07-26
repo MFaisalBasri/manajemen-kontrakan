@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class PembayaranModel extends Model
 {
     protected $table = 'tb_pembayaran';
-    protected $allowedFields = ['id_penghuni', 'id_tagihan', 'bukti_pembayaran', 'status_pembayaran'];
+    protected $allowedFields = ['id_penghuni', 'id_tagihan', 'bayar', 'bukti_pembayaran', 'status_pembayaran'];
 
     public function getPembayaran()
     {
@@ -18,7 +18,6 @@ class PembayaranModel extends Model
     {
         return $this
             ->select('tb_pembayaran.*,
-                  tb_tagihan.bulan, 
                   tb_penyewaan.id as id_penyewaan, 
                   tb_penyewaan.tanggal_penyewaan, 
                   tb_penyewaan.id_kamar, 

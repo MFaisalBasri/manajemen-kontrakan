@@ -22,7 +22,7 @@
                         <td><?= esc($pembayaran_item['nama_penghuni']) ?></td>
                         <td><?= esc($pembayaran_item['nomor_kamar']) ?></td>
                         <td><?= esc($pembayaran_item['bulan']) ?></td>
-                        <td><?= "Rp. " . number_format($pembayaran_item['harga'], 0, ',', '.') ?></td>
+                        <td><?= "Rp. " . number_format($pembayaran_item['bayar'], 0, ',', '.') ?></td>
                         <td>
                             <span class="badge <?= ($pembayaran_item['status_pembayaran'] == 'disetujui') ? 'text-bg-success' : 'text-bg-warning' ?>">
                                 <?= esc($pembayaran_item['status_pembayaran']) ?>

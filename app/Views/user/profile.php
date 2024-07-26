@@ -15,15 +15,23 @@
             <form action="<?php echo base_url(); ?>edit-profile" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id" value="<?= esc($penghuni['id']) ?>">
+                    <label for="exampleFormControlInput1" class="form-label">NIK</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput1" name="nik" value="<?= esc($penghuni['nik']) ?>" readonly>
+
                     <label for="exampleFormControlInput1" class="form-label">Nama</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput1" name="nama" value="<?= esc($penghuni['nama']); ?>" readonly>
+                    <input type="input" class="form-control" id="exampleFormControlInput1" name="nama" value="<?= esc($penghuni['nama']) ?>">
 
-                    <label for="exampleFormControlInput2" class="form-label">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="exampleFormControlInput2" name="tanggal_lahir" value="<?= esc($penghuni['tgl_lahir']); ?>">
+                    <label for="exampleFormControlInput1" class="form-label">Tanggal Lahir</label>
+                    <input type="date" class="form-control" id="exampleFormControlInput1" name="tanggal_lahir" value="<?= esc($penghuni['tgl_lahir']) ?>">
 
-                    <label for="exampleFormControlInput2" class="form-label">Pekerjaan</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput2" name="pekerjaan" value="<?= esc($penghuni['pekerjaan']); ?>">
+                    <label for="exampleFormControlInput1" class="form-label">No HP</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput1" name="no_hp" value="<?= esc($penghuni['no_hp']) ?>">
 
+                    <label for="exampleFormControlInput1" class="form-label">Pekerjaan</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput1" name="pekerjaan" value="<?= esc($penghuni['pekerjaan']) ?>">
+
+                    <label for="exampleFormControlInput1" class="form-label">Tujuan</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput1" name="tujuan" value="<?= esc($penghuni['tujuan']) ?>">
                     <!-- <label for="exampleFormControlInput4" class="form-label">Gambar</label>
                     <input type="file" class="form-control-file" id="gambar" name="gambar" value="<?= set_value('gambar') ?>">
                     <div id="preview-container" style="display: none;">

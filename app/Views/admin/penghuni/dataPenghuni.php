@@ -13,9 +13,12 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>NIK</th>
                     <th>Nama</th>
                     <th>Tanggal Lahir</th>
+                    <th>No Telepon</th>
                     <th>Pekerjaan</th>
+                    <th>Tujuan</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -24,9 +27,12 @@
                 <?php foreach ($penghuni_list as $penghuni_item) : ?>
                     <tr>
                         <td><?= $nomor ?></td>
+                        <td><?= esc($penghuni_item['nik']) ?></td>
                         <td><?= esc($penghuni_item['nama']) ?></td>
                         <td><?= date('d-m-Y', strtotime($penghuni_item['tgl_lahir'])) ?></td>
+                        <td><?= esc($penghuni_item['no_hp']) ?></td>
                         <td><?= esc($penghuni_item['pekerjaan']) ?></td>
+                        <td><?= esc($penghuni_item['tujuan']) ?></td>
                         <td>
                             <a href="<?php echo base_url('detail-penghuni/' . $penghuni_item['id']); ?>"><span class="badge text-bg-warning">Edit</span></a>
                             <a href="#" onclick="confirmDelete('<?php echo base_url('hapus-penghuni/' . $penghuni_item['id']); ?>')">

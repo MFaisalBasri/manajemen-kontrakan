@@ -43,26 +43,32 @@ class Penghuni extends BaseController
     {
         helper('form');
 
-        $data = $this->request->getPost(['nama', 'tanggal_lahir', 'pekerjaan']);
+        $data = $this->request->getPost(['id', 'nik', 'nama', 'tanggal_lahir', 'no_hp', 'pekerjaan', 'tujuan']);
 
         // Checks whether the submitted data passed the validation rules.
         if (!$this->validateData($data, [
+            'nik' => 'required|max_length[255]|min_length[3]',
             'nama' => 'required|max_length[255]|min_length[3]',
-            'tanggal_lahir'  =>  'max_length[255]|min_length[3]',
-            'pekerjaan' => 'max_length[255]|min_length[3]',
+            'tanggal_lahir' => 'required|max_length[255]|min_length[3]',
+            'no_hp' => 'integer',
+            'pekerjaan' => 'required|max_length[255]|min_length[3]',
+            'tujuan' => 'required|max_length[255]|min_length[3]',
         ])) {
             // The validation fails, so returns the form.
             return $this->tambahPenghuni();
         }
 
         // Gets the validated data.
-        $post = $this->validator->getValidated();
+        $validatedData = $this->validator->getValidated();
 
         $model = model(PenghuniModel::class);
         $model->insert([
-            'nama' => $post['nama'],
-            'tgl_lahir'  => $post['tanggal_lahir'],
-            'pekerjaan'  => $post['pekerjaan'],
+            'nik' => $validatedData['nik'],
+            'nama' => $validatedData['nama'],
+            'tgl_lahir' => $validatedData['tanggal_lahir'],
+            'no_hp' => $validatedData['no_hp'],
+            'pekerjaan' => $validatedData['pekerjaan'],
+            'tujuan' => $validatedData['tujuan'],
         ]);
 
         // Get the last inserted ID from tb_penghuni
@@ -100,14 +106,17 @@ class Penghuni extends BaseController
         helper('form');
 
         // Ambil data dari POST termasuk nomor_kamar
-        $data = $this->request->getPost(['id', 'nama', 'tanggal_lahir', 'pekerjaan']);
+        $data = $this->request->getPost(['id', 'nik', 'nama', 'tanggal_lahir', 'no_hp', 'pekerjaan', 'tujuan']);
 
         // Validasi data
         if (!$this->validateData($data, [
             'id' => 'required|min_length[1]',
+            'nik' => 'required|max_length[255]|min_length[3]',
             'nama' => 'required|max_length[255]|min_length[3]',
             'tanggal_lahir' => 'required|max_length[255]|min_length[3]',
+            'no_hp' => 'integer',
             'pekerjaan' => 'required|max_length[255]|min_length[3]',
+            'tujuan' => 'required|max_length[255]|min_length[3]',
         ])) {
             // The validation fails, so returns the form.
             return $this->editPenghuni();
@@ -121,9 +130,12 @@ class Penghuni extends BaseController
 
         // Update data kamar
         $model->update($validatedData['id'], [
+            'nik' => $validatedData['nik'],
             'nama' => $validatedData['nama'],
             'tgl_lahir' => $validatedData['tanggal_lahir'],
+            'no_hp' => $validatedData['no_hp'],
             'pekerjaan' => $validatedData['pekerjaan'],
+            'tujuan' => $validatedData['tujuan'],
         ]);
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         // Redirect atau tampilkan view setelah berhasil update

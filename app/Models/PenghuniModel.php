@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class PenghuniModel extends Model
 {
     protected $table = 'tb_penghuni';
-    protected $allowedFields = ['nama', 'tgl_lahir', 'pekerjaan'];
+    protected $allowedFields = ['nik', 'nama', 'tgl_lahir', 'no_hp', 'pekerjaan', 'tujuan'];
 
     public function getPenghuni()
     {

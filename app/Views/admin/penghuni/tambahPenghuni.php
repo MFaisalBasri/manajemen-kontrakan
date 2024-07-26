@@ -11,14 +11,23 @@
             <?= validation_list_errors() ?>
             <form action="<?php echo base_url(); ?>tambah-penghuni" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">NIK</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput1" name="nik" value="<?= set_value('nik') ?>">
+
                     <label for="exampleFormControlInput1" class="form-label">Nama</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput1" name="nama" value="<?= set_value('nomor_kamar') ?>">
+                    <input type="input" class="form-control" id="exampleFormControlInput1" name="nama" value="<?= set_value('nama') ?>">
 
                     <label for="exampleFormControlInput3" class="form-label">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="exampleFormControlInput3" name="tanggal_lahir" value="<?= set_value('fasilitas') ?>">
+                    <input type="date" class="form-control" id="exampleFormControlInput3" name="tanggal_lahir" value="<?= set_value('tanggal_lahir') ?>">
+
+                    <label for="exampleFormControlInput3" class="form-label">No HP</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput3" name="no_hp" value="<?= set_value('no_hp') ?>">
 
                     <label for="exampleFormControlInput2" class="form-label">Pekerjaan</label>
-                    <input type="input" class="form-control" id="exampleFormControlInput2" name="pekerjaan" value="<?= set_value('harga') ?>">
+                    <input type="input" class="form-control" id="exampleFormControlInput2" name="pekerjaan" value="<?= set_value('pekerjaan') ?>">
+
+                    <label for="exampleFormControlInput2" class="form-label">Tujuan</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput2" name="tujuan" value="<?= set_value('tujuan') ?>">
 
                     <!-- <label for="exampleFormControlInput4" class="form-label">Gambar</label>
                     <input type="file" class="form-control-file" id="gambar" name="gambar" value="<?= set_value('gambar') ?>">
