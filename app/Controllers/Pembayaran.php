@@ -112,4 +112,21 @@ class Pembayaran extends BaseController
         // Redirect atau tampilkan view setelah berhasil update
         return redirect()->to('/data-pembayaran')->with('success', 'Data pembayaran berhasil diupdate');
     }
+
+    public function laporan()
+    {
+
+        $model = model(PembayaranModel::class);
+        $session = session();
+        $id = $session->get('id_penghuni');
+        $data = [
+            'pembayaran_list' =>  $model->getLaporan(),
+            'title'     => 'Data Laporan',
+        ];
+
+        return view('templates/header', $data)
+            . view('templates/sidebar')
+            . view('admin/admin/laporan')
+            . view('templates/footer');
+    }
 }

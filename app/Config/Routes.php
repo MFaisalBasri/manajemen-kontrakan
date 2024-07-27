@@ -57,6 +57,8 @@ $routes->get('hapus-tagihan/(:segment)', 'Tagihan::hapusTagihan/$1');
 $routes->get('data-pembayaran', 'Pembayaran::index');
 $routes->get('setujui-pembayaran/(:segment)', 'Pembayaran::setujuiPembayaran/$1');
 $routes->get('tolak-pembayaran/(:segment)', 'Pembayaran::tolakPembayaran/$1');
+$routes->get('laporan', 'Pembayaran::laporan');
+
 
 $routes->get('/data-ajuan', 'Home::dataAjuan');
 $routes->get('/laporan-penyewaan', 'Home::laporanPenyewaan');

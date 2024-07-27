@@ -12,6 +12,9 @@
             <form action="<?php echo base_url(); ?>bayar-tagihan" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <?php foreach ($tagihan_list as $tagihan_item) : ?>
+                        <label for="dateInpu" class="form-label">Tanggal</label>
+                        <input type="date" id="#" class="form-control" name="tanggal">
+
                         <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id_penghuni" value="<?= esc($id_penghuni) ?>" readonly>
                         <label for="exampleFormControlInput1" class="form-label">Nama</label>
 
@@ -25,7 +28,7 @@
                         <input type="input" class="form-control" id="exampleFormControlInput3" name="bulan" value="<?= esc($tagihan_item['bulan']) ?>" readonly>
 
                         <label for="exampleFormControlInput2" class="form-label">Harga</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput2" name="harga" value="<?= 'Rp. ' . number_format($tagihan_item['harga'], 0, ',', '.'); ?>" readonly>
+                        <input type="text" class="form-control" id="exampleFormControlInput2" name="bayar" value="<?= $tagihan_item['harga']; ?>" readonly>
 
                         <label for="exampleFormControlInput4" class="form-label">Bukti Pembayaran</label>
                         <input type="file" class="form-control-file" id="gambar" name="bukti" value="<?= set_value('bukti') ?>">
@@ -50,4 +53,15 @@
         }
         document.getElementById('preview-container').style.display = 'block'; // Menampilkan container preview
     };
+</script>
+
+<script>
+    // Fungsi untuk mengatur nilai tanggal hari ini pada input
+    function setTodayDate() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dateInput').value = today;
+    }
+
+    // Set tanggal saat halaman dimuat
+    window.onload = setTodayDate;
 </script>

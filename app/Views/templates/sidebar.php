@@ -76,14 +76,14 @@
         </li>
 
         <!-- Nav Item - Tables -->
-        <!-- <li class="nav-item <?= $title == 'Data Ajuan' ? 'active' : ''; ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>data-ajuan">
+        <li class="nav-item <?= $title == 'Data Laporan' ? 'active' : ''; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>laporan">
                 <i class="fas fa-fw fa-paper-plane"></i>
-                <span>Ajuan</span></a>
-        </li> -->
+                <span>Laporan</span></a>
+        </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsLaporan" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-copy"></i>
                 <span>Laporan</span>
@@ -94,7 +94,7 @@
                     <a class="collapse-item <?= $title == 'Laporan Penyewaan' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>laporan-penyewaan">Penyewaan</a>
                 </div>
             </div>
-        </li>
+        </li> -->
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">

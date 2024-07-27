@@ -78,7 +78,7 @@ class Penghuni extends BaseController
 
         $modelUser->insert([
             'id_penghuni' => $lastInsertId,
-            'password' => 'admin',
+            'password' => 'user',
             'role'  => 'user',
         ]);
 

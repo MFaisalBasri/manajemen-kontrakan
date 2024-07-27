@@ -68,18 +68,6 @@
         </li> -->
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsLaporan" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-copy"></i>
-                <span>Laporan</span>
-            </a>
-            <div id="collapsLaporan" class="collapse <?= $title == 'Laporan Penyewaan' ? 'show' : ''; ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Data Laporan:</h6>
-                    <a class="collapse-item <?= $title == 'Laporan Penyewaan' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>laporan-penyewaan">Penyewaan</a>
-                </div>
-            </div>
-        </li>
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">

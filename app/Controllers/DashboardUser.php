@@ -135,12 +135,15 @@ class DashboardUser extends BaseController
     {
         helper('form');
 
-        $data = $this->request->getPost(['id_penghuni', 'id_tagihan', 'bukti']);
+        $data = $this->request->getPost(['tanggal', 'id_penghuni', 'id_tagihan', 'bulan', 'bayar', 'bukti']);
 
         // Checks whether the submitted data passed the validation rules.
         if (!$this->validateData($data, [
+            'tanggal' => 'required|max_length[255]|min_length[3]',
             'id_penghuni' => 'required|max_length[255]|min_length[1]',
             'id_tagihan' => 'required|max_length[255]|min_length[1]',
+            'bulan' => 'required|max_length[255]|min_length[1]',
+            'bayar' => 'integer',
             'bukti' => 'uploaded[bukti]|max_size[bukti,1024]|is_image[bukti]',
         ])) {
             // The validation fails, so returns the form.
@@ -158,8 +161,11 @@ class DashboardUser extends BaseController
 
         $model = model(PembayaranModel::class);
         $model->insert([
+            'tanggal_pembayaran' => $post['tanggal'],
             'id_penghuni' => $post['id_penghuni'],
             'id_tagihan' => $post['id_tagihan'],
+            'bulan' => $post['bulan'],
+            'bayar' => $post['bayar'],
             'status_pembayaran' => 'Belum disetujui',
             'bukti_pembayaran' => $nama_file_baru,
         ]);
