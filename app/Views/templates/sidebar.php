@@ -9,7 +9,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class=""></i>
             </div>
-            <div class="sidebar-brand-text mx-3">Admin KOST</div>
+            <div class="sidebar-brand-text mx-3">ADMIN</div>
         </a>
 
         <!-- Divider -->
@@ -58,7 +58,7 @@
         <li class="nav-item <?= $title == 'Data Penyewaan' ? 'active' : ''; ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>data-penyewaan">
                 <i class="fas fa-fw fa-book"></i>
-                <span>Data Penyewaan Kos</span></a>
+                <span>Data Penyewaan</span></a>
         </li>
 
         <!-- Nav Item - Tables -->

@@ -21,7 +21,7 @@
                         <a class="nav-link  <?= $title == 'Sistem KOST' ? 'active' : ''; ?>" aria-current="page" href="<?php echo base_url(); ?>">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $title == 'Informasi KOST' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>info-kost">Info Kost</a>
+                        <a class="nav-link <?= $title == 'Informasi KOST' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>info-kost">Info Kontrakan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?= $title == 'Login' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>login">Login</a>

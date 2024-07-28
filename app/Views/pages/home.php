@@ -8,21 +8,21 @@
         <div class="carousel-item active">
             <img src="<?php echo base_url(); ?>assets/img/kost/kost-1.jpg" class="d-block w-100" alt="..." style="height: 90vh; filter: brightness(0.5);">
             <div class=" d-block" style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); color: white;">
-                <h5 style="font-size: 2em; margin-bottom: 10px;">Selamat Datang di MFS_KOST</h5>
+                <h5 style="font-size: 2em; margin-bottom: 10px;">Selamat Datang di Web Kontrakan</h5>
                 <p>Penyedia hunian terbaik di Indonesia.</p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="<?php echo base_url(); ?>assets/img/kost/kost-2.jpeg" class="d-block w-100" alt="..." style="height: 90vh; filter: brightness(0.5);">
             <div class=" d-block" style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); color: white;">
-                <h5 style="font-size: 2em; margin-bottom: 10px;">Selamat Datang di MFS_KOST</h5>
+                <h5 style="font-size: 2em; margin-bottom: 10px;">Selamat Datang di Web Kontrakan</h5>
                 <p>Penyedia hunian terbaik di Indonesia.</p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="<?php echo base_url(); ?>assets/img/kost/kost-3.jpeg" class="d-block w-100" alt="..." style="height: 90vh; filter: brightness(0.5);">
             <div class=" d-block" style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); color: white;">
-                <h5 style="font-size: 2em; margin-bottom: 10px;">Selamat Datang di MFS_KOST</h5>
+                <h5 style="font-size: 2em; margin-bottom: 10px;">Selamat Datang di Web Kontrakan</h5>
                 <p>Penyedia hunian terbaik di Indonesia.</p>
             </div>
         </div>

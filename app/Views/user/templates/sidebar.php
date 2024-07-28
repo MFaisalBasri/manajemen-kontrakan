@@ -9,7 +9,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class=""></i>
             </div>
-            <div class="sidebar-brand-text mx-3">User KOST</div>
+            <div class="sidebar-brand-text mx-3">Dashboard User</div>
         </a>
 
         <!-- Divider -->
