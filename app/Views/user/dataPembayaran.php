@@ -5,7 +5,7 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama Penghuni</th>
+                    <th>Tanggal</th>
                     <th>Nomor Kamar</th>
                     <th>Bulan</th>
                     <th>Harga</th>
@@ -18,7 +18,7 @@
                 <?php foreach ($pembayaran_list as $pembayaran_item) : ?>
                     <tr>
                         <td><?= $nomor ?></td>
-                        <td><?= esc($pembayaran_item['nama_penghuni']) ?></td>
+                        <td><?= esc($pembayaran_item['tanggal_pembayaran']) ?></td>
                         <td><?= esc($pembayaran_item['nomor_kamar']) ?></td>
                         <td><?= esc($pembayaran_item['bulan']) ?></td>
                         <td><?= "Rp. " . number_format($pembayaran_item['harga'], 0, ',', '.') ?></td>

@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class TagihanModel extends Model
 {
     protected $table = 'tb_tagihan';
-    protected $allowedFields = ['id_penyewaan', 'bulan', 'status'];
+    protected $allowedFields = ['id_pemilik', 'id_penyewaan', 'bulan', 'status'];
 
     public function getTagihan()
     {

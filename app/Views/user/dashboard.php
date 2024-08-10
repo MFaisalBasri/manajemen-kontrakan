@@ -84,9 +84,43 @@
                             </div>
                         </div>
                     </div>
+                    <?php foreach ($kamar_list as $tagihan_item) : ?>
+                        <div class="row bg-white p-3 mb-3">
+                            <h2 class="text-center mb-3">Informasi Kontrakan</h2>
+                            <div class="col-md-4 col-12 d-flex justify-content-center mt-3">
+                                <?php $nama_file_gambar = $tagihan_item['gambar'];
+                                $url_gambar = base_url('uploads/' . $nama_file_gambar); ?>
+                                <td>
+                                    <?php if (!empty($tagihan_item['gambar'])) : ?>
+                                        <img src="<?= $url_gambar ?>" alt="Gambar Kamar" style="max-width: 350px;">
+                                    <?php else : ?>
+                                        <span>Tidak ada gambar</span>
+                                    <?php endif; ?>
+                                </td>
+                            </div>
+                            <div class="col-md-6 col-12 mt-3">
+                                <h5 class="card-title"><?= esc($tagihan_item['nama_kamar']) ?></h5>
+                                <p class="card-text"><b>Fasilitas : </b><?= esc($tagihan_item['fasilitas']) ?></p>
+                                <p class="card-text"><b>Alamat : </b><?= esc($tagihan_item['alamat']) ?></p>
+                                <p class="card-text"><b>Harga : </b><?= "Rp. " . number_format($tagihan_item['harga'], 0, ',', '.') ?></p>
+                                <a href="<?php echo base_url('tagihan-user/') ?>" class="btn btn-primary">Bayar Sewa</a>
+                                <a href="#" class="btn btn-warning" onclick="sendWhatsAppMessage()">Komplain</a>
+                            </div>
+                        </div>
+                    <?php endforeach ?>
 
                 </div>
                 <!-- /.container-fluid -->
 
                 </div>
                 <!-- End of Main Content -->
+
+                <script>
+                    function sendWhatsAppMessage() {
+                        const phoneNumber = "62895321406949"; // Ganti '0' dengan kode negara Indonesia '62'
+                        const message = "hallo, saya memiliki keluhan tentang kontrakan";
+                        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+                        window.open(whatsappUrl, '_blank');
+                    }
+                </script>

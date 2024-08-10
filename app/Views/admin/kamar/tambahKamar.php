@@ -23,6 +23,9 @@
                     <label for="exampleFormControlInput3" class="form-label">Fasilitas</label>
                     <input type="input" class="form-control" id="exampleFormControlInput3" name="fasilitas" value="<?= set_value('fasilitas') ?>">
 
+                    <label for="exampleFormControlInput3" class="form-label">Luas</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput3" name="luas" value="<?= set_value('luas') ?>">
+
                     <label for="exampleFormControlInput2" class="form-label">Harga</label>
                     <input type="input" class="form-control" id="exampleFormControlInput2" name="harga" value="<?= set_value('harga') ?>">
 
@@ -35,6 +38,9 @@
 
                     <label for="exampleFormControlInput3" class="form-label">Alamat</label>
                     <input type="input" class="form-control" id="exampleFormControlInput3" name="alamat" value="<?= set_value('alamat') ?>">
+
+                    <label for="exampleFormControlInput3" class="form-label">Kontak</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput3" name="kontak" value="<?= set_value('kontak') ?>">
 
                     <label for="exampleFormControlInput4" class="form-label">Gambar</label>
                     <input type="file" class="form-control-file" id="gambar" name="gambar" value="<?= set_value('gambar') ?>">

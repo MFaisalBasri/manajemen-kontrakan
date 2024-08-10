@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\PenghuniModel;
+use App\Models\PenyewaanModel;
 use App\Models\UserModel;
 
 // Add this line to import the class.
@@ -26,6 +27,24 @@ class Penghuni extends BaseController
             . view('templates/footer');
     }
 
+    public function indexPenghuni()
+    {
+        $session = session();
+        $id_pemilik = $session->get('id');
+        $model = new PenyewaanModel();
+
+        $data = [
+            'penghuni_list' => $model->getPenyewaan($id_pemilik),
+            'title'     => 'Data Penghuni',
+        ];
+
+        // Tampilkan view dengan data yang telah didapatkan
+        return view('templates/header', $data)
+            . view('pemilik/sidebar')
+            . view('pemilik/penghuni/dataPenghuni')
+            . view('templates/footer');
+    }
+
     public function tambahPenghuni(): string
     {
         helper('form');
@@ -34,8 +53,8 @@ class Penghuni extends BaseController
         ];
 
         return view('templates/header', $data)
-            . view('templates/sidebar')
-            . view('admin/penghuni/tambahPenghuni')
+            . view('pemilik/sidebar')
+            . view('pemilik/penghuni/tambahPenghuni')
             . view('templates/footer');
     }
 
@@ -71,19 +90,8 @@ class Penghuni extends BaseController
             'tujuan' => $validatedData['tujuan'],
         ]);
 
-        // Get the last inserted ID from tb_penghuni
-        $lastInsertId = $model->insertID();
-
-        $modelUser = model(UserModel::class);
-
-        $modelUser->insert([
-            'id_penghuni' => $lastInsertId,
-            'password' => 'user',
-            'role'  => 'user',
-        ]);
-
         session()->setFlashdata('success', 'Data berhasil disimpan.');
-        return redirect()->to('tambah-penyewaan');
+        return redirect()->to('data-penghuni-kontrakan');
     }
 
     public function detailPenghuni($id)
@@ -96,8 +104,8 @@ class Penghuni extends BaseController
         ];
 
         return view('templates/header', $data)
-            . view('templates/sidebar')
-            . view('admin/penghuni/editPenghuni')
+            . view('pemilik/sidebar')
+            . view('pemilik/penghuni/editPenghuni')
             . view('templates/footer');
     }
 
@@ -139,7 +147,7 @@ class Penghuni extends BaseController
         ]);
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         // Redirect atau tampilkan view setelah berhasil update
-        return redirect()->to('/data-penghuni')->with('success', 'Data Penghuni berhasil diupdate');
+        return redirect()->to('/data-penghuni-kontrakan')->with('success', 'Data Penghuni berhasil diupdate');
     }
 
     public function hapusPenghuni($id)
@@ -159,6 +167,6 @@ class Penghuni extends BaseController
 
 
         session()->setFlashdata('success', 'Data berhasil dihapus.');
-        return redirect()->to('data-penghuni');
+        return redirect()->to('data-penghuni-kontrakan');
     }
 }

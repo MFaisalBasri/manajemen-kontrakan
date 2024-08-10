@@ -42,6 +42,36 @@ class Users extends BaseController
             . view('templates/footer');
     }
 
+    public function create()
+    {
+        helper('form');
+
+        $data = $this->request->getPost(['nama', 'password', 'role']);
+
+        // Checks whether the submitted data passed the validation rules.
+        if (!$this->validateData($data, [
+            'nama' => 'required|max_length[255]|min_length[3]',
+            'password'  =>  'max_length[255]|min_length[3]',
+            'role' => 'max_length[255]|min_length[3]',
+        ])) {
+            // The validation fails, so returns the form.
+            return $this->tambahUser();
+        }
+
+        // Gets the validated data.
+        $post = $this->validator->getValidated();
+
+        $model = model(AdminModel::class);
+        $model->insert([
+            'nama' => $post['nama'],
+            'password'  => $post['password'],
+            'role'  => $post['role'],
+        ]);
+
+        session()->setFlashdata('success', 'Data berhasil disimpan.');
+        return redirect()->to('data-user');
+    }
+
 
     public function detailUser($id)
     {

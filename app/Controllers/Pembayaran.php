@@ -18,8 +18,8 @@ class Pembayaran extends BaseController
         ];
 
         return view('templates/header', $data)
-            . view('templates/sidebar')
-            . view('admin/pembayaran/dataPembayaran')
+            . view('pemilik/sidebar')
+            . view('pemilik/pembayaran/dataPembayaran')
             . view('templates/footer');
     }
 

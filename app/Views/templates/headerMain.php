@@ -11,7 +11,8 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">KONTRAKAN</a>
+            <img src="<?php echo base_url(); ?>assets/img/kost/logo-kontrakan.jpg" alt="" style="width: 15px;">
+            <a class="navbar-brand ms-2" href=" #">SISTEM INFORMASI PENYEWAAN KONTRAKAN</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -21,7 +22,7 @@
                         <a class="nav-link  <?= $title == 'Sistem KOST' ? 'active' : ''; ?>" aria-current="page" href="<?php echo base_url(); ?>">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $title == 'Informasi KOST' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>info-kost">Info Kontrakan</a>
+                        <a class="nav-link <?= $title == 'Informasi Kontrakan' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>info-kontrakan">Info Kontrakan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?= $title == 'Login' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>login">Login</a>

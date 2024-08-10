@@ -10,6 +10,14 @@
             <img src="<?php echo base_url(); ?>assets/img/kost/kost-2.jpeg" alt="" style="width: 90vh; max-width: 100%; height: auto;" class="rounded mt-4">
         </div>
     </div>
+    <?php if (session()->getFlashdata('danger')) : ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= session()->getFlashdata('danger') ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
     <div class="row mt-5 mb-5 d-flex justify-content-around bg-light p-5">
         <h3 class="text-center mb-5">INFORMASI KONTRAKAN</h3>
         <?php foreach ($kamar_list as $kamar_item) : ?>
@@ -21,9 +29,10 @@
                     <div class="card-body">
                         <h5 class="card-title"><?= esc($kamar_item['nama_kamar']) ?></h5>
                         <p><small><?= esc($kamar_item['status']) ?></small></p>
-                        <p class="card-text"><b>Fasilitas : </b><?= esc($kamar_item['fasilitas']) ?></p>
+                        <p class="card-text"><b>Harga : </b><?= "Rp. " . number_format($kamar_item['harga'], 0, ',', '.') ?></p>
                         <p class="card-text"><b>Alamat : </b><?= esc($kamar_item['alamat']) ?></p>
-                        <a href="#" class="btn btn-primary" onclick="sendWhatsAppMessage()">Sewa</a>
+                        <a href="<?php echo base_url('detail-properti/' . $kamar_item['id']); ?>" class="btn btn-primary">Detail Kontrakan</a>
+                        <!-- <a href="#" class="btn btn-primary" onclick="sendWhatsAppMessage()">Pesan</a> -->
                     </div>
                 </div>
             </div>
@@ -40,7 +49,7 @@
 
 <script>
     function sendWhatsAppMessage() {
-        const phoneNumber = "62895380902470"; // Ganti '0' dengan kode negara Indonesia '62'
+        const phoneNumber = "62895321406949"; // Ganti '0' dengan kode negara Indonesia '62'
         const message = "hallo, saya ingin memesan kontrakan";
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 

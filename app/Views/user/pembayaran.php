@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row d-flex justify-content-around">
         <div class="col-12 col-md-6 bg-white rounded-4 mb-3">
-            <h3 class="text-center mt-3">Data Pembayaran Saya</h3>
+            <h3 class="text-center mt-3">Form Pembayaran</h3>
 
             <?php if (session()->getFlashdata('error')) : ?>
                 <div class="alert alert-danger" role="alert">
@@ -12,7 +12,7 @@
             <form action="<?php echo base_url(); ?>bayar-tagihan" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <?php foreach ($tagihan_list as $tagihan_item) : ?>
-                        <label for="dateInpu" class="form-label">Tanggal</label>
+                        <label for="dateInput" class="form-label">Tanggal</label>
                         <input type="date" id="#" class="form-control" name="tanggal">
 
                         <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id_penghuni" value="<?= esc($id_penghuni) ?>" readonly>
@@ -29,6 +29,21 @@
 
                         <label for="exampleFormControlInput2" class="form-label">Harga</label>
                         <input type="text" class="form-control" id="exampleFormControlInput2" name="bayar" value="<?= $tagihan_item['harga']; ?>" readonly>
+
+                        <div class="mb-3">
+                            <label class="form-label">Metode Pembayaran</label><br>
+                            <label>
+                                <input type="radio" name="payment" value="cash" onclick="toggleRekeningInput()"> Cash
+                            </label>
+                            <label class="ms-3">
+                                <input type="radio" name="payment" value="transfer" onclick="toggleRekeningInput()"> Transfer
+                            </label>
+                        </div>
+
+                        <div id="rekeningDiv" style="display: none;" class="mb-3">
+                            <label for="rekening" class="form-label">Kirim ke Nomor Rekening:</label>
+                            <p>BCA: 5775638473</p>
+                        </div>
 
                         <label for="exampleFormControlInput4" class="form-label">Bukti Pembayaran</label>
                         <input type="file" class="form-control-file" id="gambar" name="bukti" value="<?= set_value('bukti') ?>">
@@ -64,4 +79,12 @@
 
     // Set tanggal saat halaman dimuat
     window.onload = setTodayDate;
+</script>
+
+<script>
+    function toggleRekeningInput() {
+        var transferSelected = document.querySelector('input[name="payment"][value="transfer"]').checked;
+        var rekeningDiv = document.getElementById('rekeningDiv');
+        rekeningDiv.style.display = transferSelected ? 'block' : 'none';
+    }
 </script>

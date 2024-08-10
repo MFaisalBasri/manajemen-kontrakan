@@ -56,9 +56,15 @@
         <!-- Nav Item - Tables -->
         <li class="nav-item <?= $title == 'Data Pembayaran' ? 'active' : ''; ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>pembayaran-user">
-                <i class="fas fa-fw fa-credit-card"></i>
-                <span>Pembayaran</span></a>
+                <i class="fas fa-fw fa-paper-plane"></i>
+                <span>Laporan Pembayaran</span></a>
         </li>
+
+        <!-- <li class="nav-item <?= $title == 'Data Laporan' ? 'active' : ''; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>laporan-user">
+                <i class="fas fa-fw fa-paper-plane"></i>
+                <span>Laporan</span></a>
+        </li> -->
 
         <!-- Nav Item - Tables -->
         <!-- <li class="nav-item <?= $title == 'Data Ajuan' ? 'active' : ''; ?>">

@@ -7,21 +7,33 @@ use App\Controllers\Kamar;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->get('/info-kost', 'Home::infoKost');
+$routes->get('/info-kontrakan', 'Home::infoKost');
+$routes->get('/detail-properti/(:segment)', 'Home::detailProperti/$1');
+$routes->get('/jadwal-kunjungan/(:segment)', 'Home::jadwalKunjungan/$1');
+$routes->post('/buat-kunjungan', 'Kunjungan::create');
+$routes->get('/data-kunjungan', 'Kunjungan::index');
+
 $routes->get('/login', 'Home::login');
+$routes->get('/registrasi', 'Home::registrasi');
+$routes->post('/registrasi', 'Home::registAkun');
 $routes->get('/logout', 'Home::logout');
 $routes->post('/auth', 'Home::auth');
+$routes->get('/sewa-kontrakan/(:segment)', 'Home::sewaKontrakan/$1');
 $routes->get('/dashboard', 'Home::dashboard',);
+$routes->get('/dashboard-pemilik', 'Home::dashboardPemilik',);
 
 $routes->get('data-kamar', 'Kamar::index');
+$routes->get('data-kontrakan-pemilik', 'Kamar::indexPemilik');
 $routes->get('tambah-kamar', 'Kamar::tambahKamar');
-$routes->post('tambah-kamar', 'Kamar::create');
-$routes->get('hapus-kamar/(:segment)', 'Kamar::hapusKamar/$1');
-$routes->get('detail-kamar/(:segment)', 'Kamar::detailKamar/$1');
-$routes->post('edit-kamar', 'Kamar::editKamar');
+$routes->get('tambah-kontrakan', 'Kamar::tambahKontrakan');
+$routes->post('tambah-kontrakan', 'Kamar::create');
+$routes->get('hapus-kontrakan/(:segment)', 'Kamar::hapusKontrakan/$1');
+$routes->get('detail-kontrakan/(:segment)', 'Kamar::detailKontrakan/$1');
+$routes->post('edit-kontrakan', 'Kamar::editKontrakan');
 
 $routes->get('data-user', 'Users::index');
 $routes->get('tambah-user', 'Users::tambahUser');
+$routes->post('tambah-user', 'Users::create');
 $routes->get('detail-user/(:segment)', 'Users::detailUser/$1');
 $routes->post('edit-user', 'Users::editUser');
 $routes->get('hapus-user/(:segment)', 'Users::hapusUser/$1');
@@ -36,6 +48,7 @@ $routes->post('edit-admin', 'Admin::editAdmin');
 $routes->get('hapus-admin/(:segment)', 'Admin::hapusAdmin/$1');
 
 $routes->get('data-penghuni', 'Penghuni::index');
+$routes->get('data-penghuni-kontrakan', 'Penghuni::indexPenghuni');
 $routes->get('tambah-penghuni', 'Penghuni::tambahPenghuni');
 $routes->post('tambah-penghuni', 'Penghuni::create');
 $routes->get('detail-penghuni/(:segment)', 'Penghuni::detailPenghuni/$1');
@@ -44,7 +57,8 @@ $routes->get('hapus-penghuni/(:segment)', 'Penghuni::hapusPenghuni/$1');
 
 $routes->get('data-penyewaan', 'Penyewaan::index');
 $routes->get('tambah-penyewaan', 'Penyewaan::tambahPenyewaan');
-$routes->post('tambah-penyewaan', 'penyewaan::create');
+$routes->post('tambah-penyewaan', 'Penyewaan::create');
+$routes->post('sewa-kontrakan', 'Penyewaan::sewaKontrakan');
 $routes->get('detail-penyewaan/(:segment)', 'Penyewaan::detailPenyewaan/$1');
 $routes->post('edit-penyewaan', 'penyewaan::editPenyewaan');
 $routes->get('hapus-penyewaan/(:segment)', 'Penyewaan::hapusPenyewaan/$1');
@@ -73,6 +87,7 @@ $routes->get('tagihan-user', 'DashboardUser::tagihan');
 $routes->get('bayar-tagihan/(:segment)', 'DashboardUser::pembayaran/$1');
 $routes->post('bayar-tagihan', 'DashboardUser::createPembayaran');
 $routes->get('pembayaran-user', 'DashboardUser::pembayaranUser');
+$routes->get('laporan-user', 'DashboardUser::laporanUser');
 
 $routes->get('lihat-bukti/(:segment)', 'Pembayaran::lihatBukti/$1');
 

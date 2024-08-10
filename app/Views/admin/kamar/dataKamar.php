@@ -1,5 +1,5 @@
 <div class="container-fluid bg-white text-dark p-3 ms-2 border-top border-primary">
-    <h3 class="text-center">Data Kamar</h3>
+    <h3 class="text-center">Data Kontrakan</h3>
     <div class="row">
         <div class="col-12 d-flex justify-content-end">
             <a href="<?php echo base_url(); ?>tambah-kamar"><button type="button" class="btn btn-primary ms-auto mb-2">Tambah Kamar</button></a>
@@ -18,11 +18,12 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Kode Kamar</th>
-                    <th>Nomor Kamar</th>
-                    <th>Nama Kamar</th>
+                    <th>Kode Kontrakan</th>
+                    <th>Nomor Kontrakan</th>
+                    <th>Nama Kontrakan</th>
                     <th>Alamat</th>
                     <th>Fasilitas</th>
+                    <th>Luas</th>
                     <th>Tarif Per Bulan</th>
                     <th>Status</th>
                     <th>Gambar</th>
@@ -39,7 +40,8 @@
                         <td><?= esc($kamar_item['nama_kamar']) ?></td>
                         <td><?= esc($kamar_item['alamat']) ?></td>
                         <td><?= esc($kamar_item['fasilitas']) ?></td>
-                        <td><?= esc($kamar_item['harga']) ?></td>
+                        <td><?= esc($kamar_item['luas']) ?> m²</td>
+                        <td><?= "Rp. " . number_format($kamar_item['harga'], 0, ',', '.') ?></td>
                         <td><?= esc($kamar_item['status']) ?></td>
                         <?php $nama_file_gambar = $kamar_item['gambar'];
                         $url_gambar = base_url('uploads/' . $nama_file_gambar); ?>

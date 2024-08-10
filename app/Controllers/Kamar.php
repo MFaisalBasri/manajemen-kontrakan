@@ -13,12 +13,30 @@ class Kamar extends BaseController
 
         $data = [
             'kamar_list' => $model->getKamar(),
-            'title'     => 'Data Kamar',
+            'title'     => 'Data Kontrakan',
         ];
 
         return view('templates/header', $data)
             . view('templates/sidebar')
             . view('admin/kamar/dataKamar')
+            . view('templates/footer');
+    }
+
+    public function indexPemilik(): string
+    {
+        $session = session();
+        $id_pemilik = $session->get('id');
+
+        $model = model(KamarModel::class);
+
+        $data = [
+            'kamar_list' => $model->getKontrakanPemilik($id_pemilik),
+            'title'     => 'Data Kontrakan',
+        ];
+
+        return view('templates/header', $data)
+            . view('pemilik/sidebar')
+            . view('pemilik/kontrakan/dataKontrakan')
             . view('templates/footer');
     }
 
@@ -35,22 +53,38 @@ class Kamar extends BaseController
             . view('templates/footer');
     }
 
+    public function tambahKontrakan(): string
+    {
+        helper('form');
+        $data = [
+            'title'     => 'Tambah Kontrakan',
+        ];
+
+        return view('templates/header', $data)
+            . view('pemilik/sidebar')
+            . view('pemilik/kontrakan/tambahKontrakan')
+            . view('templates/footer');
+    }
+
 
     public function create()
     {
         helper('form');
 
-        $data = $this->request->getPost(['kode_kamar', 'nomor_kamar', 'nama_kamar', 'alamat', 'fasilitas', 'harga', 'status', 'gambar']);
+        $data = $this->request->getPost(['id_pemilik', 'kode_kamar', 'nomor_kamar', 'nama_kamar', 'alamat', 'fasilitas', 'luas', 'kontak',  'harga', 'status', 'gambar']);
 
         // Checks whether the submitted data passed the validation rules.
         if (!$this->validateData($data, [
+            'id_pemilik' => 'required|max_length[255]|min_length[1]',
             'kode_kamar' => 'required|max_length[255]|min_length[3]',
             'nomor_kamar' => 'required|max_length[255]|min_length[3]',
             'nama_kamar' => 'required|max_length[255]|min_length[3]',
             'alamat' => 'required|max_length[255]|min_length[3]',
-            'fasilitas'  =>  'max_length[255]|min_length[3]',
+            'fasilitas'  =>  'max_length[255]|min_length[2]',
             'harga' => 'integer',
             'status' => 'max_length[255]|min_length[3]',
+            'luas' => 'max_length[255]|min_length[1]',
+            'kontak' => 'max_length[255]|min_length[3]',
             'gambar' => 'uploaded[gambar]|max_size[gambar,1024]|is_image[gambar]',
         ])) {
             // The validation fails, so returns the form.
@@ -74,6 +108,7 @@ class Kamar extends BaseController
             return redirect()->to('tambah-kamar')->withInput();
         }
         $model->insert([
+            'id_pemilik' => $post['id_pemilik'],
             'kode_kamar' => $post['kode_kamar'],
             'nomor_kamar' => $post['nomor_kamar'],
             'nama_kamar' => $post['nama_kamar'],
@@ -81,15 +116,17 @@ class Kamar extends BaseController
             'fasilitas'  => $post['fasilitas'],
             'harga'  => $post['harga'],
             'status'  => $post['status'],
+            'luas'  => $post['luas'],
+            'kontak'  => $post['kontak'],
             'gambar' => $nama_file_baru,
         ]);
 
 
         session()->setFlashdata('success', 'Data berhasil disimpan.');
-        return redirect()->to('data-kamar');
+        return redirect()->to('data-kontrakan-pemilik');
     }
 
-    public function hapusKamar($id)
+    public function hapusKontrakan($id)
     {
         $model = model(KamarModel::class);
 
@@ -117,10 +154,10 @@ class Kamar extends BaseController
         }
 
         session()->setFlashdata('success', 'Data berhasil dihapus.');
-        return redirect()->to('data-kamar');
+        return redirect()->to('data-kontrakan-pemilik');
     }
 
-    public function detailKamar($id)
+    public function detailKontrakan($id)
     {
         $model = model(KamarModel::class);
 
@@ -130,12 +167,12 @@ class Kamar extends BaseController
         ];
 
         return view('templates/header', $data)
-            . view('templates/sidebar')
-            . view('admin/kamar/editKamar')
+            . view('pemilik/sidebar')
+            . view('pemilik/kontrakan/editKontrakan')
             . view('templates/footer');
     }
 
-    public function editKamar()
+    public function editKontrakan()
     {
         helper('form');
 
@@ -155,7 +192,7 @@ class Kamar extends BaseController
             // 'gambar' => 'uploaded[gambar]|max_size[gambar,1024]|is_image[gambar]',
         ])) {
             // The validation fails, so returns the form.
-            return $this->editKamar();
+            return $this->editKontrakan();
         }
 
         // Dapatkan data yang divalidasi
@@ -186,6 +223,6 @@ class Kamar extends BaseController
         ]);
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         // Redirect atau tampilkan view setelah berhasil update
-        return redirect()->to('/data-kamar')->with('success', 'Data kamar berhasil diupdate');
+        return redirect()->to('/data-kontrakan-pemilik')->with('success', 'Data kamar berhasil diupdate');
     }
 }

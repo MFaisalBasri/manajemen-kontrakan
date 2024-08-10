@@ -6,6 +6,7 @@
                 <tr>
                     <th>No</th>
                     <th>Tanggal Pembayaran</th>
+                    <th>Nama</th>
                     <th>Nomor Kamar</th>
                     <th>Bulan</th>
                     <th>Harga</th>
@@ -19,7 +20,8 @@
                 <?php foreach ($pembayaran_list as $pembayaran_item) : ?>
                     <tr>
                         <td><?= $nomor ?></td>
-                        <td><?= esc($pembayaran_item['tanggal_pembayaran']) ?></td>
+                        <td><?= date('d-m-Y', strtotime($pembayaran_item['tanggal_pembayaran'])) ?></td>
+                        <td><?= esc($pembayaran_item['nama_penghuni']) ?></td>
                         <td><?= esc($pembayaran_item['nomor_kamar']) ?></td>
                         <td><?= esc($pembayaran_item['bulan']) ?></td>
                         <td><?= "Rp. " . number_format($pembayaran_item['bayar'], 0, ',', '.') ?></td>
@@ -32,7 +34,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" style="text-align: right;"><strong>Total</strong></td>
+                    <td colspan="5" style="text-align: right;"><strong>Total</strong></td>
                     <td><strong><?= "Rp. " . number_format($total_bayar, 0, ',', '.') ?></strong></td>
                 </tr>
             </tfoot>

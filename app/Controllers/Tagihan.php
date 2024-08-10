@@ -23,22 +23,24 @@ class Tagihan extends BaseController
 
         // Tampilkan view dengan data yang telah didapatkan
         return view('templates/header', $data)
-            . view('templates/sidebar')
-            . view('admin/tagihan/dataTagihan')
+            . view('pemilik/sidebar')
+            . view('pemilik/tagihan/dataTagihan')
             . view('templates/footer');
     }
 
     public function buatTagihan(): string
     {
+        $session = session();
+        $id_pemilik = $session->get('id');
         $model = new TagihanModel();
         $model = new PenyewaanModel();
         $data = [
-            'tagihan_list' => $model->getPenyewaan(),
+            'tagihan_list' => $model->getPenyewaanTagihan($id_pemilik),
             'title'     => 'Buat Tagihan',
         ];
         return view('templates/header', $data)
-            . view('templates/sidebar')
-            . view('admin/tagihan/buatTagihan')
+            . view('pemilik/sidebar')
+            . view('pemilik/tagihan/buatTagihan')
             . view('templates/footer');
     }
 
@@ -46,10 +48,11 @@ class Tagihan extends BaseController
     {
         helper('form');
 
-        $data = $this->request->getPost(['id_penyewaan', 'bulan', 'status']);
+        $data = $this->request->getPost(['id_pemilik', 'id_penyewaan', 'bulan', 'status']);
 
         // Checks whether the submitted data passed the validation rules.
         if (!$this->validateData($data, [
+            'id_pemilik' => 'required|max_length[255]|min_length[1]',
             'id_penyewaan' => 'required|max_length[255]|min_length[1]',
             'bulan' => 'required|max_length[255]|min_length[1]',
             'status' => 'max_length[255]',
@@ -63,6 +66,7 @@ class Tagihan extends BaseController
 
         $model = model(TagihanModel::class);
         $model->insert([
+            'id_pemilik' => $post['id_pemilik'],
             'id_penyewaan' => $post['id_penyewaan'],
             'bulan' => $post['bulan'],
             'status' => $post['status'],

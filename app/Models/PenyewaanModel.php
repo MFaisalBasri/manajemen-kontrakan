@@ -7,15 +7,32 @@ use CodeIgniter\Model;
 class PenyewaanModel extends Model
 {
     protected $table = 'tb_penyewaan';
-    protected $allowedFields = ['id_penghuni', 'id_kamar', 'tanggal_penyewaan', 'status_pembayaraan'];
+    protected $allowedFields = ['id_penghuni', 'id_kamar', 'id_pemilik', 'tanggal_penyewaan', 'status_pembayaraan'];
 
-    public function getPenyewaan()
+    public function getPenyewaan($id_pemilik)
+    {
+        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar, tb_penghuni.nama, tb_penghuni.*, tb_kamar.nomor_kamar, tb_kamar.harga')
+            ->join('tb_penghuni', 'tb_penghuni.id = tb_penyewaan.id_penghuni')
+            ->join('tb_kamar', 'tb_kamar.id = tb_penyewaan.id_kamar') // Bergabung dengan tb_kamar berdasarkan id_kamar
+            ->where('tb_penyewaan.id_pemilik', $id_pemilik) // Filter berdasarkan id_pemilik
+            ->findAll();
+    }
+
+    public function getPenyewaanTagihan($id_pemilik)
     {
         return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar, tb_penghuni.nama, tb_kamar.nomor_kamar, tb_kamar.harga')
             ->join('tb_penghuni', 'tb_penghuni.id = tb_penyewaan.id_penghuni')
-            ->join('tb_kamar', 'tb_kamar.id = tb_penyewaan.id_kamar')
+            ->join('tb_kamar', 'tb_kamar.id = tb_penyewaan.id_kamar') // Bergabung dengan tb_kamar berdasarkan id_kamar
+            ->where('tb_penyewaan.id_pemilik', $id_pemilik) // Filter berdasarkan id_pemilik
             ->findAll();
     }
+
+    public function totalPenyewaan($id_pemilik)
+    {
+        // Menggunakan query builder untuk memfilter data berdasarkan id_pemilik
+        return $this->where('id_pemilik', $id_pemilik)->countAllResults();
+    }
+
 
     public function getDetailPenyewaan($id)
     {
@@ -25,6 +42,16 @@ class PenyewaanModel extends Model
             ->where('tb_penyewaan.id', $id)
             ->first();
     }
+
+    public function getDetailKamar($id)
+    {
+        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar, tb_penghuni.nama, tb_kamar.*')
+            ->join('tb_penghuni', 'tb_penghuni.id = tb_penyewaan.id_penghuni')
+            ->join('tb_kamar', 'tb_kamar.id = tb_penyewaan.id_kamar')
+            ->where('tb_penyewaan.id_penghuni', $id)
+            ->findAll();
+    }
+
     public function getAvailableRooms()
     {
         $db = \Config\Database::connect();

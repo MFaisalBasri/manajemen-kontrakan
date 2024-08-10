@@ -6,6 +6,7 @@ use App\Models\UserModel;
 use App\Models\PenghuniModel;
 use App\Models\TagihanModel;
 use App\Models\PembayaranModel;
+use App\Models\PenyewaanModel;
 
 // Add this line to import the class.
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -17,6 +18,7 @@ class DashboardUser extends BaseController
         $model = new UserModel();
         $modelTagihan = new TagihanModel();
         $modelPembayaran = new PembayaranModel();
+        $modelPenyewaan = new PenyewaanModel();
 
         $session = session();
         $data = [
@@ -26,6 +28,8 @@ class DashboardUser extends BaseController
             'role' => $session->get('role'),
             'totalTagihan' => $modelTagihan->getCountTagihanByPenghuni($session->get('id_penghuni')),
             'totalPembayaran' => $modelPembayaran->getCountDataPembayaran($session->get('id_penghuni')),
+            'kamar_list' => $modelPenyewaan->getDetailKamar($session->get('id_penghuni')),
+            'tagihan_list' => $modelTagihan->getTagihanByPenghuni($session->get('id_penghuni')),
             'title' => 'Dashboard'
         ];
 
@@ -284,5 +288,26 @@ class DashboardUser extends BaseController
 
         session()->setFlashdata('success', 'Data berhasil dihapus.');
         return redirect()->to('data-penghuni');
+    }
+
+    public function laporanUser()
+    {
+        $session = session();
+        $model = new TagihanModel();
+
+        // Ambil id_penghuni dari session
+        $id_penghuni = $session->get('id_penghuni');
+
+        // Ambil data tagihan berdasarkan id_penghuni
+        $data = [
+            'tagihan_list' => $model->getTagihanByPenghuni($id_penghuni),
+            'title' => 'Data Tagihan'
+        ];
+
+        // Tampilkan view dengan data yang telah didapatkan
+        return view('templates/header', $data)
+            . view('user/templates/sidebar')
+            . view('user/laporan')
+            . view('templates/footer');
     }
 }
