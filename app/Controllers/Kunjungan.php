@@ -28,6 +28,23 @@ class Kunjungan extends BaseController
             . view('pemilik/dataKunjungan')
             . view('templates/footer');
     }
+    public function indexKunjungan()
+    {
+
+        $session = session();
+        $id_pemilik = $session->get('id');
+        $model = new KunjunganModel();
+
+        $data = [
+            'kunjungan_list' => $model->getKunjunganPemilik($id_pemilik),
+            'title'     => 'Data Kunjungan',
+        ];
+
+        return view('templates/header', $data)
+            . view('templates/sidebar')
+            . view('admin/dataKunjungan')
+            . view('templates/footer');
+    }
 
     public function tambahKunjungan($id): string
     {

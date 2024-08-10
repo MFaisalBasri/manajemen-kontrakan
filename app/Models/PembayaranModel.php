@@ -14,20 +14,21 @@ class PembayaranModel extends Model
         return $this->findAll();
     }
 
-    public function getDataPembayaran()
+    public function getDataPembayaran($id_pemilik)
     {
         return $this
-            ->select('tb_pembayaran.*,
-                  tb_penyewaan.id as id_penyewaan, 
+            ->select('tb_pembayaran.*, 
+                  tb_penyewaan.id AS id_penyewaan, 
                   tb_penyewaan.tanggal_penyewaan, 
                   tb_penyewaan.id_kamar, 
-                  tb_penghuni.nama as nama_penghuni, 
+                  tb_penghuni.nama AS nama_penghuni, 
                   tb_kamar.nomor_kamar, 
                   tb_kamar.harga')
             ->join('tb_tagihan', 'tb_pembayaran.id_tagihan = tb_tagihan.id')
             ->join('tb_penyewaan', 'tb_tagihan.id_penyewaan = tb_penyewaan.id')
             ->join('tb_penghuni', 'tb_penyewaan.id_penghuni = tb_penghuni.id')
             ->join('tb_kamar', 'tb_penyewaan.id_kamar = tb_kamar.id')
+            ->where('tb_tagihan.id_pemilik', $id_pemilik)
             ->findAll();
     }
 
@@ -49,6 +50,36 @@ class PembayaranModel extends Model
             ->findAll();
     }
 
+    public function getLaporanPemilik($id_pemilik)
+    {
+        return $this
+            ->select('tb_pembayaran.*, 
+                  tb_penyewaan.id AS id_penyewaan, 
+                  tb_penyewaan.tanggal_penyewaan, 
+                  tb_penyewaan.id_kamar, 
+                  tb_penghuni.nama AS nama_penghuni, 
+                  tb_kamar.nomor_kamar, 
+                  tb_kamar.harga')
+            ->join('tb_tagihan', 'tb_pembayaran.id_tagihan = tb_tagihan.id')
+            ->join('tb_penyewaan', 'tb_tagihan.id_penyewaan = tb_penyewaan.id')
+            ->join('tb_penghuni', 'tb_penyewaan.id_penghuni = tb_penghuni.id')
+            ->join('tb_kamar', 'tb_penyewaan.id_kamar = tb_kamar.id')
+            ->where('tb_tagihan.id_pemilik', $id_pemilik) // Filter berdasarkan id_pemilik
+            ->where('tb_pembayaran.status_pembayaran', 'disetujui') // Filter status pembayaran
+            ->findAll();
+    }
+
+    public function countLaporanPemilik($id_pemilik)
+    {
+        return $this
+            ->join('tb_tagihan', 'tb_pembayaran.id_tagihan = tb_tagihan.id')
+            ->join('tb_penyewaan', 'tb_tagihan.id_penyewaan = tb_penyewaan.id')
+            ->join('tb_penghuni', 'tb_penyewaan.id_penghuni = tb_penghuni.id')
+            ->join('tb_kamar', 'tb_penyewaan.id_kamar = tb_kamar.id')
+            ->where('tb_tagihan.id_pemilik', $id_pemilik) // Filter berdasarkan id_pemilik
+            ->where('tb_pembayaran.status_pembayaran', 'disetujui') // Filter status pembayaran
+            ->countAllResults(); // Menghitung jumlah hasil
+    }
 
     public function getDataPembayaranByIdPenghuni($id_penghuni)
     {
@@ -65,7 +96,7 @@ class PembayaranModel extends Model
             ->join('tb_penyewaan', 'tb_tagihan.id_penyewaan = tb_penyewaan.id')
             ->join('tb_penghuni', 'tb_penyewaan.id_penghuni = tb_penghuni.id')
             ->join('tb_kamar', 'tb_penyewaan.id_kamar = tb_kamar.id')
-            ->where('tb_penghuni.id', $id_penghuni)
+            ->where('tb_penghuni.id_pengguna', $id_penghuni)
             ->findAll();
     }
 

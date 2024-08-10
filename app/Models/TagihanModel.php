@@ -24,10 +24,10 @@ class TagihanModel extends Model
             ->findAll();
     }
 
-    public function getTagihanByPenghuni($id_penghuni)
+    public function getTagihanByPemilik($id_pemilik)
     {
         return $this->select('tb_tagihan.*, 
-            tb_penyewaan.id as id_penyewaan, 
+            tb_penyewaan.id as id_penyewaan,  
             tb_penyewaan.tanggal_penyewaan, 
             tb_penyewaan.id_kamar, 
             tb_penghuni.nama as nama_penghuni, 
@@ -36,7 +36,23 @@ class TagihanModel extends Model
             ->join('tb_penyewaan', 'tb_tagihan.id_penyewaan = tb_penyewaan.id')
             ->join('tb_penghuni', 'tb_penyewaan.id_penghuni = tb_penghuni.id')
             ->join('tb_kamar', 'tb_penyewaan.id_kamar = tb_kamar.id')
-            ->where('tb_penghuni.id', $id_penghuni)
+            ->where('tb_tagihan.id_pemilik', $id_pemilik)
+            ->findAll();
+    }
+
+    public function getTagihanByPenghuni($id_penghuni)
+    {
+        return $this->select('tb_tagihan.*, 
+            tb_penyewaan.id as id_penyewaan,  
+            tb_penyewaan.tanggal_penyewaan, 
+            tb_penyewaan.id_kamar, 
+            tb_penghuni.nama as nama_penghuni, 
+            tb_kamar.nomor_kamar, 
+            tb_kamar.harga')
+            ->join('tb_penyewaan', 'tb_tagihan.id_penyewaan = tb_penyewaan.id')
+            ->join('tb_penghuni', 'tb_penyewaan.id_penghuni = tb_penghuni.id')
+            ->join('tb_kamar', 'tb_penyewaan.id_kamar = tb_kamar.id')
+            ->where('tb_penghuni.id_pengguna', $id_penghuni)
             ->findAll();
     }
 

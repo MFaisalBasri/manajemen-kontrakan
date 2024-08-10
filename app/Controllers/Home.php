@@ -160,6 +160,7 @@ class Home extends BaseController
                     'nama' => $user['nama'],
                     'email' => $user['email'],
                     'status' => $user['status'],
+                    'password' => $user['password'],
                     'isLoggedIn' => TRUE
                 ];
                 $session->set($ses_data);
@@ -169,6 +170,8 @@ class Home extends BaseController
                     return redirect()->to('/dashboard-user');
                 } elseif ($user['status'] === 'pemilik') {
                     return redirect()->to('/dashboard-pemilik');
+                } elseif ($user['status'] === 'admin') {
+                    return redirect()->to('/dashboard-admin');
                 } else {
                     // Jika status tidak dikenali
                     $session->setFlashdata('danger', 'Status tidak dikenali');
@@ -198,33 +201,33 @@ class Home extends BaseController
     }
 
 
-    // public function dashboard(): string
-    // {
+    public function dashboard(): string
+    {
 
-    //     $session = session();
-    //     if (!$session->get('id')) {
-    //         return redirect()->to('/login');
-    //     }
+        $session = session();
+        if (!$session->get('id')) {
+            return redirect()->to('/login');
+        }
 
-    //     $penghuni = model(PenghuniModel::class);
-    //     $kamar = model(KamarModel::class);
-    //     $penyewaan = model(PenyewaanModel::class);
-    //     $admin = model(AdminModel::class);
+        $penghuni = model(PenghuniModel::class);
+        $kamar = model(KamarModel::class);
+        $penyewaan = model(PenyewaanModel::class);
+        $admin = model(AdminModel::class);
 
-    //     $data = [
-    //         'dataPenghuni' => $penghuni->getTotalPenghuni(),
-    //         'dataKamar' => $kamar->getTotalKamar(),
-    //         'dataPenyewaan' => $penyewaan->getTotalPenyewaan(),
-    //         'dataAdmin' => $admin->getTotalAdmin(),
-    //         'title'     => 'Dashboard Admin',
-    //     ];
+        $data = [
+            'dataPenghuni' => $penghuni->getTotalPenghuni(),
+            'dataKamar' => $kamar->getTotalKamar(),
+            'dataPenyewaan' => $penyewaan->getTotalPenyewaan(),
+            'dataAdmin' => $admin->getTotalAdmin(),
+            'title'     => 'Dashboard Admin',
+        ];
 
 
-    //     return view('templates/header', $data)
-    //         . view('templates/sidebar')
-    //         . view('admin/dashboard')
-    //         . view('templates/footer');
-    // }
+        return view('templates/header', $data)
+            . view('templates/sidebar')
+            . view('admin/dashboard')
+            . view('templates/footer');
+    }
 
     public function dashboardPemilik(): string
     {
@@ -239,13 +242,11 @@ class Home extends BaseController
         $penghuni = model(PenghuniModel::class);
         $kamar = model(KamarModel::class);
         $penyewaan = model(PenyewaanModel::class);
-        $admin = model(AdminModel::class);
 
         $data = [
             'dataPenghuni' => $penghuni->getTotalPenghuni(),
             'dataKamar' => $kamar->totalKontrakan($id_pemilik),
             'dataPenyewaan' => $penyewaan->totalPenyewaan($id_pemilik),
-            'dataAdmin' => $admin->getTotalAdmin(),
             'title'     => 'Dashboard Pemilik',
         ];
 
@@ -254,5 +255,60 @@ class Home extends BaseController
             . view('pemilik/sidebar')
             . view('pemilik/dashboard')
             . view('templates/footer');
+    }
+
+    public function setting()
+    {
+        helper('form');
+        $model = new RegistrasiModel();
+        $session = session();
+        $data = [
+            'id' => $session->get('id'),
+            'id_penghuni' => $session->get('id_penghuni'),
+            'nama' => $session->get('nama'),
+            'password' => $session->get('password'),
+            'role' => $session->get('role'),
+            'admin' => $model->where('id', $session->get('id'))->first(),
+            'title' => 'Akun Saya',
+        ];
+
+
+        // Tampilkan view dengan data yang telah didapatkan
+        return view('templates/header', $data)
+            . view('pemilik/sidebar')
+            . view('pemilik/setting')
+            . view('templates/footer');
+    }
+
+    public function ubahPasswordPemilik()
+    {
+        helper('form');
+
+        // Ambil data dari POST termasuk nomor_kamar
+        $data = $this->request->getPost(['id', 'nama', 'password']);
+
+        // Validasi data
+        if (!$this->validateData($data, [
+            'id' => 'required|min_length[1]',
+            'nama' => 'required|max_length[255]|min_length[3]',
+            'password' => 'required|max_length[255]|min_length[3]',
+        ])) {
+            // The validation fails, so returns the form.
+            return $this->setting();
+        }
+
+        // Dapatkan data yang divalidasi
+        $validatedData = $this->validator->getValidated();
+
+        // Cek apakah data dengan nomor_kamar tersebut ada
+        $model = model(RegistrasiModel::class);
+
+        // Update data User
+        $model->update($validatedData['id'], [
+            'password' => $validatedData['password'],
+        ]);
+        session()->setFlashdata('success', 'Password berhasil diupdate.');
+        // Redirect atau tampilkan view setelah berhasil update
+        return redirect()->to('/setting-akun')->with('success', 'Password berhasil diupdate');
     }
 }

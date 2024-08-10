@@ -176,7 +176,7 @@ class Admin extends BaseController
         return redirect()->to('/setting-admin')->with('success', 'Password berhasil diupdate');
     }
 
-    public function hapusAdmin($id)
+    public function hapus($id)
     {
         $model = model(AdminModel::class);
 

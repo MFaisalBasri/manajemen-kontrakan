@@ -15,9 +15,9 @@ class Tagihan extends BaseController
     public function index()
     {
         $model = new TagihanModel();
-
+        $session = session();
         $data = [
-            'tagihan_list' => $model->getTagihan(),
+            'tagihan_list' => $model->getTagihanByPemilik($session->get('id')),
             'title'     => 'Data Tagihan',
         ];
 
@@ -28,6 +28,22 @@ class Tagihan extends BaseController
             . view('templates/footer');
     }
 
+    public function indexTagihan()
+    {
+        $model = new TagihanModel();
+        $session = session();
+        $data = [
+            'tagihan_list' => $model->getTagihanByPemilik($session->get('id')),
+            'title'     => 'Data Tagihan',
+        ];
+
+        // Tampilkan view dengan data yang telah didapatkan
+        return view('templates/header', $data)
+            . view('templates/sidebar')
+            . view('admin/tagihan/dataTagihan')
+            . view('templates/footer');
+    }
+
     public function buatTagihan(): string
     {
         $session = session();
@@ -35,7 +51,7 @@ class Tagihan extends BaseController
         $model = new TagihanModel();
         $model = new PenyewaanModel();
         $data = [
-            'tagihan_list' => $model->getPenyewaanTagihan($id_pemilik),
+            'tagihan_list' => $model->getPenyewaan($id_pemilik),
             'title'     => 'Buat Tagihan',
         ];
         return view('templates/header', $data)

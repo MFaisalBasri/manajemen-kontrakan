@@ -53,7 +53,7 @@
                         <input type="date" class="form-control" id="exampleFormControlInput3" name="tanggal_lahir" value="<?= set_value('tanggal_lahir') ?>">
 
                         <label for="exampleFormControlInput3" class="form-label">No HP</label>
-                        <input type="input" class="form-control" id="exampleFormControlInput3" name="no_hp" value="<?= set_value('no_hp') ?>">
+                        <input type="input" class="form-control" id="exampleFormControlInput3" name="no_hp" value="<?= set_value('no_hp') ?>" placeholder="contoh: 629874637377">
 
                         <label for="exampleFormControlInput2" class="form-label">Pekerjaan</label>
                         <input type="input" class="form-control" id="exampleFormControlInput2" name="pekerjaan" value="<?= set_value('pekerjaan') ?>">

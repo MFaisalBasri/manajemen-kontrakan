@@ -19,6 +19,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
+                    <th>Email</th>
                     <th>password</th>
                     <th>Role</th>
                     <th>Aksi</th>
@@ -30,8 +31,9 @@
                     <tr>
                         <td><?= $nomor ?></td>
                         <td><?= esc($user_item['nama']) ?></td>
+                        <td><?= esc($user_item['email']) ?></td>
                         <td><?= esc($user_item['password']) ?></td>
-                        <td><?= esc($user_item['role']) ?></td>
+                        <td><?= esc($user_item['status']) ?></td>
                         <td>
                             <a href="<?php echo base_url('detail-user/' . $user_item['id']); ?>"><span class="badge text-bg-warning">Edit</span></a>
                             <a href="#" onclick="confirmDelete('<?php echo base_url('hapus-user/' . $user_item['id']); ?>')">

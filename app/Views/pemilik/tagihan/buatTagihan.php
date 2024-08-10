@@ -12,7 +12,7 @@
             <?php endif; ?>
             <form action="<?php echo base_url(); ?>buat-tagihan" method="post">
                 <div class="mb-3">
-                    <input type="input" class="form-control" id="exampleFormControlInput1" name="id_pemilik" value="<?= session()->get('id') ?>">
+                    <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id_pemilik" value="<?= session()->get('id') ?>">
                     <label for="id" class="form-label">ID Penyewaan</label>
                     <select name="id_penyewaan" class="form-select" aria-label="Default select example">
                         <?php foreach ($tagihan_list as $tagihan_item) : ?>

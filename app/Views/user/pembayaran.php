@@ -15,7 +15,7 @@
                         <label for="dateInput" class="form-label">Tanggal</label>
                         <input type="date" id="#" class="form-control" name="tanggal">
 
-                        <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id_penghuni" value="<?= esc($id_penghuni) ?>" readonly>
+                        <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id_penghuni" value="<?= esc($id_penghuni['id']) ?>" readonly>
                         <label for="exampleFormControlInput1" class="form-label">Nama</label>
 
                         <input type="hidden" class="form-control" id="exampleFormControlInput1" name="id_tagihan" value="<?= esc($tagihan_item['id']) ?>" readonly>

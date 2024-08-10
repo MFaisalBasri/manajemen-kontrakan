@@ -88,7 +88,7 @@ class Kamar extends BaseController
             'gambar' => 'uploaded[gambar]|max_size[gambar,1024]|is_image[gambar]',
         ])) {
             // The validation fails, so returns the form.
-            return $this->tambahKamar();
+            return $this->tambahKontrakan();
         }
 
         // Gets the validated data.
@@ -105,7 +105,7 @@ class Kamar extends BaseController
         if ($model->where('nomor_kamar', $post['nomor_kamar'])->first()) {
             // Nomor kamar sudah ada, beri pemberitahuan dan kembalikan ke form
             session()->setFlashdata('error', 'Nomor kamar sudah ada.');
-            return redirect()->to('tambah-kamar')->withInput();
+            return redirect()->to('tambah-kontrakan')->withInput();
         }
         $model->insert([
             'id_pemilik' => $post['id_pemilik'],
@@ -172,6 +172,21 @@ class Kamar extends BaseController
             . view('templates/footer');
     }
 
+    public function detailKontrakanAdmin($id)
+    {
+        $model = model(KamarModel::class);
+
+        $data = [
+            'kamar_list' => $model->where('id', $id)->findAll(),
+            'title'     => 'Data Kamar',
+        ];
+
+        return view('templates/header', $data)
+            . view('templates/sidebar')
+            . view('admin/kamar/editKamar')
+            . view('templates/footer');
+    }
+
     public function editKontrakan()
     {
         helper('form');
@@ -224,5 +239,59 @@ class Kamar extends BaseController
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         // Redirect atau tampilkan view setelah berhasil update
         return redirect()->to('/data-kontrakan-pemilik')->with('success', 'Data kamar berhasil diupdate');
+    }
+
+    public function editKamar()
+    {
+        helper('form');
+
+        // Ambil data dari POST termasuk nomor_kamar
+        $data = $this->request->getPost(['id', 'kode_kamar', 'nomor_kamar', 'nama_kamar', 'alamat', 'fasilitas', 'harga', 'status']);
+
+        // Validasi data
+        if (!$this->validateData($data, [
+            'id' => 'required|min_length[1]',
+            'kode_kamar' => 'required|max_length[255]|min_length[3]',
+            'nomor_kamar' => 'required|max_length[255]|min_length[3]',
+            'nama_kamar' => 'required|max_length[255]|min_length[3]',
+            'alamat'  => 'max_length[255]|min_length[2]',
+            'fasilitas'  => 'max_length[255]|min_length[2]',
+            'harga' => 'integer',
+            'status' => 'max_length[255]|min_length[3]',
+            // 'gambar' => 'uploaded[gambar]|max_size[gambar,1024]|is_image[gambar]',
+        ])) {
+            // The validation fails, so returns the form.
+            return $this->editKamar();
+        }
+
+        // Dapatkan data yang divalidasi
+        $validatedData = $this->validator->getValidated();
+
+        // Handle file upload
+        // $gambar = $this->request->getFile('gambar');
+        // $nama_file_asli = $gambar->getName();
+        // $nama_file_baru = uniqid() . '_' . $nama_file_asli;
+        // $gambar->move(ROOTPATH . 'public/uploads', $nama_file_baru);
+
+        // Cek apakah data dengan nomor_kamar tersebut ada
+        $model = model(KamarModel::class);
+        $existingData = $model->where('id', $validatedData['id'])->first();
+
+        if (!$existingData) {
+            return redirect()->back()->with('error', 'Data kamar tidak ditemukan.'); // Tambahkan pesan error yang sesuai
+        }
+
+        // Update data kamar
+        $model->update($existingData['id'], [
+            'nama_kamar' => $validatedData['nama_kamar'],
+            'alamat' => $validatedData['alamat'],
+            'fasilitas' => $validatedData['fasilitas'],
+            'harga' => $validatedData['harga'],
+            'status' => $validatedData['status'],
+            // 'gambar' => $nama_file_baru,
+        ]);
+        session()->setFlashdata('success', 'Data berhasil diupdate.');
+        // Redirect atau tampilkan view setelah berhasil update
+        return redirect()->to('/data-kamar')->with('success', 'Data kamar berhasil diupdate');
     }
 }

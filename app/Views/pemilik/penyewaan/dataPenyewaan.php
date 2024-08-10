@@ -22,6 +22,7 @@
                     <th>Nomor Kontrakan</th>
                     <th>Harga</th>
                     <th>Tanggal Penyewaan</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -34,7 +35,11 @@
                         <td><?= esc($penyewaan_item['nomor_kamar']) ?></td>
                         <td><?= "Rp. " . number_format($penyewaan_item['harga'], 0, ',', '.') ?></td>
                         <td><?= date('d-m-Y', strtotime($penyewaan_item['tanggal_penyewaan'])) ?></td>
+                        <td> <span class="badge <?= ($penyewaan_item['status'] == 'Disetujui') ? 'text-bg-success' : 'text-bg-warning' ?>">
+                                <?= esc($penyewaan_item['status']) ?>
+                            </span></td>
                         <td>
+                            <a href="<?php echo base_url('setujui-penyewaan/' . $penyewaan_item['id']); ?>"><span class="badge text-bg-primary">Setujui</span></a>
                             <a href="<?php echo base_url('detail-penyewaan/' . $penyewaan_item['id']); ?>"><span class="badge text-bg-warning">Edit</span></a>
                             <a href="#" onclick="confirmDelete('<?php echo base_url('hapus-penyewaan/' . $penyewaan_item['id']); ?>')">
                                 <span class="badge badge-danger">Hapus</span>

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Models\PenghuniModel;
+use App\Models\RegistrasiModel;
 
 // Add this line to import the class.
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -12,10 +13,10 @@ class Users extends BaseController
 {
     public function index()
     {
-        $model = new UserModel();
+        $model = new RegistrasiModel();
 
         $data = [
-            'user_list' => $model->getUser(),
+            'user_list' => $model->findAll(),
             'title'     => 'Data User',
         ];
 
@@ -38,7 +39,7 @@ class Users extends BaseController
         ];
         return view('templates/header', $data)
             . view('templates/sidebar')
-            . view('user/tambahUser')
+            . view('admin/user/tambahUser')
             . view('templates/footer');
     }
 
@@ -46,26 +47,30 @@ class Users extends BaseController
     {
         helper('form');
 
-        $data = $this->request->getPost(['nama', 'password', 'role']);
+        $data = $this->request->getPost(['nama', 'no_hp', 'email', 'password', 'status']);
 
         // Checks whether the submitted data passed the validation rules.
         if (!$this->validateData($data, [
             'nama' => 'required|max_length[255]|min_length[3]',
-            'password'  =>  'max_length[255]|min_length[3]',
-            'role' => 'max_length[255]|min_length[3]',
+            'no_hp' => 'integer',
+            'email' => 'required|max_length[255]|min_length[3]',
+            'password' => 'required|max_length[255]|min_length[3]',
+            'status' => 'required|max_length[255]|min_length[3]',
         ])) {
             // The validation fails, so returns the form.
             return $this->tambahUser();
         }
 
         // Gets the validated data.
-        $post = $this->validator->getValidated();
+        $validatedData = $this->validator->getValidated();
 
-        $model = model(AdminModel::class);
+        $model = model(RegistrasiModel::class);
         $model->insert([
-            'nama' => $post['nama'],
-            'password'  => $post['password'],
-            'role'  => $post['role'],
+            'nama' => $validatedData['nama'],
+            'no_hp' => $validatedData['no_hp'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password'],
+            'status' => $validatedData['status'],
         ]);
 
         session()->setFlashdata('success', 'Data berhasil disimpan.');
@@ -75,10 +80,11 @@ class Users extends BaseController
 
     public function detailUser($id)
     {
-        $model = model(UserModel::class);
+        helper('form');
+        $model = model(RegistrasiModel::class);
 
         $data = [
-            'user_list' => $model->getDetailUser($id),
+            'user_list' => $model->where('id', $id)->findAll(),
             'title'     => 'Data User',
         ];
 
@@ -93,14 +99,16 @@ class Users extends BaseController
         helper('form');
 
         // Ambil data dari POST termasuk nomor_kamar
-        $data = $this->request->getPost(['id', 'nama', 'password', 'role']);
+        $data = $this->request->getPost(['id', 'nama', 'no_hp', 'email', 'password', 'status']);
 
         // Validasi data
         if (!$this->validateData($data, [
-            'id' => 'required|min_length[1]',
+            'id' => 'required',
             'nama' => 'required',
+            'no_hp' => 'required|max_length[255]|min_length[3]',
+            'email' => 'required|max_length[255]|min_length[3]',
             'password' => 'required|max_length[255]|min_length[3]',
-            'role' => 'required|max_length[255]|min_length[3]',
+            'status' => 'required|max_length[255]|min_length[3]',
         ])) {
             // The validation fails, so returns the form.
             return $this->editUser();
@@ -110,27 +118,30 @@ class Users extends BaseController
         $validatedData = $this->validator->getValidated();
 
         // Cek apakah data dengan nomor_kamar tersebut ada
-        $model = model(UserModel::class);
+        $model = model(RegistrasiModel::class);
 
         // Update data kamar
         $model->update($validatedData['id'], [
+            'nama' => $validatedData['nama'],
+            'no_hp' => $validatedData['no_hp'],
+            'email' => $validatedData['email'],
             'password' => $validatedData['password'],
-            'role' => $validatedData['role'],
+            'status' => $validatedData['status'],
         ]);
         session()->setFlashdata('success', 'Data berhasil diupdate.');
         // Redirect atau tampilkan view setelah berhasil update
-        return redirect()->to('data-user')->with('success', 'Data kamar berhasil diupdate');
+        return redirect()->to('data-user')->with('success', 'Data pengguna berhasil diupdate');
     }
 
     public function hapusUser($id)
     {
-        $model = model(UserModel::class);
+        $model = model(RegistrasiModel::class);
 
         // Ambil data kamar berdasarkan nomor kamar
         $user = $model->where('id', $id)->first();
 
         if (!$user) {
-            session()->setFlashdata('error', 'Data Tagihan tidak ditemukan.');
+            session()->setFlashdata('error', 'Data User tidak ditemukan.');
             return redirect()->to('data-tagihan');
         }
 

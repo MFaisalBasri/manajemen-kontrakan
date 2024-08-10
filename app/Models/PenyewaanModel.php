@@ -7,11 +7,20 @@ use CodeIgniter\Model;
 class PenyewaanModel extends Model
 {
     protected $table = 'tb_penyewaan';
-    protected $allowedFields = ['id_penghuni', 'id_kamar', 'id_pemilik', 'tanggal_penyewaan', 'status_pembayaraan'];
+    protected $allowedFields = ['id_penghuni', 'id_kamar', 'id_pemilik', 'tanggal_penyewaan', 'status_pembayaraan', 'status'];
+
+    public function getPenyewaanAdmin()
+    {
+        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar, tb_penyewaan.status, tb_penghuni.nama, tb_penghuni.nik, tb_penghuni.tgl_lahir, tb_penghuni.no_hp, tb_penghuni.pekerjaan, tb_penghuni.tujuan, tb_kamar.nomor_kamar, tb_kamar.harga')
+            ->join('tb_penghuni', 'tb_penghuni.id = tb_penyewaan.id_penghuni')
+            ->join('tb_kamar', 'tb_kamar.id = tb_penyewaan.id_kamar') // Bergabung dengan tb_kamar berdasarkan id_kamar
+            ->findAll(); // Mengambil semua data tanpa filter
+
+    }
 
     public function getPenyewaan($id_pemilik)
     {
-        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar, tb_penghuni.nama, tb_penghuni.*, tb_kamar.nomor_kamar, tb_kamar.harga')
+        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar,tb_penyewaan.status, tb_penghuni.nama, tb_penghuni.nik, tb_penghuni.tgl_lahir, tb_penghuni.no_hp, tb_penghuni.pekerjaan, tb_penghuni.tujuan, tb_kamar.nomor_kamar, tb_kamar.harga')
             ->join('tb_penghuni', 'tb_penghuni.id = tb_penyewaan.id_penghuni')
             ->join('tb_kamar', 'tb_kamar.id = tb_penyewaan.id_kamar') // Bergabung dengan tb_kamar berdasarkan id_kamar
             ->where('tb_penyewaan.id_pemilik', $id_pemilik) // Filter berdasarkan id_pemilik
@@ -20,7 +29,7 @@ class PenyewaanModel extends Model
 
     public function getPenyewaanTagihan($id_pemilik)
     {
-        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar, tb_penghuni.nama, tb_kamar.nomor_kamar, tb_kamar.harga')
+        return $this->select('tb_penyewaan.id, tb_penyewaan.tanggal_penyewaan, tb_penyewaan.id_kamar,tb_penyewaan.status, tb_penghuni.nama, tb_kamar.nomor_kamar, tb_kamar.harga')
             ->join('tb_penghuni', 'tb_penghuni.id = tb_penyewaan.id_penghuni')
             ->join('tb_kamar', 'tb_kamar.id = tb_penyewaan.id_kamar') // Bergabung dengan tb_kamar berdasarkan id_kamar
             ->where('tb_penyewaan.id_pemilik', $id_pemilik) // Filter berdasarkan id_pemilik

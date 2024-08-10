@@ -29,11 +29,11 @@
                     <label for="exampleFormControlInput2" class="form-label">Tujuan</label>
                     <input type="input" class="form-control" id="exampleFormControlInput2" name="tujuan" value="<?= set_value('tujuan') ?>">
 
-                    <!-- <label for="exampleFormControlInput4" class="form-label">Gambar</label>
-                    <input type="file" class="form-control-file" id="gambar" name="gambar" value="<?= set_value('gambar') ?>">
-                    <div id="preview-container" style="display: none;">
-                        <img id="preview" src="#" alt="Preview Gambar" style="max-width: 100%; max-height: 200px; margin-top: 10px;">
-                    </div> -->
+                    <p style="color: red;"><small>*masukan email yang telah terdaftar!</small></p>
+
+                    <label for="exampleFormControlInput1" class="form-label">Email</label>
+                    <input type="input" class="form-control" id="exampleFormControlInput1" name="email">
+
                     <button type="submit" name="submit" class="btn btn-primary ms-auto mb-2 mt-3">Tambah</button>
 
                 </div>

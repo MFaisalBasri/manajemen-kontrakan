@@ -11,15 +11,31 @@ class Pembayaran extends BaseController
     {
 
         $model = model(PembayaranModel::class);
-
+        $session = session();
         $data = [
-            'pembayaran_list' => $model->getDataPembayaran(),
+            'pembayaran_list' => $model->getDataPembayaran($session->get('id')),
             'title'     => 'Data Pembayaran',
         ];
 
         return view('templates/header', $data)
             . view('pemilik/sidebar')
             . view('pemilik/pembayaran/dataPembayaran')
+            . view('templates/footer');
+    }
+
+    public function indexPembayaran(): string
+    {
+
+        $model = model(PembayaranModel::class);
+        $session = session();
+        $data = [
+            'pembayaran_list' => $model->getDataPembayaran($session->get('id')),
+            'title'     => 'Data Pembayaran',
+        ];
+
+        return view('templates/header', $data)
+            . view('templates/sidebar')
+            . view('admin/pembayaran/dataPembayaran')
             . view('templates/footer');
     }
 
@@ -127,6 +143,23 @@ class Pembayaran extends BaseController
         return view('templates/header', $data)
             . view('templates/sidebar')
             . view('admin/admin/laporan')
+            . view('templates/footer');
+    }
+
+    public function laporanPemilik()
+    {
+
+        $model = model(PembayaranModel::class);
+        $session = session();
+        $id = $session->get('id');
+        $data = [
+            'pembayaran_list' =>  $model->getLaporanPemilik($id),
+            'title'     => 'Data Laporan',
+        ];
+
+        return view('templates/header', $data)
+            . view('pemilik/sidebar')
+            . view('pemilik/laporan')
             . view('templates/footer');
     }
 }

@@ -19,13 +19,31 @@ class Penyewaan extends BaseController
         $model = new PenyewaanModel();
 
         $data = [
-            'penyewaan_list' => $model->getPenyewaan($id_pemilik),
+            'penyewaan_list' => $model->getPenyewaanTagihan($id_pemilik),
             'title'     => 'Data Penyewaan',
         ];
 
         // Tampilkan view dengan data yang telah didapatkan
         return view('templates/header', $data)
             . view('pemilik/sidebar')
+            . view('pemilik/penyewaan/dataPenyewaan')
+            . view('templates/footer');
+    }
+
+    public function indexPenyewaan()
+    {
+        $session = session();
+        $id_pemilik = $session->get('id');
+        $model = new PenyewaanModel();
+
+        $data = [
+            'penyewaan_list' => $model->getPenyewaanAdmin(),
+            'title'     => 'Data Penyewaan',
+        ];
+
+        // Tampilkan view dengan data yang telah didapatkan
+        return view('templates/header', $data)
+            . view('templates/sidebar')
             . view('admin/penyewaan/dataPenyewaan')
             . view('templates/footer');
     }
@@ -39,9 +57,14 @@ class Penyewaan extends BaseController
 
         $modelPenyewaan = new PenyewaanModel();
 
+        $session = session();
+        $id_pemilik = $session->get('id');
+
+        $model = model(KamarModel::class);
+
         $data = [
             'penghuni_list' => $penghuni_list,
-            'kamar_list' => $modelPenyewaan->getAvailableRooms(),
+            'kamar_list' => $model->getKontrakanPemilik($id_pemilik),
             'title' => 'Tambah Penyewaan',
         ];
 
@@ -78,6 +101,7 @@ class Penyewaan extends BaseController
             'id_kamar' => $post['nomor_kamar'],
             'id_pemilik' => $id_pemilik,
             'tanggal_penyewaan' => $post['tanggal_penyewaan'],
+            'status' => 'Disetujui',
         ]);
 
         $modelKamar = new KamarModel();
@@ -135,7 +159,8 @@ class Penyewaan extends BaseController
         // Model untuk tabel penghuni
         $penghuniModel = model(PenghuniModel::class); // Asumsi nama model adalah PenghuniModel
         $penghuniModel->insert([
-            'nik' => $post['nik'],
+            'id_pengguna' =>  $userId,
+            'nik' =>  $post['nik'],
             'nama' => $post['nama'],
             'tgl_lahir' => $post['tanggal_lahir'],
             'no_hp' => $post['no_hp'],
@@ -153,6 +178,7 @@ class Penyewaan extends BaseController
             'id_kamar' => $post['id_kamar'],
             'id_pemilik' => $post['id_pemilik'],
             'tanggal_penyewaan' => $post['tanggal'],
+            'status' => 'Belum disetujui',
         ]);
 
         // Model untuk tabel kamar
@@ -176,8 +202,8 @@ class Penyewaan extends BaseController
         ];
 
         return view('templates/header', $data)
-            . view('templates/sidebar')
-            . view('admin/penyewaan/editPenyewaan')
+            . view('pemilik/sidebar')
+            . view('pemilik/penyewaan/editPenyewaan')
             . view('templates/footer');
     }
 
@@ -231,5 +257,20 @@ class Penyewaan extends BaseController
 
         session()->setFlashdata('success', 'Data berhasil dihapus.');
         return redirect()->to('data-penyewaan');
+    }
+
+    public function setujuiPenyewaan($id)
+    {
+        helper('form');
+        $model = model(PenyewaanModel::class);
+
+        // Update data 
+        $model->update($id, [
+            'status' => 'Disetujui',
+        ]);
+
+        session()->setFlashdata('success', 'Data berhasil diupdate.');
+        // Redirect atau tampilkan view setelah berhasil update
+        return redirect()->to('/data-penyewaan')->with('success', 'Data penyewaan berhasil Disetujui');
     }
 }

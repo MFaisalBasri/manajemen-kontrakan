@@ -7,6 +7,7 @@ use App\Models\PenghuniModel;
 use App\Models\TagihanModel;
 use App\Models\PembayaranModel;
 use App\Models\PenyewaanModel;
+use App\Models\RegistrasiModel;
 
 // Add this line to import the class.
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -19,16 +20,25 @@ class DashboardUser extends BaseController
         $modelTagihan = new TagihanModel();
         $modelPembayaran = new PembayaranModel();
         $modelPenyewaan = new PenyewaanModel();
+        $model = new PenghuniModel();
 
         $session = session();
+        $id_penghuni = $session->get('id');
+        $penghuni = $model->where('id_pengguna', $id_penghuni)->first();
+
+        $kamar_list = [];
+        if ($penghuni) {
+            $kamar_list = $modelPenyewaan->getDetailKamar($penghuni['id']);
+        }
+
         $data = [
             'id' => $session->get('id'),
             'id_penghuni' => $session->get('id_penghuni'),
             'nama' => $session->get('nama'),
-            'role' => $session->get('role'),
+            'role' => $session->get('status'),
             'totalTagihan' => $modelTagihan->getCountTagihanByPenghuni($session->get('id_penghuni')),
             'totalPembayaran' => $modelPembayaran->getCountDataPembayaran($session->get('id_penghuni')),
-            'kamar_list' => $modelPenyewaan->getDetailKamar($session->get('id_penghuni')),
+            'kamar_list' => $kamar_list,
             'tagihan_list' => $modelTagihan->getTagihanByPenghuni($session->get('id_penghuni')),
             'title' => 'Dashboard'
         ];
@@ -47,10 +57,10 @@ class DashboardUser extends BaseController
         $model = new PenghuniModel();
 
         $session = session();
-        $id_penghuni = $session->get('id_penghuni'); // Ambil id_penghuni dari session
+        $id_penghuni = $session->get('id'); // Ambil id_penghuni dari session
 
         // Ambil data penghuni berdasarkan id_penghuni
-        $penghuni = $model->where('id', $id_penghuni)->first();
+        $penghuni = $model->where('id_pengguna', $id_penghuni)->first();
         if (!$penghuni) {
             // Handle kasus jika penghuni tidak ditemukan
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Penghuni tidak ditemukan.');
@@ -72,7 +82,7 @@ class DashboardUser extends BaseController
     public function akun()
     {
         helper('form');
-        $model = new UserModel();
+        $model = new RegistrasiModel();
         $session = session();
         $data = [
             'id' => $session->get('id'),
@@ -80,8 +90,8 @@ class DashboardUser extends BaseController
             'nama' => $session->get('nama'),
             'password' => $session->get('password'),
             'role' => $session->get('role'),
-            'user' => $model->getDetailUser($session->get('id')),
-            'title' => 'Akun'
+            'user' => $model->where('id', $session->get('id'))->first(),
+            'title' => 'Akun Saya',
         ];
 
 
@@ -98,7 +108,7 @@ class DashboardUser extends BaseController
         $model = new TagihanModel();
 
         // Ambil id_penghuni dari session
-        $id_penghuni = $session->get('id_penghuni');
+        $id_penghuni = $session->get('id');
 
         // Ambil data tagihan berdasarkan id_penghuni
         $data = [
@@ -117,15 +127,15 @@ class DashboardUser extends BaseController
     {
         helper('form');
         $model = new TagihanModel();
-
+        $modelPenghuni = new PenghuniModel();
         $session = session();
         // Ambil id_penghuni dari session
-        $id_penghuni = $session->get('id_penghuni');
+        $id_penghuni = $session->get('id');
 
         // Ambil data tagihan berdasarkan id_penghuni
         $data = [
             'tagihan_list' => $model->detailTagihan($id),
-            'id_penghuni' => $id_penghuni,
+            'id_penghuni' => $modelPenghuni->where('id_pengguna', $session->get('id'))->first(),
             'title'     => 'Bayar Tagihan',
         ];
 
@@ -151,7 +161,7 @@ class DashboardUser extends BaseController
             'bukti' => 'uploaded[bukti]|max_size[bukti,1024]|is_image[bukti]',
         ])) {
             // The validation fails, so returns the form.
-            return $this->createPembayaran();
+            return $this->tagihan();
         }
 
         // Gets the validated data.
@@ -241,7 +251,7 @@ class DashboardUser extends BaseController
         $validatedData = $this->validator->getValidated();
 
         // Cek apakah data dengan nomor_kamar tersebut ada
-        $model = model(UserModel::class);
+        $model = model(RegistrasiModel::class);
 
         // Update data User
         $model->update($validatedData['id'], [
@@ -257,7 +267,7 @@ class DashboardUser extends BaseController
 
         $model = model(PembayaranModel::class);
         $session = session();
-        $id = $session->get('id_penghuni');
+        $id = $session->get('id');
         $data = [
             'pembayaran_list' =>  $model->getDataPembayaranByIdPenghuni($id),
             'title'     => 'Data Pembayaran',

@@ -84,7 +84,7 @@
 
         <!-- Nav Item - Tables -->
         <li class="nav-item <?= $title == 'Data Laporan' ? 'active' : ''; ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>laporan">
+            <a class="nav-link" href="<?php echo base_url(); ?>laporan-pemilik">
                 <i class="fas fa-fw fa-paper-plane"></i>
                 <span>Laporan</span></a>
         </li>
@@ -158,7 +158,7 @@
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="<?php echo base_url('setting-admin') ?>">
+                            <a class="dropdown-item" href="<?php echo base_url('setting-akun') ?>">
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Settings
                             </a>

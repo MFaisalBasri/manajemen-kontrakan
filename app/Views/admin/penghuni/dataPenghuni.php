@@ -39,7 +39,7 @@
                         <td><?= esc($penghuni_item['pekerjaan']) ?></td>
                         <td><?= esc($penghuni_item['tujuan']) ?></td>
                         <td>
-                            <a href="<?php echo base_url('detail-penghuni/' . $penghuni_item['id']); ?>"><span class="badge text-bg-warning">Edit</span></a>
+                            <a href="<?php echo base_url('detail-penghuni-admin/' . $penghuni_item['id']); ?>"><span class="badge text-bg-warning">Edit</span></a>
                             <a href="#" onclick="confirmDelete('<?php echo base_url('hapus-penghuni/' . $penghuni_item['id']); ?>')">
                                 <span class="badge badge-danger">Hapus</span>
                             </a>

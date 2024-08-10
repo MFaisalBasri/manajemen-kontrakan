@@ -2,7 +2,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-light sidebar sidebar-light accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -17,7 +17,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item <?= $title == 'Dashboard Admin' ? 'active' : ''; ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>dashboard">
+            <a class="nav-link" href="<?php echo base_url(); ?>dashboard-admin">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -42,7 +42,7 @@
                     <h6 class="collapse-header">Data Master:</h6>
                     <a class="collapse-item <?= $title == 'Data Kontrakan' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-kamar">Data Kontrakan</a>
                     <a class="collapse-item <?= $title == 'Data User' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-user">Data User</a>
-                    <a class="collapse-item <?= $title == 'Data Admin' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-admin">Data Admin</a>
+                    <!-- <a class="collapse-item <?= $title == 'Data Admin' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-admin">Data Admin</a> -->
                 </div>
             </div>
         </li>
@@ -56,20 +56,20 @@
 
         <!-- Nav Item - Tables -->
         <li class="nav-item <?= $title == 'Data Kunjungan' ? 'active' : ''; ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>data-kunjungan">
+            <a class="nav-link" href="<?php echo base_url(); ?>data-kunjungan-admin">
                 <i class="fas fa-fw fa-paper-plane"></i>
                 <span>Jadwal Kunjungan</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item <?= $title == 'Data Penyewaan' ? 'active' : ''; ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>data-penyewaan">
+            <a class="nav-link" href="<?php echo base_url(); ?>data-penyewaan-admin">
                 <i class="fas fa-fw fa-book"></i>
                 <span>Data Penyewaan</span></a>
         </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-book"></i>
                 <span>Tagihan</span>
@@ -78,18 +78,18 @@
                     " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Tagihan dan Pembayaran:</h6>
-                    <a class="collapse-item <?= $title == 'Data Tagihan' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-tagihan">Data Tagihan</a>
-                    <a class="collapse-item <?= $title == 'Data Pembayaran' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-pembayaran">Data Pembayaran</a>
+                    <a class="collapse-item <?= $title == 'Data Tagihan' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-tagihan-admin">Data Tagihan</a>
+                    <a class="collapse-item <?= $title == 'Data Pembayaran' ? 'active' : ''; ?>" href="<?php echo base_url(); ?>data-pembayaran-admin">Data Pembayaran</a>
                 </div>
             </div>
-        </li>
+        </li> -->
 
         <!-- Nav Item - Tables -->
-        <li class="nav-item <?= $title == 'Data Laporan' ? 'active' : ''; ?>">
+        <!-- <li class="nav-item <?= $title == 'Data Laporan' ? 'active' : ''; ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>laporan">
                 <i class="fas fa-fw fa-paper-plane"></i>
                 <span>Laporan</span></a>
-        </li>
+        </li> -->
 
         <!-- Nav Item - Pages Collapse Menu -->
         <!-- <li class="nav-item">
