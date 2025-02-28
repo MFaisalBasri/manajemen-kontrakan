@@ -1,68 +1,93 @@
-# CodeIgniter 4 Application Starter
+# Manajemen Kontrakan
 
-## What is CodeIgniter?
+**Manajemen Kontrakan** adalah aplikasi web yang memungkinkan pemilik kontrakan untuk mengelola kontrakan mereka, sementara penyewa dapat melakukan kunjungan, pembayaran, dan cek status pembayaran. Sistem ini juga dilengkapi dengan notifikasi tagihan untuk penyewa. Terdapat tiga role pengguna: Superadmin, Pemilik, dan Penyewa.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Fitur
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+### 1. **Superadmin**
+- Dapat mengelola semua data dan pengguna di dalam sistem.
+- Memiliki akses penuh untuk memverifikasi dan mengatur hak akses pemilik dan penyewa.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+### 2. **Pemilik**
+- Mengupload kontrakan yang tersedia.
+- Mengelola detail kontrakan (harga, fasilitas, deskripsi, foto).
+- Memantau jadwal kunjungan yang diatur oleh penyewa.
+- Melihat status pembayaran dari penyewa.
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+### 3. **Penyewa**
+- Melakukan jadwal kunjungan kontrakan.
+- Melakukan pembayaran untuk kontrakan.
+- Melihat riwayat pembayaran dan status pembayaran.
+- Mendapatkan notifikasi tagihan dan pembayaran yang harus dilakukan.
 
-## Installation & updates
+## Teknologi yang Digunakan
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+- **Frontend**: HTML,  JavaScript, CSS (bootstrap)
+- **Backend**: CodeIgniter 4
+- **Database**: MySQL
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+## Instalasi
 
-## Setup
+### 1. Clone Repository
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+Clone repositori ini ke komputer Anda:
 
-## Important Change with index.php
+```bash
+git clone https://github.com/mfaisalbasri/manajemen-kontrakan.git
+cd manajemen-kontrakan
+```
+### 2. Instalasi Dependencies
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Setelah meng-clone repositori, pastikan Anda sudah menginstal PHP versi 7.3 ke atas dan Composer untuk mengelola dependensi proyek. Berikut adalah langkah-langkah untuk menginstal dependensi yang dibutuhkan oleh proyek ini.
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+**Langkah 1: Instal PHP dan Composer
+Instalasi PHP**
 
-**Please** read the user guide for a better explanation of how CI4 works!
+Pastikan PHP versi 7.3 ke atas sudah terinstal. Berikut cara menginstal PHP di beberapa sistem operasi:
+- **Linux (Ubuntu/Debian):**
+```bash
+sudo apt update
+sudo apt install php php-cli php-mbstring php-xml php-curl php-mysql
+```
+- **Windows:** Unduh PHP dari [situs resmi PHP](https://www.php.net/downloads.php) atau gunakan paket XAMPP yang sudah mencakup PHP.
 
-## Repository Management
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+**Instalasi Composer**
+**Composer** adalah alat untuk mengelola dependensi PHP. Ikuti langkah-langkah berikut untuk menginstal Composer.
+- **Di Windows:** Unduh **Composer** dari [situs resmi Composer](https://getcomposer.org/download/) dan ikuti petunjuk penginstalan di sana.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
 
-## Server Requirements
+**Langkah 2: Menginstal Dependensi**
+Setelah Composer terinstal, masuk ke dalam folder proyek yang sudah Anda clone dan jalankan perintah berikut untuk menginstal semua dependensi yang diperlukan oleh proyek ini:
+```bash
+composer install
+```
+Perintah ini akan mengunduh dan menginstal semua paket yang diperlukan yang tercantum dalam file `composer.json.`
 
-PHP version 7.4 or higher is required, with the following extensions installed:
+### 3. Menyiapkan Database
+Pastikan Anda sudah menyiapkan database MySQL sesuai dengan kebutuhan proyek ini. Sesuaikan pengaturan database.
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+Contoh pengaturan untuk MySQL di `app -> config -> database.php:`
+```bash
+'hostname'     => 'localhost',
+'username'     => 'root',
+'password'     => '',
+'database'     => 'db_kontrakan',
+```
 
-> [!WARNING]
-> The end of life date for PHP 7.4 was November 28, 2022.
-> The end of life date for PHP 8.0 was November 26, 2023.
-> If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> The end of life date for PHP 8.1 will be November 25, 2024.
+### 4. Menjalankan Aplikasi
+Sekarang, Anda siap untuk menjalankan aplikasi menggunakan server internal bawaan dari CodeIgniter 4. Jalankan perintah berikut:
+```bash
+php spark serve
+```
+Aplikasi Anda akan berjalan pada http://localhost:8000.
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+### 5. Akses Aplikasi
+Buka browser Anda dan akses aplikasi di http://localhost:8000.
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+## Kontribusi
+
+Kami membuka kesempatan bagi Anda yang ingin berkontribusi dalam mengembangkan website Bank Sampah ini. Jika Anda tertarik untuk berkolaborasi, silakan fork repository ini dan kirimkan pull request!
+
+
+
